@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D725737B-8D2A-492B-AB5E-F82120A85813}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AssemblyName>Ms3dLoader</AssemblyName>
-    <RootNamespace>Ms3dLoader</RootNamespace>
-    <SccProjectName>OOGL/Ms3dLoader</SccProjectName>
+    <ProjectGuid>{5B350848-C821-495A-9C14-B7FEDE8899FD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Example</AssemblyName>
+    <RootNamespace>Example</RootNamespace>
+    <SccProjectName>OOGL/Example</SccProjectName>
     <SccLocalPath>.</SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
+    <SccAuxPath />
     <SccProvider>MSSCCI:PushOk SVNSCC</SccProvider>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
+    <FileUpgradeFlags />
     <OldToolsVersion>2.0</OldToolsVersion>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
+    <UpgradeBackupLocation />
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
     <NoWin32Manifest>False</NoWin32Manifest>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <NoStdLib>False</NoStdLib>
-    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <Ducky>False</Ducky>
+    <Strict>False</Strict>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,7 +33,10 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Example</RootNamespace>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -41,18 +44,23 @@
     <OutputPath>bin\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <OutputType>Exe</OutputType>
     <DebugSymbols>true</DebugSymbols>
+    <RootNamespace>Example</RootNamespace>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|32bit' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>Full</DebugType>
-    <Optimize>False</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Example</RootNamespace>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|32bit' ">
     <DebugType>full</DebugType>
@@ -60,71 +68,60 @@
     <OutputPath>bin\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <OutputType>Exe</OutputType>
     <DebugSymbols>true</DebugSymbols>
+    <RootNamespace>Example</RootNamespace>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Platform)' == '32bit' ">
-    <BaseAddress>4194304</BaseAddress>
     <PlatformTarget>x86</PlatformTarget>
-    <RegisterForComInterop>False</RegisterForComInterop>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <StartAction>Project</StartAction>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
+    <Reference Include="OpenTK">
       <HintPath>..\..\OpenTK\Binaries\OpenTK\Release\OpenTK.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK.Compatibility, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
+    <Reference Include="OpenTK.Compatibility">
       <HintPath>..\..\OpenTK\Binaries\OpenTK\Release\OpenTK.Compatibility.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GUI\OOGL.GUI.csproj">
+      <Project>{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}</Project>
+      <Name>OOGL.GUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ms3dLoader\Ms3dLoader.csproj">
+      <Project>{D725737B-8D2A-492B-AB5E-F82120A85813}</Project>
+      <Name>Ms3dLoader</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OOGL.csproj">
       <Project>{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}</Project>
       <Name>OOGL</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Comment.cs" />
-    <Compile Include="File.cs" />
-    <Compile Include="Flags.cs" />
-    <Compile Include="Group.cs" />
-    <Compile Include="Header.cs" />
-    <Compile Include="Joint.cs" />
-    <Compile Include="KeyFramePosition.cs" />
-    <Compile Include="KeyFrameRotation.cs" />
-    <Compile Include="Material.cs" />
-    <Compile Include="Triangle.cs" />
-    <Compile Include="Vertex.cs" />
+    <Compile Include="Game.boo" />
+    <Compile Include="UI\DemoWindow.boo" />
+    <Compile Include="UI\PlayerWindow.boo" />
+    <Compile Include="UI\RadarWindow.boo" />
+    <Compile Include="UI\WaypointWindow.boo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OriginalSpecification" />
+    <None Include="app.config" />
     <None Include="ChangeLog" />
-    <None Include="COPYING" />
-    <None Include="README" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ProjectExtensions>
-    <VisualStudio />
-    <MonoDevelop>
-      <Properties>
-        <Policies>
-          <ChangeLogPolicy UpdateMode="ProjectRoot" inheritsSet="Mono">
-            <MessageStyle LineAlign="0" />
-          </ChangeLogPolicy>
-        </Policies>
-      </Properties>
-    </MonoDevelop>
-  </ProjectExtensions>
+  <Import Project="$(BooBinPath)\Boo.Microsoft.Build.targets" />
 </Project>

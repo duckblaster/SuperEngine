@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-# SharpDevelop 4.0.0.7070
+# SharpDevelop 4.3
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ms3dLoader", "Ms3dLoader\Ms3dLoader.csproj", "{D725737B-8D2A-492B-AB5E-F82120A85813}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOGL", "OOGL.csproj", "{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}"
@@ -9,6 +9,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOGL.GUI", "GUI\OOGL.GUI.csproj", "{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}"
+EndProject
+Project("{A33008B1-5DAC-44D5-9060-242E3B6E38F2}") = "Example.Converted", "Example.ConvertedToBoo\Example.Converted.booproj", "{5B350848-C821-495A-9C14-B7FEDE8899FD}"
 EndProject
 Global
 	GlobalSection(SourceCodeControl) = preSolution
@@ -31,6 +33,8 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Debug|32bit = Debug|32bit
+		Release|32bit = Release|32bit
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D725737B-8D2A-492B-AB5E-F82120A85813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -49,6 +53,30 @@ Global
 		{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B350848-C821-495A-9C14-B7FEDE8899FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B350848-C821-495A-9C14-B7FEDE8899FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B350848-C821-495A-9C14-B7FEDE8899FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B350848-C821-495A-9C14-B7FEDE8899FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B350848-C821-495A-9C14-B7FEDE8899FD}.Debug|32bit.Build.0 = Debug|32bit
+		{5B350848-C821-495A-9C14-B7FEDE8899FD}.Debug|32bit.ActiveCfg = Debug|32bit
+		{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}.Debug|32bit.Build.0 = Debug|32bit
+		{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}.Debug|32bit.ActiveCfg = Debug|32bit
+		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}.Debug|32bit.Build.0 = Debug|32bit
+		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}.Debug|32bit.ActiveCfg = Debug|32bit
+		{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}.Debug|32bit.Build.0 = Debug|32bit
+		{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}.Debug|32bit.ActiveCfg = Debug|32bit
+		{D725737B-8D2A-492B-AB5E-F82120A85813}.Debug|32bit.Build.0 = Debug|32bit
+		{D725737B-8D2A-492B-AB5E-F82120A85813}.Debug|32bit.ActiveCfg = Debug|32bit
+		{5B350848-C821-495A-9C14-B7FEDE8899FD}.Release|32bit.Build.0 = Release|32bit
+		{5B350848-C821-495A-9C14-B7FEDE8899FD}.Release|32bit.ActiveCfg = Release|32bit
+		{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}.Release|32bit.Build.0 = Release|32bit
+		{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}.Release|32bit.ActiveCfg = Release|32bit
+		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}.Release|32bit.Build.0 = Release|32bit
+		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}.Release|32bit.ActiveCfg = Release|32bit
+		{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}.Release|32bit.Build.0 = Release|32bit
+		{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}.Release|32bit.ActiveCfg = Release|32bit
+		{D725737B-8D2A-492B-AB5E-F82120A85813}.Release|32bit.Build.0 = Release|32bit
+		{D725737B-8D2A-492B-AB5E-F82120A85813}.Release|32bit.ActiveCfg = Release|32bit
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

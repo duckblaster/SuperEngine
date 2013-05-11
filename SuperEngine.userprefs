@@ -1,0 +1,16 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SuperEngineLib\AssemblyInfo.boo">
+    <Files>
+      <File FileName="SuperEngine\Program.boo" Line="1" Column="1" />
+      <File FileName="SuperEngine\AssemblyInfo.boo" Line="1" Column="1" />
+      <File FileName="SuperEngineLib\AssemblyInfo.boo" Line="31" Column="17" />
+      <File FileName="SuperEngineLib\Extensions\Attributes\PropertyAttribute.boo" Line="9" Column="1" />
+      <File FileName="SuperEngineLib\Macros\PropertyMacro.boo" Line="31" Column="7" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
