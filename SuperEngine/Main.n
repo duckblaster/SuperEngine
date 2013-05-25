@@ -1,0 +1,23 @@
+﻿using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+
+using System;
+using System.Collections.Generic;
+using System.Console;
+using System.Drawing;
+using System.Diagnostics;
+using System.Threading;
+using System.IO;
+
+namespace SuperEngine
+{
+    module Program
+    {
+      Main() : void
+      {
+        def game = Window();
+        game.Run(30.0);
+      }
+    }
+}

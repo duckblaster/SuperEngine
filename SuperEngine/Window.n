@@ -1,0 +1,96 @@
+﻿using Nemerle;
+using Nemerle.Collections;
+using Nemerle.Text;
+using Nemerle.Utility;
+using Nemerle.Macros;
+
+using System;
+using System.Collections.Generic;
+
+using OpenTK;
+using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
+using OpenTK.Audio;
+using OpenTK.Audio.OpenAL;
+using OpenTK.Input;
+
+namespace SuperEngine
+{
+  /// <summary>
+  /// Description of Game.
+  /// </summary>
+  class Window : GameWindow
+  {
+        /// <summary>Creates a 800x600 window with the specified title.</summary>
+        public this()
+        {
+            base(800, 600, GraphicsMode.Default, "OpenTK Quick Start Sample");
+            VSync = VSyncMode.On;
+        }
+
+        /// <summary>Load resources here.</summary>
+        /// <param name="e">Not used.</param>
+        protected override OnLoad(e : EventArgs) : void
+        {
+            base.OnLoad(e);
+
+            GL.ClearColor(0.1f, 0.2f, 0.5f, 0.0f);
+            GL.Enable(EnableCap.DepthTest);
+        }
+
+        /// <summary>
+        /// Called when your window is resized. Set your viewport here. It is also
+        /// a good place to set up your projection matrix (which probably changes
+        /// along when the aspect ratio of your window).
+        /// </summary>
+        /// <param name="e">Not used.</param>
+        protected override OnResize(e : EventArgs) : void
+        {
+            base.OnResize(e);
+
+            GL.Viewport(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width, ClientRectangle.Height);
+
+            mutable projection : Matrix4 = Matrix4.CreatePerspectiveFieldOfView((Math.PI:>float) / 4, Width / (Height:>float), 1.0f, 64.0f);
+            GL.MatrixMode(MatrixMode.Projection);
+            GL.LoadMatrix(ref projection);
+        }
+
+        /// <summary>
+        /// Called when it is time to setup the next frame. Add you game logic here.
+        /// </summary>
+        /// <param name="e">Contains timing information for framerate independent logic.</param>
+        protected override OnUpdateFrame(e : FrameEventArgs) : void
+        {
+            base.OnUpdateFrame(e);
+
+            when(Keyboard[Key.Escape]) {
+                Exit();
+            }
+        }
+
+        /// <summary>
+        /// Called when it is time to render the next frame. Add your rendering code here.
+        /// </summary>
+        /// <param name="e">Contains timing information.</param>
+        protected override OnRenderFrame(e : FrameEventArgs) : void
+        {
+            base.OnRenderFrame(e);
+
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+            mutable modelview : Matrix4 = Matrix4.LookAt(Vector3.Zero, Vector3.UnitZ, Vector3.UnitY);
+            GL.MatrixMode(MatrixMode.Modelview);
+            GL.LoadMatrix(ref modelview);
+
+            GL.Begin(BeginMode.Triangles);
+
+            GL.Color3(1.0f, 1.0f, 0.0f); GL.Vertex3(-1.0f, -1.0f, 4.0f);
+            GL.Color3(1.0f, 0.0f, 0.0f); GL.Vertex3(1.0f, -1.0f, 4.0f);
+            GL.Color3(0.2f, 0.9f, 1.0f); GL.Vertex3(0.0f, 1.0f, 4.0f);
+
+            GL.End();
+
+            SwapBuffers();
+        }
+  }
+}
