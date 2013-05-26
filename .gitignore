@@ -12,3 +12,4 @@ obj/
 *.vshost.*
 [Tt]est[Rr]esult*
 *.pidb
+AssemblyVersion.cs
