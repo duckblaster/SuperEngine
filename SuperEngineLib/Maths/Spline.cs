@@ -3,100 +3,54 @@ using OpenTK;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace SuperEngine.Maths {
-	/*public struct Spline {
-		public struct Segment {
-		}
-		
-		private List<Vector4> nodes;
-		private List<Vector4> points;
-		private List<Segment> segments;
-		private float length;
-		private bool continuous;
-		
-		public IEnumerable<Vector4> Nodes {
-			get {
-				return nodes.AsReadOnly();
-			}
-			set {
-				nodes = new List<Vector4>(value);
-				CalcSpline();
-			}
-		}
-		
-		public IEnumerable<Segment> Segments {
-			get {
-				return segments.AsReadOnly();
-			}
-		}
-		
-		public float Length {
-			get {
-				return length;
-			}
-		}
-		
-		public bool Continuous {
-			get {
-				return continuous;
-			}
-			set {
-				if(continuous != value) {
-					continuous = value;
-					CalcSpline();
-				}
-			}
-		}
-		
-		public void CalcSpline() {
-			float tmpLen = 0.0f;
-			int count = nodes.Count;
-			if(count < 2) {
-				return;
-			}
-			if(continuous) {
-				points.Add(nodes[count - 1]);
-				points.AddRange(nodes);
-				points.Add(nodes[0]);
-			} else {
-				Vector4 diff;
-				diff = nodes[0] + (nodes[1] - nodes[0]);
-				points.Add(diff);
-				points.AddRange(nodes);
-				diff = nodes[count - 2] - nodes[count - 1];
-				diff = nodes[count - 1] + diff;
-				points.Add(diff);
-			}
-			for(int i = 1; i < count - 2; i++) {
-				Segment tmp = new Segment(points[i - 1], points[i], points[i + 1], points[i + 2]);
-				segments.Add(tmp);
-				tmp.StartDistance = tmpLen;
-				tmpLen += tmp.Length;
-			}
-			length = tmpLen;
-		}
-		
-		public Vector4 Point(float distance) {
-			Segment tmp = segments.Find(s => s.StartDistance <= distance && s.StartDistance + s.Length >= distance);
-			float u = (distance - tmp.StartDistance) / tmp.Length;
-			return tmp.Point(u);
-		}
-		
-		public Spline() {
-		}
-
-		public Spline(IEnumerable<Vector4> n) {
-			Nodes = n;
-		}
-	}*/
-    public class Spline {
-        public Spline next;
-        public Spline prev;
-        public Vector2d next_end;
-        public Vector2d prev_start;
-        public Vector2d start;
-        public Vector2d end;
-        public Spline Next {
+namespace SuperEngineLib.Maths {
+    public class Spline<T> where T : ISplineNode<T> {
+        private struct SplineNodeWrapper<T> where T : ISplineNode<T> {
+            private T node;
+            public SplineNodeWrapper(T splineNode) {
+                this.node = splineNode;
+            }
+            public static implicit operator SplineNodeWrapper<T>(T splineNode) {
+                return new SplineNodeWrapper<T>(splineNode);
+            }
+            public static implicit operator T(SplineNodeWrapper<T> wrapper) {
+                return wrapper.node;
+            }
+            public static SplineNodeWrapper<T> operator +(SplineNodeWrapper<T> a, SplineNodeWrapper<T> b) {
+                return new SplineNodeWrapper<T>(a.node.Add(b.node));
+            }
+            public static SplineNodeWrapper<T> operator -(SplineNodeWrapper<T> a, SplineNodeWrapper<T> b) {
+                return new SplineNodeWrapper<T>(a.node.Sub(b.node));
+            }
+            public static SplineNodeWrapper<T> operator *(SplineNodeWrapper<T> a, double b) {
+                return new SplineNodeWrapper<T>(a.node.Mult(b));
+            }
+            public static SplineNodeWrapper<T> operator *(double b, SplineNodeWrapper<T> a) {
+                return new SplineNodeWrapper<T>(a.node.Mult(b));
+            }
+            public double Length {
+                get {
+                    return node.Length;
+                }
+            }
+            public double LengthFast {
+                get {
+                    return node.LengthFast;
+                }
+            }
+            public double LengthSquared {
+                get {
+                    return node.LengthSquared;
+                }
+            }
+        }
+        private Spline<T> next;
+        private Spline<T> prev;
+        private SplineNodeWrapper<T> next_end;
+        private SplineNodeWrapper<T> prev_start;
+        private SplineNodeWrapper<T> start;
+        private SplineNodeWrapper<T> end;
+        public Spline<T> Next {
             get {
                 return next;
             }
@@ -117,7 +71,7 @@ namespace SuperEngine.Maths {
                 }
             }
         }
-        public Spline Prev {
+        public Spline<T> Prev {
             get {
                 return prev;
             }
@@ -138,14 +92,15 @@ namespace SuperEngine.Maths {
                 }
             }
         }
-        public Vector2d Start {
+        public T Start {
             get {
                 return start;
             }
-            set { start = value;
+            set {
+                start = value;
             }
         }
-        public Vector2d End {
+        public T End {
             get {
                 return end;
             }
@@ -160,33 +115,30 @@ namespace SuperEngine.Maths {
             }
         }
 
-        public Vector2d Point(double s) {
+        public T Point(double s) {
             double h1 = 2 * Math.Pow(s, 3) - 3 * Math.Pow(s, 2) + 1;
             double h2 = -2 * Math.Pow(s, 3) + 3 * Math.Pow(s, 2);
             double h3 = Math.Pow(s, 3) - 2 * Math.Pow(s, 2) + s;
             double h4 = Math.Pow(s, 3) - Math.Pow(s, 2);
-            Vector2d p = h1 * start + h2 * end + h3 * (0.75 * (end - prev_start)) + h4 * (0.75 * (next_end - start));
+            SplineNodeWrapper<T> p = (h1 * start + h2 * end + h3 * (0.75 * (end - prev_start)) + h4 * (0.75 * (next_end - start)));
             return p;
         }
 
-        public void Draw(Bitmap bmp, Color col) {
+        public delegate void DrawPoint(Spline<T> spline, double t, T p, object data);
+
+        public void Draw(Bitmap bmp, DrawPoint func, object data = null, double quality = 100) {
             double len = CalcLength(1);
-            double width = (start - end).X;
-            double height = (start - end).Y;
-            int iters = (int)Math.Ceiling(Math.Max(len, Math.Max(Math.Abs(width), Math.Abs(height)))) * 100;
+            int iters = (int)Math.Ceiling(len * quality);
             double inv_iters = 1.0 / iters;
             for (int i = 0; i < iters; i++) {
                 double t = inv_iters * i;
-                Vector2d p = Point(t);
-                int x = (int)Math.Round(p.X);
-                int y = (int)Math.Round(p.Y);
-                bmp.SetPixel(x, y, col);
+                func(this, t, Point(t), data);
             }
         }
 
         public double CalcLength() {
             return CalcLength((start - end).Length / 100);
-		}
+        }
 
         public double CalcLength(double len) {
             return CalcLength(0, 1, len);
@@ -194,9 +146,9 @@ namespace SuperEngine.Maths {
 
         public double CalcLength(double u0, double u1, double len) {
             double umid = (u0 + u1) / 2;
-            Vector2d P0 = Point(u0);
-            Vector2d P1 = Point(u1);
-            if (((P0 - P1).LengthSquared > len * len)) {
+            SplineNodeWrapper<T> P0 = Point(u0);
+            SplineNodeWrapper<T> P1 = Point(u1);
+            if((P0 - P1).LengthSquared > len * len) {
                 double len0 = CalcLength(u0, umid, len);
                 double len1 = CalcLength(umid, u1, len);
                 return len0 + len1;
@@ -215,27 +167,27 @@ namespace SuperEngine.Maths {
                 double len1 = CalcLength(umid, u1, maxDepth, depth + 1);
                 return len0 + len1;
             } else {
-                Vector2d P0 = Point(u0);
-                Vector2d P1 = Point(u1);
+                SplineNodeWrapper<T> P0 = Point(u0);
+                SplineNodeWrapper<T> P1 = Point(u1);
                 return (P0 - P1).Length;
             }
         }
 
-        public Spline(Vector2d _start, Vector2d _end) {
+        public Spline(T _start, T _end) {
             Start = _start;
             End = _end;
             Next = null;
             Prev = null;
         }
 
-        public Spline(Vector2d _start, Vector2d _end, Vector2d _prev_start, Vector2d _next_end) {
+        public Spline(T _start, T _end, T _prev_start, T _next_end) {
             Start = _start;
             End = _end;
             prev_start = _prev_start;
             next_end = _next_end;
         }
 
-        public Spline(Vector2d _start, Vector2d _end, Spline _prev, Spline _next) {
+        public Spline(T _start, T _end, Spline<T> _prev, Spline<T> _next) {
             Start = _start;
             End = _end;
             Prev = _prev;
@@ -243,4 +195,3 @@ namespace SuperEngine.Maths {
         }
     }
 }
-
