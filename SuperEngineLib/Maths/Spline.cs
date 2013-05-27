@@ -120,13 +120,14 @@ namespace SuperEngineLib.Maths {
             double h2 = -2 * Math.Pow(s, 3) + 3 * Math.Pow(s, 2);
             double h3 = Math.Pow(s, 3) - 2 * Math.Pow(s, 2) + s;
             double h4 = Math.Pow(s, 3) - Math.Pow(s, 2);
-            SplineNodeWrapper<T> p = (h1 * start + h2 * end + h3 * (0.75 * (end - prev_start)) + h4 * (0.75 * (next_end - start)));
+            double tension = 0.75;
+            SplineNodeWrapper<T> p = (h1 * start + h2 * end + h3 * (tension * (end - prev_start)) + h4 * (tension * (next_end - start)));
             return p;
         }
 
         public delegate void DrawPoint(Spline<T> spline, double t, T p, object data);
 
-        public void Draw(Bitmap bmp, DrawPoint func, object data = null, double quality = 100) {
+        public void Draw(Bitmap bmp, DrawPoint func, object data = null, double quality = 1) {
             double len = CalcLength(1);
             int iters = (int)Math.Ceiling(len * quality);
             double inv_iters = 1.0 / iters;

@@ -12,13 +12,16 @@ namespace SuperEngine {
         struct MyData {
             public Spline<SplineNode4> colorSpline;
             public bool print;
+            public int i;
             public MyData(Spline<SplineNode4> s) {
                 colorSpline = s;
                 print = false;
+                i = 0;
             }
             public MyData(Spline<SplineNode4> s, bool p) {
                 colorSpline = s;
                 print = p;
+                i = 0;
             }
         }
         static void Main(string[] args) {
@@ -55,9 +58,9 @@ namespace SuperEngine {
             s9 = new Spline<SplineNode4>(new Vector4(255, 255, 0, 0), new Vector4(255, 0, 255, 0));
             s10 = new Spline<SplineNode4>(new Vector4(255, 0, 0, 255), new Vector4(255, 255, 0, 255));
 
-            s11 = new Spline<SplineNode2>(new Vector2(0, 750), new Vector2(1500, 750));
-            s12 = new Spline<SplineNode2>(new Vector2(0, 750), new Vector2(0, 100000));
-            s13 = new Spline<SplineNode2>(new Vector2(1500, 750), new Vector2(1500, 100000));
+            s11 = new Spline<SplineNode2>(new Vector2(0, 500), new Vector2(1500, 500));
+            s12 = new Spline<SplineNode2>(new Vector2(0, -10000), new Vector2(0, 500));
+            s13 = new Spline<SplineNode2>(new Vector2(1500, 500), new Vector2(1500, -10000));
 
             s14 = new Spline<SplineNode4>(new Vector4(255, 255, 0, 0), new Vector4(255, 0, 0, 255));
 
@@ -77,6 +80,7 @@ namespace SuperEngine {
                 int x = (int)Math.Round(vec.X);
                 int y = (int)Math.Round(vec.Y);
                 MyData myData = (MyData)data;
+                myData.i++;
                 if (myData.print) {
                     Console.Write("X: ");
                     Console.Write(x);
@@ -90,14 +94,14 @@ namespace SuperEngine {
                 Vector4 col = colorSpline.Point(t);
                 Color color = Color.FromArgb((int)Math.Round(col.X), (int)Math.Round(col.Y), (int)Math.Round(col.Z), (int)Math.Round(col.W));
                 bmp.SetPixel(x, y, color);
-                if (myData.print) {
-                    bmp.SetPixel(x, y + 1, color);
-                    bmp.SetPixel(x, y - 1, color);
-                    bmp.SetPixel(x, y + 2, color);
-                    bmp.SetPixel(x, y - 2, color);
+                if (myData.print && myData.i % 100 == 0) {
+                    //bmp.SetPixel(x, y + 1, color);
+                    //bmp.SetPixel(x, y - 1, color);
+                    //bmp.SetPixel(x, y + 2, color);
+                    //bmp.SetPixel(x, y - 2, color);
                     try {
                         bmp.Save("out.png");
-                    } catch (Exception e) {
+                    } catch (Exception) {
                     }
                 }
             };
