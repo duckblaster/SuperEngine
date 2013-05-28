@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Drawing;
 
 namespace SuperEngineLib.Maths {
+    public class SplineList<T> : List<Spline<T>> where T : ISplineNode<T> {
+        // TODO: Something?
+    }
     public class Spline<T> where T : ISplineNode<T> {
         private struct SplineNodeWrapper<T> where T : ISplineNode<T> {
             private T node;
@@ -27,6 +30,15 @@ namespace SuperEngineLib.Maths {
             }
             public static SplineNodeWrapper<T> operator *(double b, SplineNodeWrapper<T> a) {
                 return new SplineNodeWrapper<T>(a.node.Mult(b));
+            }
+            public static bool operator ==(SplineNodeWrapper<T> a, SplineNodeWrapper<T> b) {
+                return false;//a.node.Eq(b);
+            }
+            public static bool operator !=(SplineNodeWrapper<T> a, SplineNodeWrapper<T> b) {
+                return true;//!a.node.Eq(b);
+            }
+            public bool Equals(SplineNodeWrapper<T> a) {
+                return false;//this.node.Eq(a);
             }
             public double Length {
                 get {
@@ -55,12 +67,10 @@ namespace SuperEngineLib.Maths {
                 return next;
             }
             set {
-                if (value == null && next != null) {
-                    next = value;
+                if (next != null) {
                     next.Prev = null;
-                } else {
-                    next = value;
                 }
+                next = value;
                 if (next != null) {
                     if (next.Prev != this) {
                         next.Prev = this;
@@ -76,12 +86,10 @@ namespace SuperEngineLib.Maths {
                 return prev;
             }
             set {
-                if (value == null && prev != null) {
-                    prev = value;
+                if (prev != null) {
                     prev.Next = null;
-                } else {
-                    prev = value;
                 }
+                prev = value;
                 if (prev != null) {
                     if (prev.Next != this) {
                         prev.Next = this;
@@ -97,7 +105,12 @@ namespace SuperEngineLib.Maths {
                 return start;
             }
             set {
-                start = value;
+                if(start != value) {
+                    start = value;
+                    if(prev != null) {
+                        prev.End = start;
+                    }
+                }
             }
         }
         public T End {
@@ -105,7 +118,12 @@ namespace SuperEngineLib.Maths {
                 return end;
             }
             set {
-                end = value;
+                if(end != value) {
+                    end = value;
+                    if(next != null) {
+                        next.Start = end;
+                    }
+                }
             }
         }
 

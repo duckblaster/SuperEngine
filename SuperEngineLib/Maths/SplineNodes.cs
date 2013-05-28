@@ -28,6 +28,9 @@ namespace SuperEngineLib.Maths {
         public SplineNode2 Mult(double a) {
             return Vector2.Multiply(vec, (float)a);
         }
+        public bool Eq(SplineNode2 a) {
+            return vec == a.vec;
+        }
         public double Length {
             get { return vec.Length; }
         }
