@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Maths\ISplineNode.cs" />
+    <Compile Include="Maths\SplineNode.cs" />
     <Compile Include="Maths\SplineNodes.cs" />
     <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

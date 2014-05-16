@@ -7,7 +7,10 @@ namespace SuperEngineLib.Maths {
     public class SplineList<T> : List<Spline<T>> where T : ISplineNode<T> {
         // TODO: Something?
     }
-    public class Spline<T> where T : ISplineNode<T> {
+    public class SplineBase {
+        public static float tension = 0.75F;
+    }
+    public class Spline<T> : SplineBase where T : ISplineNode<T> {
         private struct SplineNodeWrapper<T> where T : ISplineNode<T> {
             private T node;
             public SplineNodeWrapper(T splineNode) {
@@ -25,10 +28,10 @@ namespace SuperEngineLib.Maths {
             public static SplineNodeWrapper<T> operator -(SplineNodeWrapper<T> a, SplineNodeWrapper<T> b) {
                 return new SplineNodeWrapper<T>(a.node.Sub(b.node));
             }
-            public static SplineNodeWrapper<T> operator *(SplineNodeWrapper<T> a, double b) {
+            public static SplineNodeWrapper<T> operator *(SplineNodeWrapper<T> a, float b) {
                 return new SplineNodeWrapper<T>(a.node.Mult(b));
             }
-            public static SplineNodeWrapper<T> operator *(double b, SplineNodeWrapper<T> a) {
+            public static SplineNodeWrapper<T> operator *(float b, SplineNodeWrapper<T> a) {
                 return new SplineNodeWrapper<T>(a.node.Mult(b));
             }
             public static bool operator ==(SplineNodeWrapper<T> a, SplineNodeWrapper<T> b) {
@@ -40,17 +43,17 @@ namespace SuperEngineLib.Maths {
             public bool Equals(SplineNodeWrapper<T> a) {
                 return false;//this.node.Eq(a);
             }
-            public double Length {
+            public float Length {
                 get {
                     return node.Length;
                 }
             }
-            public double LengthFast {
+            public float LengthFast {
                 get {
                     return node.LengthFast;
                 }
             }
-            public double LengthSquared {
+            public float LengthSquared {
                 get {
                     return node.LengthSquared;
                 }
@@ -58,17 +61,56 @@ namespace SuperEngineLib.Maths {
         }
         private Spline<T> next;
         private Spline<T> prev;
-        private SplineNodeWrapper<T> next_end;
-        private SplineNodeWrapper<T> prev_start;
-        private SplineNodeWrapper<T> start;
-        private SplineNodeWrapper<T> end;
+        private T next_end;
+        private T prev_start;
+        private T start;
+        private T end;
+
+        private SplineNodeWrapper<T> next_end_w {
+            get {
+                return next_end;
+            }
+            set {
+                next_end = value;
+            }
+        }
+        private SplineNodeWrapper<T> prev_start_w {
+            get {
+                return prev_start;
+            }
+            set {
+                prev_start = value;
+            }
+        }
+        private SplineNodeWrapper<T> end_w {
+            get {
+                return end;
+            }
+            set {
+                end = value;
+            }
+        }
+        private SplineNodeWrapper<T> start_w {
+            get {
+                return start;
+            }
+            set {
+                start = value;
+            }
+        }
+
         public Spline<T> Next {
             get {
                 return next;
             }
             set {
+                if(next_end != null) {
+                    next_end.Splines.Remove(this);
+                }
                 if (next != null) {
-                    next.Prev = null;
+                    Spline<T> tmp = next;
+                    next = null;
+                    tmp.Prev = null;
                 }
                 next = value;
                 if (next != null) {
@@ -77,7 +119,10 @@ namespace SuperEngineLib.Maths {
                     }
                     next_end = next.end;
                 } else {
-                    next_end = end + (end - start);
+                    next_end = end + (end_w - start);
+                }
+                if(next_end != null) {
+                    next_end.Splines.Add(this);
                 }
             }
         }
@@ -86,8 +131,13 @@ namespace SuperEngineLib.Maths {
                 return prev;
             }
             set {
-                if (prev != null) {
-                    prev.Next = null;
+                if(prev_start != null) {
+                    prev_start.Splines.Remove(this);
+                }
+                if(prev != null) {
+                    Spline<T> tmp = prev;
+                    prev = null;
+                    tmp.Next = null;
                 }
                 prev = value;
                 if (prev != null) {
@@ -96,7 +146,10 @@ namespace SuperEngineLib.Maths {
                     }
                     prev_start = prev.start;
                 } else {
-                    prev_start = start - (end - start);
+                    prev_start = start - (end_w - start);
+                }
+                if(prev_start != null) {
+                    prev_start.Splines.Add(this);
                 }
             }
         }
@@ -105,7 +158,7 @@ namespace SuperEngineLib.Maths {
                 return start;
             }
             set {
-                if(start != value) {
+                if(start_w != value) {
                     start = value;
                     if(prev != null) {
                         prev.End = start;
@@ -118,7 +171,7 @@ namespace SuperEngineLib.Maths {
                 return end;
             }
             set {
-                if(end != value) {
+                if(end_w != value) {
                     end = value;
                     if(next != null) {
                         next.Start = end;
@@ -127,63 +180,69 @@ namespace SuperEngineLib.Maths {
             }
         }
 
-        public double Length {
+        public float Length {
             get {
                 return CalcLength();
             }
         }
 
-        public T Point(double s) {
-            double h1 = 2 * Math.Pow(s, 3) - 3 * Math.Pow(s, 2) + 1;
-            double h2 = -2 * Math.Pow(s, 3) + 3 * Math.Pow(s, 2);
-            double h3 = Math.Pow(s, 3) - 2 * Math.Pow(s, 2) + s;
-            double h4 = Math.Pow(s, 3) - Math.Pow(s, 2);
-            double tension = 0.75;
-            SplineNodeWrapper<T> p = (h1 * start + h2 * end + h3 * (tension * (end - prev_start)) + h4 * (tension * (next_end - start)));
+        public T Point(float s) {
+            float h1 = 2 * s * s * s - 3 * s * s + 1;
+            float h2 = -2 * s * s * s + 3 * s * s;
+            float h3 = s * s * s - 2 * s * s + s;
+            float h4 = s * s * s - s * s;
+            SplineNodeWrapper<T> p = (h1 * start_w + h2 * end_w + h3 * (tension * (end_w - prev_start_w)) + h4 * (tension * (next_end_w - start_w)));
             return p;
+            /*float h00 = 2 * Math.Pow(s, 3) - 3 * Math.Pow(s, 2) + 1;
+            float h10 = Math.Pow(s, 3) - 2 * Math.Pow(s, 2) + s;
+            float h01 = -2 * Math.Pow(s, 3) + 3 * Math.Pow(s, 2);
+            float h11 = Math.Pow(s, 3) - Math.Pow(s, 2);
+            float c = 0.75;
+            SplineNodeWrapper<T> point = (h1 * start + h2 * end + h3 * (tension * (end - prev_start)) + h4 * (tension * (next_end - start)));
+            return point;*/
         }
 
-        public delegate void DrawPoint(Spline<T> spline, double t, T p, object data);
+        public delegate void DrawPoint(Spline<T> spline, float t, T p, object data);
 
-        public void Draw(Bitmap bmp, DrawPoint func, object data = null, double quality = 1) {
-            double len = CalcLength(1);
+        public void Draw(Bitmap bmp, DrawPoint func, object data = null, float quality = 1) {
+            float len = CalcLength(1);
             int iters = (int)Math.Ceiling(len * quality);
-            double inv_iters = 1.0 / iters;
+            float inv_iters = 1.0F / iters;
             for (int i = 0; i < iters; i++) {
-                double t = inv_iters * i;
+                float t = inv_iters * i;
                 func(this, t, Point(t), data);
             }
         }
 
-        public double CalcLength() {
-            return CalcLength((start - end).Length / 100);
+        public float CalcLength() {
+            return CalcLength((start_w - end_w).LengthFast / 100);
         }
 
-        public double CalcLength(double len) {
+        public float CalcLength(float len) {
             return CalcLength(0, 1, len);
         }
 
-        public double CalcLength(double u0, double u1, double len) {
-            double umid = (u0 + u1) / 2;
+        public float CalcLength(float u0, float u1, float len) {
+            float umid = (u0 + u1) / 2;
             SplineNodeWrapper<T> P0 = Point(u0);
             SplineNodeWrapper<T> P1 = Point(u1);
             if((P0 - P1).LengthSquared > len * len) {
-                double len0 = CalcLength(u0, umid, len);
-                double len1 = CalcLength(umid, u1, len);
+                float len0 = CalcLength(u0, umid, len);
+                float len1 = CalcLength(umid, u1, len);
                 return len0 + len1;
             } else {
                 return (P0 - P1).Length;
             }
         }
 
-        public double CalcLength(double u0, double u1, int maxDepth) {
+        public float CalcLength(float u0, float u1, int maxDepth) {
             return CalcLength(u0, u1, maxDepth, 0);
         }
-        private double CalcLength(double u0, double u1, int maxDepth, int depth) {
-            double umid = (u0 + u1) / 2;
+        private float CalcLength(float u0, float u1, int maxDepth, int depth) {
+            float umid = (u0 + u1) / 2;
             if (depth < maxDepth) {
-                double len0 = CalcLength(u0, umid, maxDepth, depth + 1);
-                double len1 = CalcLength(umid, u1, maxDepth, depth + 1);
+                float len0 = CalcLength(u0, umid, maxDepth, depth + 1);
+                float len1 = CalcLength(umid, u1, maxDepth, depth + 1);
                 return len0 + len1;
             } else {
                 SplineNodeWrapper<T> P0 = Point(u0);

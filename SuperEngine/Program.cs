@@ -67,6 +67,8 @@ namespace SuperEngine {
             s11.Prev = s12;
             s11.Next = s13;
 
+            SplineBase.tension = 0.75F;
+
             Bitmap bmp = new Bitmap(1500, 1500);
 
             for (int x = 0; x < bmp.Width; x++) {
@@ -75,10 +77,10 @@ namespace SuperEngine {
                 }
             }
 
-            Spline<SplineNode2>.DrawPoint func = delegate(Spline<SplineNode2> spline, double t, SplineNode2 p, object data) {
+            Spline<SplineNode2>.DrawPoint func = delegate(Spline<SplineNode2> spline, float t, SplineNode2 p, object data) {
                 Vector2 vec = p;
-                int x = (int)Math.Round(vec.X);
-                int y = (int)Math.Round(vec.Y);
+                int x = (int)Math.Floor(vec.X);
+                int y = (int)Math.Floor(vec.Y);
                 MyData myData = (MyData)data;
                 myData.i++;
                 if (myData.print) {

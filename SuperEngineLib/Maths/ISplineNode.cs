@@ -5,21 +5,21 @@ using System.Text;
 
 namespace SuperEngineLib.Maths {
     public interface ISplineNode<T> {
-        /*SplineList<T> Splines {
+        SplineList<T> Splines {
             get;
             set;
-        }*/// TODO: Something?
+        } // TODO: Something?
         T Sub(T a);
         T Add(T a);
-        T Mult(double a);
+        T Mult(float a);
         //bool Eq(T a);
-        double Length {
+        float Length {
             get;
         }
-        double LengthFast {
+        float LengthFast {
             get;
         }
-        double LengthSquared {
+        float LengthSquared {
             get;
         }
     }

@@ -5,6 +5,48 @@ using System.Linq;
 using System.Text;
 
 namespace SuperEngineLib.Maths {
+    public class SplineNode1 : ISplineNode<SplineNode1> {
+        private float vec;
+        public SplineNode1(float vector) {
+            vec = vector;
+        }
+        public static implicit operator float(SplineNode1 spline) {
+            return spline.vec;
+        }
+        public static implicit operator SplineNode1(float vector) {
+            return new SplineNode1(vector);
+        }
+        public SplineNode1 Sub(SplineNode1 a) {
+            return (vec - a.vec);
+        }
+        public SplineNode1 Add(SplineNode1 a) {
+            return (vec + a.vec);
+        }
+        public SplineNode1 Mult(SplineNode1 a) {
+            return (vec * a.vec);
+        }
+        public SplineNode1 Mult(float a) {
+            return vec * a;
+        }
+        public bool Eq(SplineNode1 a) {
+            return vec == a.vec;
+        }
+        public double Length {
+            get {
+                return vec;
+            }
+        }
+        public double LengthFast {
+            get {
+                return vec;
+            }
+        }
+        public double LengthSquared {
+            get {
+                return vec * vec;
+            }
+        }
+    }
     public class SplineNode2 : ISplineNode<SplineNode2> {
         private Vector2 vec;
         public SplineNode2(Vector2 vector) {
@@ -25,8 +67,8 @@ namespace SuperEngineLib.Maths {
         public SplineNode2 Mult(SplineNode2 a) {
             return Vector2.Multiply(vec, a.vec);
         }
-        public SplineNode2 Mult(double a) {
-            return Vector2.Multiply(vec, (float)a);
+        public SplineNode2 Mult(float a) {
+            return Vector2.Multiply(vec, a);
         }
         public bool Eq(SplineNode2 a) {
             return vec == a.vec;
@@ -37,41 +79,6 @@ namespace SuperEngineLib.Maths {
         public double LengthFast {
             get {
                 return vec.LengthFast;
-            }
-        }
-        public double LengthSquared {
-            get { return vec.LengthSquared; }
-        }
-    }
-    public class SplineNode2d : ISplineNode<SplineNode2d> {
-        private Vector2d vec;
-        public SplineNode2d(Vector2d vector) {
-            vec = vector;
-        }
-        public static implicit operator Vector2d(SplineNode2d spline) {
-            return spline.vec;
-        }
-        public static implicit operator SplineNode2d(Vector2d vector) {
-            return new SplineNode2d(vector);
-        }
-        public SplineNode2d Sub(SplineNode2d a) {
-            return Vector2d.Subtract(vec, a.vec);
-        }
-        public SplineNode2d Add(SplineNode2d a) {
-            return Vector2d.Add(vec, a.vec);
-        }
-        public SplineNode2d Mult(SplineNode2d a) {
-            return Vector2d.Multiply(vec, a.vec);
-        }
-        public SplineNode2d Mult(double a) {
-            return Vector2d.Multiply(vec, a);
-        }
-        public double Length {
-            get { return vec.Length; }
-        }
-        public double LengthFast {
-            get {
-                return 1.0 / MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y);
             }
         }
         public double LengthSquared {
@@ -98,47 +105,8 @@ namespace SuperEngineLib.Maths {
         public SplineNode3 Mult(SplineNode3 a) {
             return Vector3.Multiply(vec, a.vec);
         }
-        public SplineNode3 Mult(double a) {
-            return Vector3.Multiply(vec, (float)a);
-        }
-        public double Length {
-            get {
-                return vec.Length;
-            }
-        }
-        public double LengthFast {
-            get {
-                return vec.LengthFast;
-            }
-        }
-        public double LengthSquared {
-            get {
-                return vec.LengthSquared;
-            }
-        }
-    }
-    public class SplineNode3d : ISplineNode<SplineNode3d> {
-        private Vector3d vec;
-        public SplineNode3d(Vector3d vector) {
-            vec = vector;
-        }
-        public static implicit operator Vector3d(SplineNode3d spline) {
-            return spline.vec;
-        }
-        public static implicit operator SplineNode3d(Vector3d vector) {
-            return new SplineNode3d(vector);
-        }
-        public SplineNode3d Sub(SplineNode3d a) {
-            return Vector3d.Subtract(vec, a.vec);
-        }
-        public SplineNode3d Add(SplineNode3d a) {
-            return Vector3d.Add(vec, a.vec);
-        }
-        public SplineNode3d Mult(SplineNode3d a) {
-            return Vector3d.Multiply(vec, a.vec);
-        }
-        public SplineNode3d Mult(double a) {
-            return Vector3d.Multiply(vec, a);
+        public SplineNode3 Mult(float a) {
+            return Vector3.Multiply(vec, a);
         }
         public double Length {
             get {
@@ -176,47 +144,8 @@ namespace SuperEngineLib.Maths {
         public SplineNode4 Mult(SplineNode4 a) {
             return Vector4.Multiply(vec, a.vec);
         }
-        public SplineNode4 Mult(double a) {
-            return Vector4.Multiply(vec, (float)a);
-        }
-        public double Length {
-            get {
-                return vec.Length;
-            }
-        }
-        public double LengthFast {
-            get {
-                return vec.LengthFast;
-            }
-        }
-        public double LengthSquared {
-            get {
-                return vec.LengthSquared;
-            }
-        }
-    }
-    public class SplineNode4d : ISplineNode<SplineNode4d> {
-        private Vector4d vec;
-        public SplineNode4d(Vector4d vector) {
-            vec = vector;
-        }
-        public static implicit operator Vector4d(SplineNode4d spline) {
-            return spline.vec;
-        }
-        public static implicit operator SplineNode4d(Vector4d vector) {
-            return new SplineNode4d(vector);
-        }
-        public SplineNode4d Sub(SplineNode4d a) {
-            return Vector4d.Subtract(vec, a.vec);
-        }
-        public SplineNode4d Add(SplineNode4d a) {
-            return Vector4d.Add(vec, a.vec);
-        }
-        public SplineNode4d Mult(SplineNode4d a) {
-            return Vector4d.Multiply(vec, a.vec);
-        }
-        public SplineNode4d Mult(double a) {
-            return Vector4d.Multiply(vec, a);
+        public SplineNode4 Mult(float a) {
+            return Vector4.Multiply(vec, a);
         }
         public double Length {
             get {
