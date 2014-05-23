@@ -11,6 +11,8 @@
     <AssemblyName>SuperEngineLib</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <ProductVersion>12.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +43,21 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="OOGL">
+      <HintPath>..\Dependencies\OOGL\bin\Release\OOGL.dll</HintPath>
+    </Reference>
+    <Reference Include="Jitter">
+      <HintPath>..\Dependencies\Jitter\Jitter\bin\Release\Jitter.dll</HintPath>
+    </Reference>
+    <Reference Include="GLGUI">
+      <HintPath>..\Dependencies\OOGL\GUI\bin\Release\GLGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Addins.Setup">
+      <HintPath>..\Dependencies\mono-addins\bin\Mono.Addins.Setup.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Addins">
+      <HintPath>..\Dependencies\mono-addins\bin\Mono.Addins.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Maths\ISplineNode.cs" />
@@ -68,33 +85,11 @@
   <ItemGroup>
     <Folder Include="Commands\ParameterGroups\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Dependencies\Jitter\Jitter\Jitter.csproj">
-      <Project>{aa03ef1a-94f7-4d30-ab14-2092863ff923}</Project>
-      <Name>Jitter %28Dependencies\Jitter\Jitter%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dependencies\mono-addins\Mono.Addins.Setup\Mono.Addins.Setup.csproj">
-      <Project>{a85c9721-c054-4bd8-a1f3-0227615f0a36}</Project>
-      <Name>Mono.Addins.Setup</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dependencies\mono-addins\Mono.Addins\Mono.Addins.csproj">
-      <Project>{91dd5a2d-9fe3-4c3c-9253-876141874dad}</Project>
-      <Name>Mono.Addins %28Dependencies\Mono.Addins\Mono.Addins%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dependencies\OOGL\GUI\OOGL.GUI.csproj">
-      <Project>{998ceea2-6895-4bd2-93c0-53e8ef0af569}</Project>
-      <Name>OOGL.GUI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Dependencies\OOGL\OOGL.csproj">
-      <Project>{195aaf4a-3e4c-4fea-92f6-0cd63fb3fe4b}</Project>
-      <Name>OOGL %28Dependencies\OOGL\OOGL%29</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
-        <Deployment.LinuxDeployData generatePcFile="false" />
+        <Deployment.LinuxDeployData generatePcFile="False" />
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
