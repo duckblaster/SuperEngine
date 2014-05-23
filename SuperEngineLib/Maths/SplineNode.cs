@@ -35,11 +35,11 @@ namespace SuperEngineLib.Maths {
             }
         }
 
-        public SplineNode() {
+        /*public SplineNode() {
             _values = new double[1];
             _length = 0;
             _lengthSquared = 0;
-        }
+        }*/
 
         public SplineNode(int size) {
             _values = new double[size];
@@ -63,7 +63,7 @@ namespace SuperEngineLib.Maths {
             _length = Math.Sqrt(_lengthSquared);
         }
 
-        public implicit operator SplineNode(Vector4d vec) {
+        public static implicit operator SplineNode(Vector4d vec) {
             return new SplineNode();
         }
     }

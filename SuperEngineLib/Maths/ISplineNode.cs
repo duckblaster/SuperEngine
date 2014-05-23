@@ -5,10 +5,10 @@ using System.Text;
 
 namespace SuperEngineLib.Maths {
     public interface ISplineNode<T> {
-        SplineList<T> Splines {
+        /*SplineList<T> Splines {
             get;
             set;
-        } // TODO: Something?
+        } // TODO: Something?*/
         T Sub(T a);
         T Add(T a);
         T Mult(float a);
