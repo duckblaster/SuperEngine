@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SuperEngineLib</RootNamespace>
     <AssemblyName>SuperEngineLib</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
@@ -74,16 +74,19 @@
     <Compile Include="GUI\Button.cs" />
     <Compile Include="Commands\ParameterGroup.cs" />
     <Compile Include="Commands\Parameter.cs" />
-    <Compile Include="ReadOnlyDictionary.cs" />
     <Compile Include="Objects\Spline.cs" />
     <Compile Include="Objects\MeshObject.cs" />
     <Compile Include="Graphics\Mesh.cs" />
     <Compile Include="Graphics\Texture.cs" />
     <Compile Include="Graphics\Vertex.cs" />
     <Compile Include="Maths\Spline.cs" />
+    <Compile Include="Misc\NotifyPropertyChanged.cs" />
+    <Compile Include="Misc\UnixTime.cs" />
+    <Compile Include="Misc\ReadOnlyDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\ParameterGroups\" />
+    <Folder Include="Misc\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
