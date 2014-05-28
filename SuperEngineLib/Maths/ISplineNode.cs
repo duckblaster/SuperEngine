@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace SuperEngineLib.Maths {
-    public interface ISplineNode<T> {
-        /*SplineList<T> Splines {
+	public interface ISplineNode {
+
+	}
+    public interface ISplineNode<TSplineNode> : ISplineNode {
+		/*SplineList<TSplineNode> Splines {
             get;
             set;
         }*/// TODO: Something?
-        T Sub(T a);
-        T Add(T a);
-        T Mult(double a);
-        //bool Eq(T a);
+		TSplineNode Sub(TSplineNode a);
+		TSplineNode Add(TSplineNode a);
+		TSplineNode Mult(double a);
+		bool Eq(TSplineNode a);
         double Length {
             get;
         }
@@ -21,6 +25,6 @@ namespace SuperEngineLib.Maths {
         }
         double LengthSquared {
             get;
-        }
+		}
     }
 }

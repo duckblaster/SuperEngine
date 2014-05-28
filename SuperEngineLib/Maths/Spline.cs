@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Drawing;
 
 namespace SuperEngineLib.Maths {
-    public class SplineList<T> : List<Spline<T>> where T : ISplineNode<T> {
+	/*public class SplineList<TSplineNode> : List<Spline<TSplineNode>> where TSplineNode : ISplineNode {
         // TODO: Something?
-    }
+    }*/
     public class Spline<T> where T : ISplineNode<T> {
-        private struct SplineNodeWrapper<T> where T : ISplineNode<T> {
+		private struct SplineNodeWrapper<T> : IEquatable<ISplineNode<T>>, IEquatable<SplineNodeWrapper<T>> where T : ISplineNode<T> {
             private T node;
             public SplineNodeWrapper(T splineNode) {
                 this.node = splineNode;
@@ -32,14 +32,23 @@ namespace SuperEngineLib.Maths {
                 return new SplineNodeWrapper<T>(a.node.Mult(b));
             }
             public static bool operator ==(SplineNodeWrapper<T> a, SplineNodeWrapper<T> b) {
-                return false;//a.node.Eq(b);
+				return (ISplineNode)a.node == (ISplineNode)b.node;
             }
             public static bool operator !=(SplineNodeWrapper<T> a, SplineNodeWrapper<T> b) {
-                return true;//!a.node.Eq(b);
+				return (ISplineNode)a.node != (ISplineNode)b.node;
             }
             public bool Equals(SplineNodeWrapper<T> a) {
-                return false;//this.node.Eq(a);
-            }
+				return (ISplineNode)this.node == (ISplineNode)a.node;
+			}
+			public bool Equals(ISplineNode<T> a) {
+				return (ISplineNode)this.node == a;
+			}
+			public override bool Equals(object obj) {
+				return base.Equals(obj);
+			}
+			public override int GetHashCode() {
+				return node.GetHashCode();
+			}
             public double Length {
                 get {
                     return node.Length;

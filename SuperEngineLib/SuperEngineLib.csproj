@@ -40,7 +40,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="OOGL">
@@ -58,6 +57,7 @@
     <Reference Include="Mono.Addins">
       <HintPath>..\Dependencies\mono-addins\bin\Mono.Addins.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Maths\ISplineNode.cs" />
@@ -83,10 +83,12 @@
     <Compile Include="Misc\NotifyPropertyChanged.cs" />
     <Compile Include="Misc\UnixTime.cs" />
     <Compile Include="Misc\ReadOnlyDictionary.cs" />
+    <Compile Include="Maths\Spline\Spline.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\ParameterGroups\" />
     <Folder Include="Misc\" />
+    <Folder Include="Maths\Spline\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

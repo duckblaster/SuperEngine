@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace SuperEngineLib.Maths {
     public class SplineNode2 : ISplineNode<SplineNode2> {
@@ -66,6 +67,9 @@ namespace SuperEngineLib.Maths {
         public SplineNode2d Mult(double a) {
             return Vector2d.Multiply(vec, a);
         }
+		public bool Eq(SplineNode2d a) {
+			return vec == a.vec;
+		}
         public double Length {
             get { return vec.Length; }
         }
@@ -100,7 +104,10 @@ namespace SuperEngineLib.Maths {
         }
         public SplineNode3 Mult(double a) {
             return Vector3.Multiply(vec, (float)a);
-        }
+		}
+		public bool Eq(SplineNode3 a) {
+			return vec == a.vec;
+		}
         public double Length {
             get {
                 return vec.Length;
@@ -139,7 +146,10 @@ namespace SuperEngineLib.Maths {
         }
         public SplineNode3d Mult(double a) {
             return Vector3d.Multiply(vec, a);
-        }
+		}
+		public bool Eq(SplineNode3d a) {
+			return vec == a.vec;
+		}
         public double Length {
             get {
                 return vec.Length;
@@ -178,7 +188,10 @@ namespace SuperEngineLib.Maths {
         }
         public SplineNode4 Mult(double a) {
             return Vector4.Multiply(vec, (float)a);
-        }
+		}
+		public bool Eq(SplineNode4 a) {
+			return vec == a.vec;
+		}
         public double Length {
             get {
                 return vec.Length;
@@ -217,7 +230,10 @@ namespace SuperEngineLib.Maths {
         }
         public SplineNode4d Mult(double a) {
             return Vector4d.Multiply(vec, a);
-        }
+		}
+		public bool Eq(SplineNode4d a) {
+			return vec == a.vec;
+		}
         public double Length {
             get {
                 return vec.Length;
