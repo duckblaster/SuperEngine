@@ -83,12 +83,10 @@
     <Compile Include="Misc\NotifyPropertyChanged.cs" />
     <Compile Include="Misc\UnixTime.cs" />
     <Compile Include="Misc\ReadOnlyDictionary.cs" />
-    <Compile Include="Maths\Spline\Spline.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\ParameterGroups\" />
     <Folder Include="Misc\" />
-    <Folder Include="Maths\Spline\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
