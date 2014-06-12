@@ -184,7 +184,22 @@ namespace SuperEngineLib.Maths {
 					return next;
 				}
 				set {
-					if(next != null) {
+					SetProperty<SplineSegment>(ref next, value, (SplineSegment oldValue, ref SplineSegment newValue) => {
+						if(oldValue != null) {
+							oldValue.Prev = null;
+						}
+					}, (SplineSegment oldValue, SplineSegment newValue) => {
+						if(next != null) {
+							if(next.Prev != this) {
+								next.Prev = this;
+							}
+							next_end = next.end;
+						} else {
+							next_end = end.Add(end.Subtract(start));
+							//next_end = end + (end - start);
+						}
+					});
+					/*if(next != null) {
 						next.Prev = null;
 					}
 					next = value;
@@ -196,7 +211,7 @@ namespace SuperEngineLib.Maths {
 					} else {
 						next_end = end.Add(end.Subtract(start));
 						//next_end = end + (end - start);
-					}
+					}*/
 				}
 			}
 
@@ -337,7 +352,7 @@ namespace SuperEngineLib.Maths {
 			}
 
 			public double CalcLength() {
-				return CalcLength(2);
+				return CalcLength(0.1);
 			}
 
 			public double CalcLength(double accuracy) {
@@ -352,12 +367,16 @@ namespace SuperEngineLib.Maths {
 				double umid = (u0 + u1) / 2;
 				TSplineNode P0 = Point(u0);
 				TSplineNode P1 = Point(u1);
-				if(P0.Subtract(P1).LengthSquared > accuracy * accuracy) {
+				TSplineNode Pmid = Point(umid);
+				double lenP0mid = P0.Subtract(Pmid).Length;
+				double lenP1mid = P1.Subtract(Pmid).Length;
+				double lenP0P1 = P0.Subtract(P1).Length;
+				if((lenP0mid + lenP1mid) - lenP0P1 > accuracy) {
 					double len0 = CalcLength(u0, umid, accuracy);
 					double len1 = CalcLength(umid, u1, accuracy);
 					return len0 + len1;
 				}
-				return P0.Subtract(P1).Length;
+				return lenP0P1;
 			}
 
 			public double CalcLength(double u0, double u1, int maxDepth) {

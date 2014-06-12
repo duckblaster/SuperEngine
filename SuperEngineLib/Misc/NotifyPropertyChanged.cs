@@ -2,9 +2,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System;
+//using System.Linq;
 
 namespace SuperEngine.Misc {
-	public class DetailedPropertyChangedEventArgs : PropertyChangedEventArgs{
+	public class DetailedPropertyChangedEventArgs : PropertyChangedEventArgs {
 		object oldValue;
 		object newValue;
 		Type type;
@@ -47,30 +48,65 @@ namespace SuperEngine.Misc {
 		}
 		
 	}
-	public class DetailedPropertyChangedEventArgs<T> : DetailedPropertyChangedEventArgs{
+	public class DetailedPropertyChangedEventArgs<T> : PropertyChangedEventArgs {
+		T oldValue;
+		T newValue;
+		Type type;
+		string originalPropertyName;
 
-		public new T OldValue {
+		public virtual T OldValue {
 			get {
-				return (T)base.OldValue;
+				return oldValue;
 			}
 		}
 
-		public new T NewValue {
+		public virtual T NewValue {
 			get {
-				return (T)base.NewValue;
+				return newValue;
 			}
 		}
 
-		/*public static explicit operator DetailedPropertyChangedEventArgs<T>(DetailedPropertyChangedEventArgs args){
-			if(typeof(T).IsAssignableFrom(args.Type)) {
-				return new DetailedPropertyChangedEventArgs<T>(args.OldValue, args.NewValue, args.PropertyName, args.OriginalPropertyName);
+		public Type Type {
+			get {
+				return type;
 			}
-		}*/
-
-		public DetailedPropertyChangedEventArgs(T oldValue, T newValue, string propertyName, string originalPropertyName = null) : base(oldValue, newValue, typeof(T), propertyName, originalPropertyName) {
 		}
-		/*public DetailedPropertyChangedEventArgs(DetailedPropertyChangedEventArgs args) : base(args.OldValue, args.NewValue, args.PropertyName, typeof(T), args.OriginalPropertyName) {
-		}*/
+
+		public string OriginalPropertyName {
+			get {
+				return originalPropertyName;
+			}
+		}
+
+
+		public DetailedPropertyChangedEventArgs(string propertyName, string originalPropertyName = null) : base(propertyName) {
+			this.originalPropertyName = originalPropertyName;
+		}
+
+		public DetailedPropertyChangedEventArgs(T oldValue, T newValue, string propertyName, string originalPropertyName = null) : base(propertyName) {
+			this.oldValue = oldValue;
+			this.newValue = newValue;
+			this.type = typeof(T);
+			this.originalPropertyName = originalPropertyName;
+		}
+
+		public static explicit operator DetailedPropertyChangedEventArgs<T>(DetailedPropertyChangedEventArgs args){
+			return new DetailedPropertyChangedEventArgs<T>(args.OldValue, args.NewValue, args.PropertyName, args.OriginalPropertyName);
+		}
+
+		public static implicit operator DetailedPropertyChangedEventArgs(DetailedPropertyChangedEventArgs<T> args){
+			return new DetailedPropertyChangedEventArgs(args.OldValue, args.NewValue, args.Type, args.PropertyName, args.OriginalPropertyName);
+		}
+
+		public DetailedPropertyChangedEventArgs(DetailedPropertyChangedEventArgs args) : base(args.PropertyName) {
+			if(!typeof(T).IsAssignableFrom(args.Type)) {
+				throw new InvalidCastException();
+			}
+			this.oldValue = (T)args.OldValue;
+			this.newValue = (T)args.NewValue;
+			this.type = typeof(T);
+			this.originalPropertyName = args.OriginalPropertyName;
+		}
 
 	}
 	public abstract class NotifyPropertyChanged : INotifyPropertyChanged {
@@ -106,7 +142,7 @@ namespace SuperEngine.Misc {
 		protected static void PropertyDependsOn<T>(string property, string depends) {
 			Type t = typeof(T);
 			if(initializedTypes.ContainsKey(t) && initializedTypes[t]) {
-				throw new InvalidOperationException(string.Format("NotifyPropertyChanged.PropertyDependsOn must be called from a static constructor. Called by {0}", t));
+				throw new InvalidOperationException(string.Format("NotifyPropertyChanged.PropertyDependsOn must be called from a static constructor. Called by type {0}", t));
 			}
 			if (property == depends) {
 				return;
@@ -127,7 +163,7 @@ namespace SuperEngine.Misc {
 		protected static void PropertySubDependsOn<T>(string property, string depends) {
 			Type t = typeof(T);
 			if(initializedTypes.ContainsKey(t) && initializedTypes[t]) {
-				throw new InvalidOperationException(string.Format("NotifyPropertyChanged.PropertySubDependsOn must be called from a static constructor. Called by {0}", t));
+				throw new InvalidOperationException(string.Format("NotifyPropertyChanged.PropertySubDependsOn must be called from a static constructor. Called by type {0}", t));
 			}
 			if (property == depends) {
 				return;
@@ -152,33 +188,35 @@ namespace SuperEngine.Misc {
 			initialized = true;
 		}
 		static void Initialize(Type t) {
+			Console.WriteLine("Initialize(Type t={0}), initializedTypes:", t);
+			foreach(KeyValuePair<Type, bool> item in initializedTypes) {
+				Console.WriteLine("    {0}: {1}", item.Key, item.Value);
+			}
+
 			if(initializedTypes.ContainsKey(t) && initializedTypes[t]) {
+				Console.WriteLine("initializedTypes.ContainsKey(t) && initializedTypes[t]; t={0}", t);
 				return;
 			}
 			Type baseType = t.BaseType;
-			if(baseType == typeof(NotifyPropertyChanged))
+			if(baseType == typeof(NotifyPropertyChanged)) {
+				initializedTypes[t] = true;
 				return;
+			}
 			Initialize(baseType);
 
 			Dictionary<string, List<string>> propertyDependecyMap = PropertyDependecyMapForType(t);
 			Dictionary<string, List<string>> basePropertyDependecyMap = PropertyDependecyMapForType(baseType);
-			foreach(var itemKey in basePropertyDependecyMap.Keys) {
+			foreach(KeyValuePair<string, List<string>> property in basePropertyDependecyMap) {
 				List<string> itemList;
-				List<string> itemBaseList;
 
-				if (!propertyDependecyMap.TryGetValue(itemKey, out itemList)) {
+				if (!propertyDependecyMap.TryGetValue(property.Key, out itemList)) {
 					itemList = new List<string>();
-					propertyDependecyMap[itemKey] = itemList;
+					propertyDependecyMap[property.Key] = itemList;
 				}
 
-				if (!basePropertyDependecyMap.TryGetValue(itemKey, out itemBaseList)) {
-					itemBaseList = new List<string>();
-					basePropertyDependecyMap[itemKey] = itemBaseList;
-				}
-
-				foreach(var item in itemBaseList) {
-					if(!itemList.Contains(item)) {
-						itemList.Add(item);
+				foreach(string dependency in property.Value) {
+					if(!itemList.Contains(dependency)) {
+						itemList.Add(dependency);
 					}
 				}
 			}
@@ -209,14 +247,11 @@ namespace SuperEngine.Misc {
 		}
 
 		protected virtual void SetProperty<T>(ref T field, T value, OnBeforeSetPropertyAction<T> onBeforeSetAction, OnSetPropertyAction<T> onSetAction, [CallerMemberName] string propertyName = null) {
-			if(Equals(field, value)) {
+			if(field != null && Equals(field, value)) {
 				return;
 			}
 			T oldValue = field;
 			onBeforeSetAction(oldValue, ref value);
-			if(oldValue.Equals(value)){
-				return;
-			}
 			field = value;
 			onSetAction(oldValue, value);
 			OnPropertyChanged<T>(oldValue, value, propertyName);
@@ -227,10 +262,9 @@ namespace SuperEngine.Misc {
 				Initialize();
 			}
 			PropertyChangedEventHandler handler = PropertyChanged;
-			if (handler == null) {
-				return;
+			if (handler != null) {
+				handler(this, new DetailedPropertyChangedEventArgs(propertyName));
 			}
-			handler(this, new DetailedPropertyChangedEventArgs(propertyName));
 
 			if (propertyName == null) {
 				return;
@@ -252,10 +286,9 @@ namespace SuperEngine.Misc {
 				Initialize();
 			}
 			PropertyChangedEventHandler handler = PropertyChanged;
-			if (handler == null) {
-				return;
+			if (handler != null) {
+				handler(this, new DetailedPropertyChangedEventArgs(oldValue, newValue, type, propertyName));
 			}
-			handler(this, new DetailedPropertyChangedEventArgs(oldValue, newValue, type, propertyName));
 
 			HandleDependentPropertyChanges(oldValue, newValue, type, propertyName, originalPropertyName);
 		}
@@ -264,10 +297,9 @@ namespace SuperEngine.Misc {
 				Initialize();
 			}
 			PropertyChangedEventHandler handler = PropertyChanged;
-			if (handler == null) {
-				return;
+			if (handler != null) {
+				handler(this, new DetailedPropertyChangedEventArgs<T>(oldValue, newValue, propertyName));
 			}
-			handler(this, new DetailedPropertyChangedEventArgs<T>(oldValue, newValue, propertyName));
 
 			HandleDependentPropertyChanges(oldValue, newValue, typeof(T), propertyName, originalPropertyName);
 		}

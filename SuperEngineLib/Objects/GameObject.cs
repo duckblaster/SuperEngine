@@ -2,86 +2,28 @@ using System;
 using OpenTK;
 using SuperEngine.Editors;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using OpenTK.Graphics.OpenGL;
+using SuperEngine.Misc;
 
-namespace SuperEngine.Objects {
+namespace SuperEngineLib.Objects {
 	/// <summary>
 	/// Description of GameObject.
 	/// </summary>
-	public class GameObject {
+	public class GameObject : NotifyPropertyChanged {
 		#region Position/Orientation
-		#region Events
-		public class PropertyChangedEventArgs<T> : EventArgs {
-			public T OldValue { get; private set; }
-
-			public T Value { get; private set; }
-
-			public PropertyChangedEventArgs(T oldValue, T newValue) {
-				this.OldValue = oldValue;
-				this.Value = newValue;
-			}
-		}
-
-		public class PositionChangedEventArgs : EventArgs {
-			public Vector3 OldPosition { get; private set; }
-
-			public Vector3 Position { get; private set; }
-
-			public PositionChangedEventArgs(Vector3 oldPosition, Vector3 position) {
-				this.OldPosition = oldPosition;
-				this.Position = position;
-			}
-		}
-
-		public class OrientationChangedEventArgs : EventArgs {
-			public Quaternion OldOrientation { get; private set; }
-
-			public Quaternion Orientation { get; private set; }
-
-			public OrientationChangedEventArgs(Quaternion oldOrientation, Quaternion orientation) {
-				this.OldOrientation = oldOrientation;
-				this.Orientation = orientation;
-			}
-		}
-
-		public event EventHandler<PositionChangedEventArgs> PositionChanged;
-		public event EventHandler<OrientationChangedEventArgs> OrientationChanged;
-
-		protected virtual void OnPositionChanged(PositionChangedEventArgs e) {
-			if(PositionChanged != null) {
-				PositionChanged(this, e);
-			}
-		}
-
-		protected virtual void OnOrientationChanged(OrientationChangedEventArgs e) {
-			if(OrientationChanged != null) {
-				OrientationChanged(this, e);
-			}
-		}
-		#endregion
 		Vector3 position;
 		Quaternion orientation;
 
 		public Vector3 Position {
 			get { return position; }
 			set {
-				if(position != value) {
-					PositionChangedEventArgs e = new PositionChangedEventArgs(position, value);
-					position = value;
-					OnPositionChanged(e);
-				}
+				SetProperty(ref position, value);
 			}
 		}
 
 		public Quaternion Orientation {
 			get { return orientation; }
 			set {
-				if(orientation != value) {
-					OrientationChangedEventArgs e = new OrientationChangedEventArgs(orientation, value);
-					orientation = value;
-					OnOrientationChanged(e);
-				}
+				SetProperty(ref orientation, value);
 			}
 		}
 		#endregion

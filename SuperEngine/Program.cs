@@ -65,6 +65,11 @@ namespace SuperEngine {
             s11.Prev = s12;
             s11.Next = s13;
 
+			s1.Start.Bias = 0.0;
+			s1.Start.Bias = 0.1;
+			s2.Start.Bias = 0.0;
+			s2.Start.Bias = 0.1;
+
             var bmp = new Bitmap(1500, 1500);
 
             for (int x = 0; x < bmp.Width; x++) {
@@ -116,7 +121,7 @@ namespace SuperEngine {
 			s8.DrawPoints(func, new MyData(s9), quality);
             Console.WriteLine();
             Console.WriteLine();
-
+			
 			s1.DrawPoints(func, new MyData(s10), quality);
             Console.WriteLine();
 			s2.DrawPoints(func, new MyData(s10), quality);
