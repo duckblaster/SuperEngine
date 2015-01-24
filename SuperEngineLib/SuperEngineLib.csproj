@@ -91,6 +91,7 @@
     </MonoDevelop>
   </ProjectExtensions>
   <PropertyGroup>
-    <PreBuildEvent>$(SolutionDir)\UpdateVersion.exe $(ProjectName)</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>
