@@ -1,0 +1,4 @@
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\Jitter\Jitter\bin\Debug\Jitter.dll
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\Jitter\Jitter\bin\Debug\Jitter.pdb
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\Jitter\Jitter\obj\Debug\Jitter.dll
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\Jitter\Jitter\obj\Debug\Jitter.pdb
