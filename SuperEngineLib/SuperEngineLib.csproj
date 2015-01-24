@@ -81,10 +81,7 @@
     <Compile Include="Maths\SplineNode\SplineNode4.cs" />
     <Compile Include="Maths\SplineNode\SplineNode4d.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Misc\" />
-    <Folder Include="Maths\SplineNode\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>

@@ -1,0 +1,5 @@
+language: csharp
+solution: SuperEngine.sln
+script:
+  - xbuild /p:Configuration=Release SuperEngine.sln
+  - mono ./packages/xunit.runners.2.0.0-rc1-build2826/tools/xunit.console.exe ./SuperEngine.Tests/bin/Release/SuperEngine.Tests.dll
