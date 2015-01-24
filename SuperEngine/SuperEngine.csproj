@@ -5,12 +5,13 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9760AEBB-9EC1-432F-A2E8-13689FB55216}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SuperEngine</RootNamespace>
     <AssemblyName>SuperEngine</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,11 +24,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <ProductVersion>12.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,23 +46,27 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>SuperEngine.SuperEngine</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenTK">
-      <HintPath>..\Dependencies\OpenTK\Binaries\OpenTK\Release\OpenTK.dll</HintPath>
+      <HintPath>..\Dependencies\OpenTK\Binaries\OpenTK\Debug\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Jitter">
-      <HintPath>..\Dependencies\Jitter\Jitter\bin\Release\Jitter.dll</HintPath>
+      <HintPath>..\Dependencies\Jitter\Jitter\bin\Debug\Jitter.dll</HintPath>
     </Reference>
     <Reference Include="OOGL">
-      <HintPath>..\Dependencies\OOGL\bin\Release\OOGL.dll</HintPath>
+      <HintPath>..\Dependencies\OOGL\bin\Debug\OOGL.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Addins">
       <HintPath>..\Dependencies\mono-addins\bin\Mono.Addins.dll</HintPath>
@@ -73,10 +75,16 @@
       <HintPath>..\Dependencies\mono-addins\bin\Mono.Addins.Setup.dll</HintPath>
     </Reference>
     <Reference Include="GLGUI">
-      <HintPath>..\Dependencies\OOGL\GUI\bin\Release\GLGUI.dll</HintPath>
+      <HintPath>..\Dependencies\OOGL\GUI\bin\Debug\GLGUI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DebugGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugGUI.Designer.cs">
+      <DependentUpon>DebugGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyVersion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,6 +116,11 @@
       <Project>{394DBD0C-1983-48AA-98FF-3FC12FBCB87C}</Project>
       <Name>SuperEngineLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="DebugGUI.resx">
+      <DependentUpon>DebugGUI.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

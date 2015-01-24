@@ -1,98 +1,98 @@
 using System;
 namespace System.Collections.Generic {
-	public class ReadOnlyDictionary<TKey, TValue> : IDictionary<TKey, TValue> {
-		private IDictionary<TKey, TValue> _dictionary;
+    public class ReadOnlyDictionary<TKey, TValue> : IDictionary<TKey, TValue> {
+        private IDictionary<TKey, TValue> _dictionary;
 
-		public ReadOnlyDictionary() {
-			_dictionary = new Dictionary<TKey, TValue>();
-		}
+        public ReadOnlyDictionary() {
+            _dictionary = new Dictionary<TKey, TValue>();
+        }
 
-		public ReadOnlyDictionary(IDictionary<TKey, TValue> dictionary) {
-			_dictionary = dictionary;
-		}
-		
-		#region IDictionary<TKey,TValue> Members
+        public ReadOnlyDictionary(IDictionary<TKey, TValue> dictionary) {
+            _dictionary = dictionary;
+        }
 
-		public void Add(TKey key, TValue value) {
-			throw new NotSupportedException("This dictionary is read-only");
-		}
+        #region IDictionary<TKey,TValue> Members
 
-		public bool ContainsKey(TKey key) {
-			return _dictionary.ContainsKey(key);
-		}
+        public void Add(TKey key, TValue value) {
+            throw new NotSupportedException("This dictionary is read-only");
+        }
 
-		public ICollection<TKey> Keys {
-			get { return _dictionary.Keys; }
-		}
+        public bool ContainsKey(TKey key) {
+            return _dictionary.ContainsKey(key);
+        }
 
-		public bool Remove(TKey key) {
-			throw new NotSupportedException("This dictionary is read-only");
-		}
+        public ICollection<TKey> Keys {
+            get { return _dictionary.Keys; }
+        }
 
-		public bool TryGetValue(TKey key, out TValue value) {
-			return _dictionary.TryGetValue(key, out value);
-		}
+        public bool Remove(TKey key) {
+            throw new NotSupportedException("This dictionary is read-only");
+        }
 
-		public ICollection<TValue> Values {
-			get { return _dictionary.Values; }
-		}
+        public bool TryGetValue(TKey key, out TValue value) {
+            return _dictionary.TryGetValue(key, out value);
+        }
 
-		public TValue this[TKey key] {
-			get { return _dictionary[key]; }
-			set {
-				throw new NotSupportedException("This dictionary is read-only");
-			}
-		}
+        public ICollection<TValue> Values {
+            get { return _dictionary.Values; }
+        }
 
-		#endregion
+        public TValue this[TKey key] {
+            get { return _dictionary[key]; }
+            set {
+                throw new NotSupportedException("This dictionary is read-only");
+            }
+        }
 
-		#region ICollection<KeyValuePair<TKey,TValue>> Members
+        #endregion
 
-		public void Add(KeyValuePair<TKey, TValue> item) {
-			throw new NotSupportedException("This dictionary is read-only");
-		}
+        #region ICollection<KeyValuePair<TKey,TValue>> Members
 
-		public void Clear() {
-			throw new NotSupportedException("This dictionary is read-only");
-		}
+        public void Add(KeyValuePair<TKey, TValue> item) {
+            throw new NotSupportedException("This dictionary is read-only");
+        }
 
-		public bool Contains(KeyValuePair<TKey, TValue> item) {
-			return _dictionary.Contains(item);
-		}
+        public void Clear() {
+            throw new NotSupportedException("This dictionary is read-only");
+        }
 
-		public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) {
-			_dictionary.CopyTo(array, arrayIndex);
-		}
+        public bool Contains(KeyValuePair<TKey, TValue> item) {
+            return _dictionary.Contains(item);
+        }
 
-		public int Count {
-			get { return _dictionary.Count; }
-		}
+        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) {
+            _dictionary.CopyTo(array, arrayIndex);
+        }
 
-		public bool IsReadOnly {
-			get { return true; }
-		}
+        public int Count {
+            get { return _dictionary.Count; }
+        }
 
-		public bool Remove(KeyValuePair<TKey, TValue> item) {
-			throw new NotSupportedException("This dictionary is read-only");
-		}
+        public bool IsReadOnly {
+            get { return true; }
+        }
 
-		#endregion
+        public bool Remove(KeyValuePair<TKey, TValue> item) {
+            throw new NotSupportedException("This dictionary is read-only");
+        }
 
-		#region IEnumerable<KeyValuePair<TKey,TValue>> Members
+        #endregion
 
-		public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() {
-			return _dictionary.GetEnumerator();
-		}
+        #region IEnumerable<KeyValuePair<TKey,TValue>> Members
 
-		#endregion
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() {
+            return _dictionary.GetEnumerator();
+        }
 
-		#region IEnumerable Members
+        #endregion
 
-		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
-			return (_dictionary as System.Collections.IEnumerable).GetEnumerator();
-		}
-		
-		#endregion
-	}
+        #region IEnumerable Members
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() {
+            return (_dictionary as System.Collections.IEnumerable).GetEnumerator();
+        }
+
+        #endregion
+    }
 }
 

@@ -1,19 +1,13 @@
 using System;
-namespace SuperEngine.Commands {
-	public class Command {
-		private ParameterGroup parameters;
-		public ParameterGroup Parameters {
-			get {
-				return this.parameters;
-			}
-		}
 
-        public virtual void Run()
-        {
+namespace SuperEngineLib.Commands {
+    public class Command {
+
+        public virtual void Run() {
         }
-		
-		public Command() {
-		}
-	}
+
+        public Command() {
+        }
+    }
 }
 

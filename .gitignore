@@ -20,6 +20,7 @@ AssemblyVersion.cs
 *.user
 *.sln.docstates
 *.userprefs
+*.ide/
 
 # Build results
 

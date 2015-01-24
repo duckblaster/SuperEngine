@@ -2,362 +2,375 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 using System;
+
 //using System.Linq;
 
-namespace SuperEngine.Misc {
-	public class DetailedPropertyChangedEventArgs : PropertyChangedEventArgs {
-		object oldValue;
-		object newValue;
-		Type type;
-		string originalPropertyName;
+namespace SuperEngineLib.Misc {
+    public class DetailedPropertyChangedEventArgs : PropertyChangedEventArgs {
+        readonly object oldValue;
+        readonly object newValue;
+        readonly Type type;
+        readonly string originalPropertyName;
 
-		public virtual object OldValue {
-			get {
-				return oldValue;
-			}
-		}
-	
-		public virtual object NewValue {
-			get {
-				return newValue;
-			}
-		}
+        public virtual object OldValue {
+            get {
+                return oldValue;
+            }
+        }
 
-		public Type Type {
-			get {
-				return type;
-			}
-		}
+        public virtual object NewValue {
+            get {
+                return newValue;
+            }
+        }
 
-		public string OriginalPropertyName {
-			get {
-				return originalPropertyName;
-			}
-		}
-		
+        public Type Type {
+            get {
+                return type;
+            }
+        }
 
-		public DetailedPropertyChangedEventArgs(string propertyName, string originalPropertyName = null) : base(propertyName) {
-			this.originalPropertyName = originalPropertyName;
-		}
-
-		public DetailedPropertyChangedEventArgs(object oldValue, object newValue, Type type, string propertyName, string originalPropertyName = null) : base(propertyName) {
-			this.oldValue = oldValue;
-			this.newValue = newValue;
-			this.type = type;
-			this.originalPropertyName = originalPropertyName;
-		}
-		
-	}
-	public class DetailedPropertyChangedEventArgs<T> : PropertyChangedEventArgs {
-		T oldValue;
-		T newValue;
-		Type type;
-		string originalPropertyName;
-
-		public virtual T OldValue {
-			get {
-				return oldValue;
-			}
-		}
-
-		public virtual T NewValue {
-			get {
-				return newValue;
-			}
-		}
-
-		public Type Type {
-			get {
-				return type;
-			}
-		}
-
-		public string OriginalPropertyName {
-			get {
-				return originalPropertyName;
-			}
-		}
+        public string OriginalPropertyName {
+            get {
+                return originalPropertyName;
+            }
+        }
 
 
-		public DetailedPropertyChangedEventArgs(string propertyName, string originalPropertyName = null) : base(propertyName) {
-			this.originalPropertyName = originalPropertyName;
-		}
+        public DetailedPropertyChangedEventArgs(string propertyName, string originalPropertyName = null)
+            : base(propertyName) {
+            this.originalPropertyName = originalPropertyName;
+        }
 
-		public DetailedPropertyChangedEventArgs(T oldValue, T newValue, string propertyName, string originalPropertyName = null) : base(propertyName) {
-			this.oldValue = oldValue;
-			this.newValue = newValue;
-			this.type = typeof(T);
-			this.originalPropertyName = originalPropertyName;
-		}
+        public DetailedPropertyChangedEventArgs(object oldValue, object newValue, Type type, string propertyName, string originalPropertyName = null)
+            : base(propertyName) {
+            this.oldValue = oldValue;
+            this.newValue = newValue;
+            this.type = type;
+            this.originalPropertyName = originalPropertyName;
+        }
 
-		public static explicit operator DetailedPropertyChangedEventArgs<T>(DetailedPropertyChangedEventArgs args){
-			return new DetailedPropertyChangedEventArgs<T>(args.OldValue, args.NewValue, args.PropertyName, args.OriginalPropertyName);
-		}
+    }
 
-		public static implicit operator DetailedPropertyChangedEventArgs(DetailedPropertyChangedEventArgs<T> args){
-			return new DetailedPropertyChangedEventArgs(args.OldValue, args.NewValue, args.Type, args.PropertyName, args.OriginalPropertyName);
-		}
+    public class DetailedPropertyChangedEventArgs<T> : PropertyChangedEventArgs {
+        readonly T oldValue;
+        readonly T newValue;
+        readonly Type type;
+        readonly string originalPropertyName;
 
-		public DetailedPropertyChangedEventArgs(DetailedPropertyChangedEventArgs args) : base(args.PropertyName) {
-			if(!typeof(T).IsAssignableFrom(args.Type)) {
-				throw new InvalidCastException();
-			}
-			this.oldValue = (T)args.OldValue;
-			this.newValue = (T)args.NewValue;
-			this.type = typeof(T);
-			this.originalPropertyName = args.OriginalPropertyName;
-		}
+        public virtual T OldValue {
+            get {
+                return oldValue;
+            }
+        }
 
-	}
-	public abstract class NotifyPropertyChanged : INotifyPropertyChanged {
-		static readonly Dictionary<Type, Dictionary<string, List<string>>> PropertyDependecyMap = new Dictionary<Type, Dictionary<string, List<string>>>();
-		static readonly Dictionary<Type, Dictionary<string, List<string>>> PropertySubDependecyMap = new Dictionary<Type, Dictionary<string, List<string>>>();
+        public virtual T NewValue {
+            get {
+                return newValue;
+            }
+        }
 
-		Dictionary<string, List<string>> localPropertyDependecyMap;
-		Dictionary<string, List<string>> localPropertySubDependecyMap;
-		Dictionary<NotifyPropertyChanged, PropertyChangedEventHandler> subPropertyEventHandlers = new Dictionary<NotifyPropertyChanged, PropertyChangedEventHandler>();
+        public Type Type {
+            get {
+                return type;
+            }
+        }
 
-		static Dictionary<Type, bool> initializedTypes = new Dictionary<Type, bool>();
-		bool initialized;
-		Type myType;
+        public string OriginalPropertyName {
+            get {
+                return originalPropertyName;
+            }
+        }
 
-		static Dictionary<string, List<string>> PropertyDependecyMapForType(Type t) {
-			Dictionary<string, List<string>> result;
-			if(!PropertyDependecyMap.TryGetValue(t, out result)) {
-				result = new Dictionary<string, List<string>>();
-				PropertyDependecyMap[t] = result;
-			}
-			return result;
-		}
 
-		static Dictionary<string, List<string>> PropertySubDependecyMapForType(Type t) {
-			Dictionary<string, List<string>> result;
-			if(!PropertySubDependecyMap.TryGetValue(t, out result)) {
-				result = new Dictionary<string, List<string>>();
-				PropertySubDependecyMap[t] = result;
-			}
-			return result;
-		}
+        public DetailedPropertyChangedEventArgs(string propertyName, string originalPropertyName = null)
+            : base(propertyName) {
+            this.originalPropertyName = originalPropertyName;
+        }
 
-		protected static void PropertyDependsOn<T>(string property, string depends) {
-			Type t = typeof(T);
-			if(initializedTypes.ContainsKey(t) && initializedTypes[t]) {
-				throw new InvalidOperationException(string.Format("NotifyPropertyChanged.PropertyDependsOn must be called from a static constructor. Called by type {0}", t));
-			}
-			if (property == depends) {
-				return;
-			}
-			Dictionary<string, List<string>> propertyDependecyMap = PropertyDependecyMapForType(t);
-			List<string> dependentProperties;
+        public DetailedPropertyChangedEventArgs(T oldValue, T newValue, string propertyName, string originalPropertyName = null)
+            : base(propertyName) {
+            this.oldValue = oldValue;
+            this.newValue = newValue;
+            type = typeof(T);
+            this.originalPropertyName = originalPropertyName;
+        }
 
-			if (!propertyDependecyMap.TryGetValue(depends, out dependentProperties)) {
-				dependentProperties = new List<string>();
-				propertyDependecyMap[depends] = dependentProperties;
-			}
+        public static explicit operator DetailedPropertyChangedEventArgs<T>(DetailedPropertyChangedEventArgs args) {
+            return new DetailedPropertyChangedEventArgs<T>((T)args.OldValue, (T)args.NewValue, args.PropertyName, args.OriginalPropertyName);
+        }
 
-			if (!dependentProperties.Contains(property)) {
-				dependentProperties.Add(property);
-			}
-		}
+        public static implicit operator DetailedPropertyChangedEventArgs(DetailedPropertyChangedEventArgs<T> args) {
+            return new DetailedPropertyChangedEventArgs(args.OldValue, args.NewValue, args.Type, args.PropertyName, args.OriginalPropertyName);
+        }
 
-		protected static void PropertySubDependsOn<T>(string property, string depends) {
-			Type t = typeof(T);
-			if(initializedTypes.ContainsKey(t) && initializedTypes[t]) {
-				throw new InvalidOperationException(string.Format("NotifyPropertyChanged.PropertySubDependsOn must be called from a static constructor. Called by type {0}", t));
-			}
-			if (property == depends) {
-				return;
-			}
-			Dictionary<string, List<string>> propertySubDependecyMap = PropertySubDependecyMapForType(t);
-			List<string> dependentSubProperties;
+        public DetailedPropertyChangedEventArgs(DetailedPropertyChangedEventArgs args)
+            : base(args.PropertyName) {
+            if (!typeof(T).IsAssignableFrom(args.Type)) {
+                throw new InvalidCastException();
+            }
+            oldValue = (T)args.OldValue;
+            newValue = (T)args.NewValue;
+            type = typeof(T);
+            originalPropertyName = args.OriginalPropertyName;
+        }
 
-			if (!propertySubDependecyMap.TryGetValue(depends, out dependentSubProperties)) {
-				dependentSubProperties = new List<string>();
-				propertySubDependecyMap[depends] = dependentSubProperties;
-			}
+    }
 
-			if (!dependentSubProperties.Contains(property)) {
-				dependentSubProperties.Add(property);
-			}
-		}
-		void Initialize(){
-			myType = GetType();
-			Initialize(myType);
-			localPropertyDependecyMap = PropertyDependecyMapForType(myType);
-			localPropertySubDependecyMap = PropertySubDependecyMapForType(myType);
-			initialized = true;
-		}
-		static void Initialize(Type t) {
-			Console.WriteLine("Initialize(Type t={0}), initializedTypes:", t);
-			foreach(KeyValuePair<Type, bool> item in initializedTypes) {
-				Console.WriteLine("    {0}: {1}", item.Key, item.Value);
-			}
+    public abstract class NotifyPropertyChanged : INotifyPropertyChanged {
+        static readonly Dictionary<Type, Dictionary<string, List<string>>> PropertyDependecyMap = new Dictionary<Type, Dictionary<string, List<string>>>();
+        static readonly Dictionary<Type, Dictionary<string, List<string>>> PropertySubDependecyMap = new Dictionary<Type, Dictionary<string, List<string>>>();
 
-			if(initializedTypes.ContainsKey(t) && initializedTypes[t]) {
-				Console.WriteLine("initializedTypes.ContainsKey(t) && initializedTypes[t]; t={0}", t);
-				return;
-			}
-			Type baseType = t.BaseType;
-			if(baseType == typeof(NotifyPropertyChanged)) {
-				initializedTypes[t] = true;
-				return;
-			}
-			Initialize(baseType);
+        Dictionary<string, List<string>> localPropertyDependecyMap;
+        Dictionary<string, List<string>> localPropertySubDependecyMap;
+        readonly Dictionary<NotifyPropertyChanged, PropertyChangedEventHandler> subPropertyEventHandlers = new Dictionary<NotifyPropertyChanged, PropertyChangedEventHandler>();
 
-			Dictionary<string, List<string>> propertyDependecyMap = PropertyDependecyMapForType(t);
-			Dictionary<string, List<string>> basePropertyDependecyMap = PropertyDependecyMapForType(baseType);
-			foreach(KeyValuePair<string, List<string>> property in basePropertyDependecyMap) {
-				List<string> itemList;
+        static Dictionary<Type, bool> initializedTypes = new Dictionary<Type, bool>();
+        bool initialized;
+        Type myType;
 
-				if (!propertyDependecyMap.TryGetValue(property.Key, out itemList)) {
-					itemList = new List<string>();
-					propertyDependecyMap[property.Key] = itemList;
-				}
+        static Dictionary<string, List<string>> PropertyDependecyMapForType(Type t) {
+            Dictionary<string, List<string>> result;
+            if (!PropertyDependecyMap.TryGetValue(t, out result)) {
+                result = new Dictionary<string, List<string>>();
+                PropertyDependecyMap[t] = result;
+            }
+            return result;
+        }
 
-				foreach(string dependency in property.Value) {
-					if(!itemList.Contains(dependency)) {
-						itemList.Add(dependency);
-					}
-				}
-			}
-			initializedTypes[t] = true;
-		}
+        static Dictionary<string, List<string>> PropertySubDependecyMapForType(Type t) {
+            Dictionary<string, List<string>> result;
+            if (!PropertySubDependecyMap.TryGetValue(t, out result)) {
+                result = new Dictionary<string, List<string>>();
+                PropertySubDependecyMap[t] = result;
+            }
+            return result;
+        }
 
-		public event PropertyChangedEventHandler PropertyChanged;
-		protected delegate void OnSetPropertyAction<in T>(T oldValue, T newValue);
-		protected delegate void OnBeforeSetPropertyAction<T>(T oldValue, ref T newValue);
+        protected static void PropertyDependsOn<T>(string property, string depends) {
+            Type t = typeof(T);
+            if (initializedTypes.ContainsKey(t) && initializedTypes[t]) {
+                throw new InvalidOperationException(string.Format("NotifyPropertyChanged.PropertyDependsOn must be called from a static constructor. Called by type {0}", t));
+            }
+            if (property == depends) {
+                return;
+            }
+            Dictionary<string, List<string>> propertyDependecyMap = PropertyDependecyMapForType(t);
+            List<string> dependentProperties;
 
-		protected virtual void SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null) {
-			if (Equals(field, value)) {
-				return;
-			}
-			T oldValue = field;
-			field = value;
-			OnPropertyChanged<T>(oldValue, value, propertyName);
-		}
+            if (!propertyDependecyMap.TryGetValue(depends, out dependentProperties)) {
+                dependentProperties = new List<string>();
+                propertyDependecyMap[depends] = dependentProperties;
+            }
 
-		protected virtual void SetProperty<T>(ref T field, T value, OnSetPropertyAction<T> onSetAction, [CallerMemberName] string propertyName = null) {
-			if(Equals(field, value)) {
-				return;
-			}
-			T oldValue = field;
-			field = value;
-			onSetAction(oldValue, value);
-			OnPropertyChanged<T>(oldValue, value, propertyName);
-		}
+            if (!dependentProperties.Contains(property)) {
+                dependentProperties.Add(property);
+            }
+        }
 
-		protected virtual void SetProperty<T>(ref T field, T value, OnBeforeSetPropertyAction<T> onBeforeSetAction, OnSetPropertyAction<T> onSetAction, [CallerMemberName] string propertyName = null) {
-			if(field != null && Equals(field, value)) {
-				return;
-			}
-			T oldValue = field;
-			onBeforeSetAction(oldValue, ref value);
-			field = value;
-			onSetAction(oldValue, value);
-			OnPropertyChanged<T>(oldValue, value, propertyName);
-		}
-		
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null, string originalPropertyName = null) {
-			if(!initialized){
-				Initialize();
-			}
-			PropertyChangedEventHandler handler = PropertyChanged;
-			if (handler != null) {
-				handler(this, new DetailedPropertyChangedEventArgs(propertyName));
-			}
+        protected static void PropertySubDependsOn<T>(string property, string depends) {
+            Type t = typeof(T);
+            if (initializedTypes.ContainsKey(t) && initializedTypes[t]) {
+                throw new InvalidOperationException(string.Format("NotifyPropertyChanged.PropertySubDependsOn must be called from a static constructor. Called by type {0}", t));
+            }
+            if (property == depends) {
+                return;
+            }
+            Dictionary<string, List<string>> propertySubDependecyMap = PropertySubDependecyMapForType(t);
+            List<string> dependentSubProperties;
 
-			if (propertyName == null) {
-				return;
-			}
+            if (!propertySubDependecyMap.TryGetValue(depends, out dependentSubProperties)) {
+                dependentSubProperties = new List<string>();
+                propertySubDependecyMap[depends] = dependentSubProperties;
+            }
 
-			List<string> handlerDependentProperties;
+            if (!dependentSubProperties.Contains(property)) {
+                dependentSubProperties.Add(property);
+            }
+        }
 
-			if (!localPropertyDependecyMap.TryGetValue(propertyName, out handlerDependentProperties)) {
-				return;
-			}
+        void Initialize() {
+            myType = GetType();
+            Initialize(myType);
+            localPropertyDependecyMap = PropertyDependecyMapForType(myType);
+            localPropertySubDependecyMap = PropertySubDependecyMapForType(myType);
+            initialized = true;
+        }
 
-			foreach (string handlerDependentProperty in handlerDependentProperties) {
-				OnPropertyChanged(handlerDependentProperty, propertyName);
-			}
-		}
+        static void Initialize(Type t) {
+            Console.WriteLine("Initialize(Type t={0}), initializedTypes:", t);
+            foreach (KeyValuePair<Type, bool> item in initializedTypes) {
+                Console.WriteLine("    {0}: {1}", item.Key, item.Value);
+            }
 
-		protected virtual void OnPropertyChanged(object oldValue, object newValue, Type type, [CallerMemberName] string propertyName = null, string originalPropertyName = null) {
-			if(!initialized){
-				Initialize();
-			}
-			PropertyChangedEventHandler handler = PropertyChanged;
-			if (handler != null) {
-				handler(this, new DetailedPropertyChangedEventArgs(oldValue, newValue, type, propertyName));
-			}
+            if (initializedTypes.ContainsKey(t) && initializedTypes[t]) {
+                Console.WriteLine("initializedTypes.ContainsKey(t) && initializedTypes[t]; t={0}", t);
+                return;
+            }
+            Type baseType = t.BaseType;
+            if (baseType == typeof(NotifyPropertyChanged)) {
+                initializedTypes[t] = true;
+                return;
+            }
+            Initialize(baseType);
 
-			HandleDependentPropertyChanges(oldValue, newValue, type, propertyName, originalPropertyName);
-		}
-		protected virtual void OnPropertyChanged<T>(T oldValue, T newValue, [CallerMemberName] string propertyName = null, string originalPropertyName = null) {
-			if(!initialized){
-				Initialize();
-			}
-			PropertyChangedEventHandler handler = PropertyChanged;
-			if (handler != null) {
-				handler(this, new DetailedPropertyChangedEventArgs<T>(oldValue, newValue, propertyName));
-			}
+            Dictionary<string, List<string>> propertyDependecyMap = PropertyDependecyMapForType(t);
+            Dictionary<string, List<string>> basePropertyDependecyMap = PropertyDependecyMapForType(baseType);
+            foreach (KeyValuePair<string, List<string>> property in basePropertyDependecyMap) {
+                List<string> itemList;
 
-			HandleDependentPropertyChanges(oldValue, newValue, typeof(T), propertyName, originalPropertyName);
-		}
+                if (!propertyDependecyMap.TryGetValue(property.Key, out itemList)) {
+                    itemList = new List<string>();
+                    propertyDependecyMap[property.Key] = itemList;
+                }
 
-		static PropertyChangedEventHandler GetSubPropertyHandler(NotifyPropertyChanged self, string propertyName, string subPropertyName) {
-			return (object sender, PropertyChangedEventArgs e) =>  {
-				var args = e as DetailedPropertyChangedEventArgs;
-				if(args != null) {
-					if(e.PropertyName == subPropertyName) {
-						self.OnPropertyChanged(propertyName + "." + e.PropertyName, e.PropertyName);
-					}
-				}
-				else
-					if(args.PropertyName == subPropertyName) {
-						self.OnPropertyChanged(args.OldValue, args.NewValue, args.Type, propertyName + "." + args.PropertyName, args.PropertyName);
-					}
-			};
-		}
+                foreach (string dependency in property.Value) {
+                    if (!itemList.Contains(dependency)) {
+                        itemList.Add(dependency);
+                    }
+                }
+            }
+            initializedTypes[t] = true;
+        }
 
-		protected virtual void HandleDependentPropertyChanges(object oldValue, object newValue, Type type, string propertyName = null, string originalPropertyName = null) {
-			if (propertyName == null) {
-				return;
-			}
+        public event PropertyChangedEventHandler PropertyChanged;
 
-			List<string> handlerDependentProperties;
+        protected delegate void OnSetPropertyAction<in T>(T oldValue);
 
-			if (!localPropertyDependecyMap.TryGetValue(propertyName, out handlerDependentProperties)) {
-				return;
-			}
+        protected delegate bool OnBeforeSetPropertyAction<T>(ref T newValue);
 
-			foreach (string handlerDependentProperty in handlerDependentProperties) {
-				OnPropertyChanged(oldValue, newValue, type, handlerDependentProperty, propertyName);
-			}
+        protected virtual void SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null) {
+            if (Equals(field, value)) {
+                return;
+            }
+            T oldValue = field;
+            field = value;
+            OnPropertyChanged<T>(oldValue, value, propertyName);
+        }
 
-			List<string> handlerSubDependentProperties;
+        protected virtual void SetProperty<T>(ref T field, T value, OnSetPropertyAction<T> onSetAction, [CallerMemberName] string propertyName = null) {
+            if (Equals(field, value)) {
+                return;
+            }
+            T oldValue = field;
+            field = value;
+            onSetAction(oldValue);
+            OnPropertyChanged<T>(oldValue, value, propertyName);
+        }
 
-			if (!localPropertySubDependecyMap.TryGetValue(propertyName, out handlerSubDependentProperties)) {
-				return;
-			}
+        protected virtual void SetProperty<T>(ref T field, T value, OnBeforeSetPropertyAction<T> onBeforeSetAction, OnSetPropertyAction<T> onSetAction, [CallerMemberName] string propertyName = null) {
+            if (field != null && Equals(field, value)) {
+                return;
+            }
+            T oldValue = field;
+            if (!onBeforeSetAction(ref value)) {
+                return;
+            }
+            field = value;
+            onSetAction(oldValue);
+            OnPropertyChanged<T>(oldValue, value, propertyName);
+        }
 
-			foreach (string handlerSubDependentProperty in handlerSubDependentProperties) {
-				PropertyChangedEventHandler handler;
-				var oldNotify = oldValue as NotifyPropertyChanged;
-				if(oldNotify != null) {
-					if(subPropertyEventHandlers.TryGetValue(oldNotify, out handler)) {
-						oldNotify.PropertyChanged -= handler;
-						subPropertyEventHandlers.Remove(oldNotify);
-					}
-				}
-				var newNotify = newValue as NotifyPropertyChanged;
-				if(newNotify != null) {
-					handler = GetSubPropertyHandler(this, propertyName, handlerSubDependentProperty);
-					newNotify.PropertyChanged += handler;
-					subPropertyEventHandlers[newNotify] = handler;
-				}
-			}
-		}
-	}
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null, string originalPropertyName = null) {
+            if (!initialized) {
+                Initialize();
+            }
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) {
+                handler(this, new DetailedPropertyChangedEventArgs(propertyName));
+            }
+
+            if (propertyName == null) {
+                return;
+            }
+
+            List<string> handlerDependentProperties;
+
+            if (!localPropertyDependecyMap.TryGetValue(propertyName, out handlerDependentProperties)) {
+                return;
+            }
+
+            foreach (string handlerDependentProperty in handlerDependentProperties) {
+                OnPropertyChanged(handlerDependentProperty, propertyName);
+            }
+        }
+
+        protected virtual void OnPropertyChanged(object oldValue, object newValue, Type type, [CallerMemberName] string propertyName = null, string originalPropertyName = null) {
+            if (!initialized) {
+                Initialize();
+            }
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) {
+                handler(this, new DetailedPropertyChangedEventArgs(oldValue, newValue, type, propertyName));
+            }
+
+            HandleDependentPropertyChanges(oldValue, newValue, type, propertyName, originalPropertyName);
+        }
+
+        protected virtual void OnPropertyChanged<T>(T oldValue, T newValue, [CallerMemberName] string propertyName = null, string originalPropertyName = null) {
+            if (!initialized) {
+                Initialize();
+            }
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) {
+                handler(this, new DetailedPropertyChangedEventArgs<T>(oldValue, newValue, propertyName));
+            }
+
+            HandleDependentPropertyChanges(oldValue, newValue, typeof(T), propertyName, originalPropertyName);
+        }
+
+        static PropertyChangedEventHandler GetSubPropertyHandler(NotifyPropertyChanged self, string propertyName, string subPropertyName) {
+            return (sender, e) => {
+                var args = e as DetailedPropertyChangedEventArgs;
+                if (args != null) {
+                    if (e.PropertyName == subPropertyName) {
+                        self.OnPropertyChanged(propertyName + "." + e.PropertyName, e.PropertyName);
+                    }
+                } else if (args.PropertyName == subPropertyName) {
+                    self.OnPropertyChanged(args.OldValue, args.NewValue, args.Type, propertyName + "." + args.PropertyName, args.PropertyName);
+                }
+            };
+        }
+
+        protected virtual void HandleDependentPropertyChanges(object oldValue, object newValue, Type type, string propertyName = null, string originalPropertyName = null) {
+            if (propertyName == null) {
+                return;
+            }
+
+            List<string> handlerDependentProperties;
+
+            if (!localPropertyDependecyMap.TryGetValue(propertyName, out handlerDependentProperties)) {
+                return;
+            }
+
+            foreach (string handlerDependentProperty in handlerDependentProperties) {
+                OnPropertyChanged(oldValue, newValue, type, handlerDependentProperty, propertyName);
+            }
+
+            List<string> handlerSubDependentProperties;
+
+            if (!localPropertySubDependecyMap.TryGetValue(propertyName, out handlerSubDependentProperties)) {
+                return;
+            }
+
+            foreach (string handlerSubDependentProperty in handlerSubDependentProperties) {
+                PropertyChangedEventHandler handler;
+                var oldNotify = oldValue as NotifyPropertyChanged;
+                if (oldNotify != null) {
+                    if (subPropertyEventHandlers.TryGetValue(oldNotify, out handler)) {
+                        oldNotify.PropertyChanged -= handler;
+                        subPropertyEventHandlers.Remove(oldNotify);
+                    }
+                }
+                var newNotify = newValue as NotifyPropertyChanged;
+                if (newNotify != null) {
+                    handler = GetSubPropertyHandler(this, propertyName, handlerSubDependentProperty);
+                    newNotify.PropertyChanged += handler;
+                    subPropertyEventHandlers[newNotify] = handler;
+                }
+            }
+        }
+    }
 }
 
 

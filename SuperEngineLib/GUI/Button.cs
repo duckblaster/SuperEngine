@@ -1,14 +1,14 @@
 using System;
 using OpenTK;
 using OpenTK.Input;
-using SuperEngine.Commands;
+using SuperEngineLib.Commands;
 
-namespace SuperEngine.GUI {
-	public class Button : Control {
-		public Command Action;
-		
-		public Button() {
-		}
-	}
+namespace SuperEngineLib.GUI {
+    public class Button : Control {
+        public Command Action;
+
+        public Button() {
+        }
+    }
 }
 
