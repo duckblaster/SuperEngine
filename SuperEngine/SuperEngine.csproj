@@ -68,12 +68,6 @@
     <Reference Include="OOGL">
       <HintPath>..\Dependencies\OOGL\bin\Debug\OOGL.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Addins">
-      <HintPath>..\Dependencies\mono-addins\bin\Mono.Addins.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Addins.Setup">
-      <HintPath>..\Dependencies\mono-addins\bin\Mono.Addins.Setup.dll</HintPath>
-    </Reference>
     <Reference Include="GLGUI">
       <HintPath>..\Dependencies\OOGL\GUI\bin\Debug\GLGUI.dll</HintPath>
     </Reference>
