@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{394DBD0C-1983-48AA-98FF-3FC12FBCB87C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SuperEngineLib</RootNamespace>
+    <AssemblyName>SuperEngineLib</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK">
+      <HintPath>..\Dependencies\OpenTK\Binaries\OpenTK\Release\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="OOGL">
+      <HintPath>..\Dependencies\OOGL\bin\Release\OOGL.dll</HintPath>
+    </Reference>
+    <Reference Include="Jitter">
+      <HintPath>..\Dependencies\Jitter\Jitter\bin\Release\Jitter.dll</HintPath>
+    </Reference>
+    <Reference Include="GLGUI">
+      <HintPath>..\Dependencies\OOGL\GUI\bin\Release\GLGUI.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Maths\ISplineNode.cs" />
+    <Compile Include="Properties\AssemblyVersion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Objects\GameObject.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="GUI\Control.cs" />
+    <Compile Include="GUI\Container.cs" />
+    <Compile Include="GUI\Button.cs" />
+    <Compile Include="Graphics\Mesh.cs" />
+    <Compile Include="Graphics\Texture.cs" />
+    <Compile Include="Graphics\Vertex.cs" />
+    <Compile Include="Maths\Spline.cs" />
+    <Compile Include="Misc\NotifyPropertyChanged.cs" />
+    <Compile Include="Misc\UnixTime.cs" />
+    <Compile Include="Misc\ReadOnlyDictionary.cs" />
+    <Compile Include="Maths\SplineNodeBase.cs" />
+    <Compile Include="Maths\SplineNode\SplineNode2.cs" />
+    <Compile Include="Maths\SplineNode\SplineNode2d.cs" />
+    <Compile Include="Maths\SplineNode\SplineNode3.cs" />
+    <Compile Include="Maths\SplineNode\SplineNode3d.cs" />
+    <Compile Include="Maths\SplineNode\SplineNode4.cs" />
+    <Compile Include="Maths\SplineNode\SplineNode4d.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Deployment.LinuxDeployData generatePcFile="False" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+</Project>

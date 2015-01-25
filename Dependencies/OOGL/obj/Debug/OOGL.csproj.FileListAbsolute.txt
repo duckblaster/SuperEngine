@@ -1,0 +1,11 @@
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\bin\Debug\OOGL.dll
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\bin\Debug\OOGL.pdb
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\bin\Debug\OpenTK.Compatibility.dll
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\bin\Debug\OpenTK.dll
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\bin\Debug\OpenTK.GLControl.dll
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\bin\Debug\OpenTK.xml
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\bin\Debug\OpenTK.Compatibility.xml
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\bin\Debug\OpenTK.GLControl.xml
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\obj\Debug\OOGL.csprojResolveAssemblyReference.cache
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\obj\Debug\OOGL.dll
+C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\obj\Debug\OOGL.pdb
