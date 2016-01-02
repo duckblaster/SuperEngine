@@ -19,7 +19,7 @@ using System.Drawing;
 using System.Diagnostics;
 using System.IO;
 
-using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 using OpenTK;
 using OpenTK.Input;
 

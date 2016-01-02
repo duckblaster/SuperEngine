@@ -15,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 using OpenTK;
 
 namespace OOGL.Shaders

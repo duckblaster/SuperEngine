@@ -19,7 +19,7 @@ using System.Drawing;
 using System.Diagnostics;
 
 using OpenTK;
-using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using OpenTK.Platform;
 
@@ -33,7 +33,7 @@ namespace OOGL.GUI.Abstract
     {
         protected BaseFrame[] windows = new BaseFrame[0];
 
-        public readonly ITextPrinter textPrinter = new TextPrinter();
+        public readonly OpenTK.Graphics.ITextPrinter textPrinter = new OpenTK.Graphics.TextPrinter();
 
         public BaseFrameMgr(GameWindow gameWindow, ShaderProgram positionColorShader, ShaderProgram positionTextureShader)
         {

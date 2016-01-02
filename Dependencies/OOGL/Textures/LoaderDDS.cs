@@ -16,7 +16,7 @@ using System.IO;
 using System.Diagnostics;
 
 using OpenTK;
-using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 
 namespace TextureLoaders
 {
@@ -526,7 +526,7 @@ namespace TextureLoaders
                 GLError = GL.GetError( );
                 if ( GLError != ErrorCode.NoError )
                 {
-                    throw new ArgumentException( "Error setting Texture Parameters. GL Error: " + GLError + " " + Glu.ErrorString( GLError ) );
+                    throw new ArgumentException( "Error setting Texture Parameters. GL Error: " + GLError + " " + GLError.ToString() );
                 }
                 #endregion Set Texture Parameters
 

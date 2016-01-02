@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 using OpenTK;
 using OpenTK.Input;
 
