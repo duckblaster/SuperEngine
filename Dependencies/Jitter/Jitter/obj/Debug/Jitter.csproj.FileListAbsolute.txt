@@ -2,3 +2,8 @@ C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\Jitter\Jitter\bin\De
 C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\Jitter\Jitter\bin\Debug\Jitter.pdb
 C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\Jitter\Jitter\obj\Debug\Jitter.dll
 C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\Jitter\Jitter\obj\Debug\Jitter.pdb
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\Jitter\Jitter\bin\Debug\Jitter.dll
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\Jitter\Jitter\bin\Debug\Jitter.pdb
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\Jitter\Jitter\obj\Debug\Jitter.csprojResolveAssemblyReference.cache
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\Jitter\Jitter\obj\Debug\Jitter.dll
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\Jitter\Jitter\obj\Debug\Jitter.pdb

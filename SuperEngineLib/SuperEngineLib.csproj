@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenTK">
-      <HintPath>..\Dependencies\OpenTK\Binaries\OpenTK\Release\OpenTK.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -40,15 +37,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="OOGL">
-      <HintPath>..\Dependencies\OOGL\bin\Release\OOGL.dll</HintPath>
-    </Reference>
-    <Reference Include="Jitter">
-      <HintPath>..\Dependencies\Jitter\Jitter\bin\Release\Jitter.dll</HintPath>
-    </Reference>
-    <Reference Include="GLGUI">
-      <HintPath>..\Dependencies\OOGL\GUI\bin\Release\GLGUI.dll</HintPath>
-    </Reference>
     <Reference Include="System.Data.Linq" />
   </ItemGroup>
   <ItemGroup>
@@ -75,7 +63,24 @@
     <Compile Include="Maths\SplineNode\SplineNode4.cs" />
     <Compile Include="Maths\SplineNode\SplineNode4d.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Dependencies\Jitter\Jitter\Jitter.csproj">
+      <Project>{aa03ef1a-94f7-4d30-ab14-2092863ff923}</Project>
+      <Name>Jitter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\OOGL\GUI\OOGL.GUI.csproj">
+      <Project>{998ceea2-6895-4bd2-93c0-53e8ef0af569}</Project>
+      <Name>OOGL.GUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\OOGL\OOGL.csproj">
+      <Project>{195aaf4a-3e4c-4fea-92f6-0cd63fb3fe4b}</Project>
+      <Name>OOGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\OpenTK\Source\OpenTK\OpenTK.csproj">
+      <Project>{a37a7e14-0000-0000-0000-000000000000}</Project>
+      <Name>OpenTK</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>

@@ -24,6 +24,23 @@ namespace SuperEngine {
             SuperEngine.Instance.Exit();
             base.OnClosed(e);
         }
+
+        public object SelectedObject
+        {
+            get
+            {
+                return propertyGrid1.SelectedObject;
+            }
+            set
+            {
+                propertyGrid1.SelectedObject = value;
+            }
+        }
+
+        private void DebugGUI_Shown(object sender, EventArgs e)
+        {
+            //SelectedObject = SuperEngine.Instance;
+        }
     }
 
     static class ControlExtensions {

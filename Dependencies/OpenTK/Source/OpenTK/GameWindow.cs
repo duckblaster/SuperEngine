@@ -887,7 +887,7 @@ namespace OpenTK
             get
             {
                 EnsureUndisposed();
-                GraphicsContext.Assert();
+                //GraphicsContext.Assert();
                 return vsync;
             }
             set

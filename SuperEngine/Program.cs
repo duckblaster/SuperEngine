@@ -3,6 +3,7 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 
@@ -24,6 +25,8 @@ namespace SuperEngine {
             }
         }
 
+        List<SuperEngineLib.Objects.GameObject> GameObjects;
+
         public SuperEngine() {
             self = this;
             gameWindowThread = Thread.CurrentThread;
@@ -42,11 +45,16 @@ namespace SuperEngine {
             this.Mouse.Move += new EventHandler<MouseMoveEventArgs>(Game_MouseMove);
             this.Mouse.WheelChanged += new EventHandler<MouseWheelEventArgs>(Game_WheelChanged);
 
+            GameObjects = new List<SuperEngineLib.Objects.GameObject>();
+            
+
         }
 
 
         protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
+            guiThread.Start();
+            //gui.SelectedObject = Instance;
 
             GL.Enable(EnableCap.DepthTest);
             GL.DepthFunc(DepthFunction.Lequal);
@@ -166,6 +174,9 @@ namespace SuperEngine {
             Matrix4 viewMatrix = Matrix4.LookAt(new Vector3(0, 0, chaseDistance), Vector3.Zero, Vector3.UnitY);
 
             GL.PolygonMode(MaterialFace.FrontAndBack, this.polygonMode);
+
+            
+
             ErrorChecking.TraceErrors();
 
             GL.PolygonMode(MaterialFace.FrontAndBack, PolygonMode.Fill);
@@ -187,12 +198,13 @@ namespace SuperEngine {
         }
 
         static DebugGUI gui;
+        public Thread guiThread;
 
         static void Main() {
             SuperEngine engine = new SuperEngine();
             gui = new DebugGUI();
-            Thread guiThread = new Thread(() => { System.Windows.Forms.Application.Run(gui); });
-            guiThread.Start();
+            engine.guiThread = new Thread(() => { System.Windows.Forms.Application.Run(gui); });
+            //guiThread.Start();
             engine.Run();
         }
     }

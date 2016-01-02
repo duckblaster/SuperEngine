@@ -50,9 +50,6 @@
     <StartupObject>SuperEngine.SuperEngine</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenTK">
-      <HintPath>..\Dependencies\OpenTK\Binaries\OpenTK\Debug\OpenTK.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -62,15 +59,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Jitter">
-      <HintPath>..\Dependencies\Jitter\Jitter\bin\Debug\Jitter.dll</HintPath>
-    </Reference>
-    <Reference Include="OOGL">
-      <HintPath>..\Dependencies\OOGL\bin\Debug\OOGL.dll</HintPath>
-    </Reference>
-    <Reference Include="GLGUI">
-      <HintPath>..\Dependencies\OOGL\GUI\bin\Debug\GLGUI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DebugGUI.cs">
@@ -106,6 +94,22 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Dependencies\Jitter\Jitter\Jitter.csproj">
+      <Project>{aa03ef1a-94f7-4d30-ab14-2092863ff923}</Project>
+      <Name>Jitter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\OOGL\GUI\OOGL.GUI.csproj">
+      <Project>{998ceea2-6895-4bd2-93c0-53e8ef0af569}</Project>
+      <Name>OOGL.GUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\OOGL\OOGL.csproj">
+      <Project>{195aaf4a-3e4c-4fea-92f6-0cd63fb3fe4b}</Project>
+      <Name>OOGL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Dependencies\OpenTK\Source\OpenTK\OpenTK.csproj">
+      <Project>{a37a7e14-0000-0000-0000-000000000000}</Project>
+      <Name>OpenTK</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SuperEngineLib\SuperEngineLib.csproj">
       <Project>{394DBD0C-1983-48AA-98FF-3FC12FBCB87C}</Project>
       <Name>SuperEngineLib</Name>

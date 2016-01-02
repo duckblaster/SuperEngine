@@ -11,3 +11,16 @@ C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\GUI\bin\Debug\O
 C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\GUI\obj\Debug\OOGL.GUI.csprojResolveAssemblyReference.cache
 C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\GUI\obj\Debug\GLGUI.dll
 C:\Users\Donald\Documents\Projects\SuperEngine\Dependencies\OOGL\GUI\obj\Debug\GLGUI.pdb
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\bin\Debug\GLGUI.dll
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\bin\Debug\GLGUI.pdb
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\bin\Debug\OOGL.dll
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\bin\Debug\OpenTK.Compatibility.dll
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\bin\Debug\OpenTK.dll
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\bin\Debug\OpenTK.GLControl.dll
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\bin\Debug\OOGL.pdb
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\bin\Debug\OpenTK.xml
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\bin\Debug\OpenTK.Compatibility.xml
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\bin\Debug\OpenTK.GLControl.xml
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\obj\Debug\OOGL.GUI.csprojResolveAssemblyReference.cache
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\obj\Debug\GLGUI.dll
+C:\Users\duckb_000\Desktop\Donald\SuperEngine\Dependencies\OOGL\GUI\obj\Debug\GLGUI.pdb
