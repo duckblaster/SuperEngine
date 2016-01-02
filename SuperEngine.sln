@@ -41,12 +41,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jitter", "Dependencies\Jitt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOGL.GUI", "Dependencies\OOGL\GUI\OOGL.GUI.csproj", "{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK.Compatibility", "Dependencies\OpenTK\Source\Compatibility\OpenTK.Compatibility.csproj", "{62C0DB35-0000-0000-0000-000000000000}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenTK Extras", "OpenTK Extras", "{B49B8550-70EE-45F0-A408-93E4E51D479A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTK.GLControl", "Dependencies\OpenTK\Source\GLControl\OpenTK.GLControl.csproj", "{A625BE88-0000-0000-0000-000000000000}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -247,54 +241,6 @@ Global
 		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}.Release|x86.ActiveCfg = Release|Any CPU
 		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}.Release|x86.Build.0 = Release|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Documentation|Mixed Platforms.ActiveCfg = Documentation|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Documentation|Mixed Platforms.Build.0 = Documentation|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Documentation|x86.ActiveCfg = Documentation|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Documentation|x86.Build.0 = Documentation|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Nsis|Any CPU.ActiveCfg = Nsis|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Nsis|Any CPU.Build.0 = Nsis|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Nsis|Mixed Platforms.ActiveCfg = Nsis|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Nsis|Mixed Platforms.Build.0 = Nsis|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Nsis|x86.ActiveCfg = Nsis|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Nsis|x86.Build.0 = Nsis|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|Any CPU
-		{62C0DB35-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Debug|x86.Build.0 = Debug|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Documentation|Any CPU.ActiveCfg = Documentation|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Documentation|Any CPU.Build.0 = Documentation|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Documentation|Mixed Platforms.ActiveCfg = Documentation|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Documentation|Mixed Platforms.Build.0 = Documentation|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Documentation|x86.ActiveCfg = Documentation|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Documentation|x86.Build.0 = Documentation|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Nsis|Any CPU.ActiveCfg = Nsis|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Nsis|Any CPU.Build.0 = Nsis|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Nsis|Mixed Platforms.ActiveCfg = Nsis|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Nsis|Mixed Platforms.Build.0 = Nsis|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Nsis|x86.ActiveCfg = Nsis|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Nsis|x86.Build.0 = Nsis|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Release|x86.ActiveCfg = Release|Any CPU
-		{A625BE88-0000-0000-0000-000000000000}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -304,9 +250,6 @@ Global
 		{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B} = {399C001E-D576-4600-A9FB-51D931108FFC}
 		{AA03EF1A-94F7-4D30-AB14-2092863FF923} = {399C001E-D576-4600-A9FB-51D931108FFC}
 		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569} = {399C001E-D576-4600-A9FB-51D931108FFC}
-		{62C0DB35-0000-0000-0000-000000000000} = {B49B8550-70EE-45F0-A408-93E4E51D479A}
-		{B49B8550-70EE-45F0-A408-93E4E51D479A} = {399C001E-D576-4600-A9FB-51D931108FFC}
-		{A625BE88-0000-0000-0000-000000000000} = {B49B8550-70EE-45F0-A408-93E4E51D479A}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = SuperEngine\SuperEngine.csproj

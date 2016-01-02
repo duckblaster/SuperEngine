@@ -83,10 +83,6 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <ProjectReference Include="..\..\OpenTK\Source\Compatibility\OpenTK.Compatibility.csproj">
-      <Project>{62c0db35-0000-0000-0000-000000000000}</Project>
-      <Name>OpenTK.Compatibility</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\OpenTK\Source\OpenTK\OpenTK.csproj">
       <Project>{a37a7e14-0000-0000-0000-000000000000}</Project>
       <Name>OpenTK</Name>
@@ -97,6 +93,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="OpenTK.Compatibility, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\OpenTK\Binaries\OpenTK\Release\OpenTK.Compatibility.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
