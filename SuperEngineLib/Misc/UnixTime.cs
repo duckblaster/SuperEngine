@@ -36,7 +36,7 @@ namespace SuperEngineLib.Misc {
         }
 
         public UnixTime(DateTime dateTime) {
-            TimeSpan timeSpan = dateTime - UnixEpoch;
+            var timeSpan = dateTime - UnixEpoch;
             //return timeSpan.Ticks / TimeSpan.TicksPerSecond;
             UnixTimeStamp = Convert.ToInt64(timeSpan.TotalSeconds);
         }

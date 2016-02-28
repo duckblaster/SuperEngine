@@ -10,7 +10,7 @@ using System.Threading;
 namespace SuperEngine {
     class SuperEngine : GameWindow {
 
-        Thread gameWindowThread;
+        readonly Thread gameWindowThread;
 
         public Thread GameWindowThread {
             get { return gameWindowThread; }
@@ -25,28 +25,28 @@ namespace SuperEngine {
             }
         }
 
-        List<SuperEngineLib.Objects.GameObject> GameObjects;
+        readonly List<SuperEngineLib.Objects.GameObject> GameObjects;
 
         public SuperEngine() {
             self = this;
             gameWindowThread = Thread.CurrentThread;
 
-            this.Width = 800;
-            this.Height = 600;
-            this.Title = "OOGL Example";
+            Width = 800;
+            Height = 600;
+            Title = "OOGL Example";
 
-            this.VSync = VSyncMode.Off;
+            VSync = VSyncMode.Off;
 
-            this.Keyboard.KeyDown += new EventHandler<KeyboardKeyEventArgs>(Game_KeyDown);
-            this.Keyboard.KeyUp += new EventHandler<KeyboardKeyEventArgs>(Game_KeyUp);
+            Keyboard.KeyDown += new EventHandler<KeyboardKeyEventArgs>(Game_KeyDown);
+            Keyboard.KeyUp += new EventHandler<KeyboardKeyEventArgs>(Game_KeyUp);
 
-            this.Mouse.ButtonDown += new EventHandler<MouseButtonEventArgs>(Game_MouseDown);
-            this.Mouse.ButtonUp += new EventHandler<MouseButtonEventArgs>(Game_MouseUp);
-            this.Mouse.Move += new EventHandler<MouseMoveEventArgs>(Game_MouseMove);
-            this.Mouse.WheelChanged += new EventHandler<MouseWheelEventArgs>(Game_WheelChanged);
+            Mouse.ButtonDown += new EventHandler<MouseButtonEventArgs>(Game_MouseDown);
+            Mouse.ButtonUp += new EventHandler<MouseButtonEventArgs>(Game_MouseUp);
+            Mouse.Move += new EventHandler<MouseMoveEventArgs>(Game_MouseMove);
+            Mouse.WheelChanged += new EventHandler<MouseWheelEventArgs>(Game_WheelChanged);
 
             GameObjects = new List<SuperEngineLib.Objects.GameObject>();
-            
+
 
         }
 
@@ -67,17 +67,17 @@ namespace SuperEngine {
         }
 
         protected override void OnResize(EventArgs e) {
-            Console.WriteLine(string.Format("Resizing ViewPort: width={0},height={1}", this.Width, this.Height));
+            Console.WriteLine($"Resizing ViewPort: width={Width},height={Height}");
 
-            GL.Viewport(0, 0, this.Width, this.Height);
+            GL.Viewport(0, 0, Width, Height);
 
-            float aspectRatio = this.Width / (float)this.Height;
-            float fieldOfView = (float)Math.PI / 4.0f;
+            var aspectRatio = Width / (float)Height;
+            const float fieldOfView = (float)Math.PI / 4.0f;
 
-            this.projectionMatrix = Matrix4.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, 1.0f, 1000.0f);
+            projectionMatrix = Matrix4.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, 1.0f, 1000.0f);
 
             GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadMatrix(Matrix4Helper.ToOpenGL(this.projectionMatrix));
+            GL.LoadMatrix(Matrix4Helper.ToOpenGL(projectionMatrix));
 
             base.OnResize(e);
         }
@@ -138,8 +138,8 @@ namespace SuperEngine {
         }
 
         private float chaseDistance = 10;
-        private float cameraYaw = 0;
-        private float cameraPitch = 0;
+        private float cameraYaw;
+        private float cameraPitch;
 
         private float actualFps;
         public float ActualFps {
@@ -149,7 +149,7 @@ namespace SuperEngine {
         }
 
         private DateTime start = DateTime.Now;
-        private long frames = 0;
+        private long frames;
         private void UpdateActualFps() {
             frames++;
 
@@ -171,11 +171,11 @@ namespace SuperEngine {
             GL.MatrixMode(MatrixMode.Projection);
             GL.LoadMatrix(OOGL.Matrix4Helper.ToOpenGL(ProjectionMatrix));
 
-            Matrix4 viewMatrix = Matrix4.LookAt(new Vector3(0, 0, chaseDistance), Vector3.Zero, Vector3.UnitY);
+            var viewMatrix = Matrix4.LookAt(new Vector3(0, 0, chaseDistance), Vector3.Zero, Vector3.UnitY);
 
-            GL.PolygonMode(MaterialFace.FrontAndBack, this.polygonMode);
+            GL.PolygonMode(MaterialFace.FrontAndBack, polygonMode);
 
-            
+
 
             ErrorChecking.TraceErrors();
 
@@ -201,11 +201,13 @@ namespace SuperEngine {
         public Thread guiThread;
 
         static void Main() {
-            SuperEngine engine = new SuperEngine();
-            gui = new DebugGUI();
-            engine.guiThread = new Thread(() => { System.Windows.Forms.Application.Run(gui); });
-            //guiThread.Start();
-            engine.Run();
+            using (var engine = new SuperEngine())
+            {
+                gui = new DebugGUI();
+                engine.guiThread = new Thread(() => { System.Windows.Forms.Application.Run(gui); });
+                //guiThread.Start();
+                engine.Run();
+            }
         }
     }
 }

@@ -19,8 +19,10 @@ namespace SuperEngineLib.Maths {
             get {
                 return tension;
             }
-            set {
-                SetProperty(ref tension, value);
+            set
+            {
+                tension = value;
+                OnPropertyChanged();
             }
         }
 
@@ -36,8 +38,10 @@ namespace SuperEngineLib.Maths {
             get {
                 return bias;
             }
-            set {
-                SetProperty(ref bias, value);
+            set
+            {
+                bias = value;
+                OnPropertyChanged();
             }
         }
 
@@ -54,14 +58,15 @@ namespace SuperEngineLib.Maths {
                 return continuity;
             }
             set {
-                SetProperty(ref continuity, value);
+                continuity = value;
+                OnPropertyChanged();
             }
         }
 
         static SplineNodeBase() {
-            PropertyDependsOn<SplineNodeBase<TSplineNode>>("TBC", "Tension");
-            PropertyDependsOn<SplineNodeBase<TSplineNode>>("TBC", "Bias");
-            PropertyDependsOn<SplineNodeBase<TSplineNode>>("TBC", "Continuity");
+            PropertyDependsOn<SplineNodeBase<TSplineNode>>("TBC", nameof(Tension));
+            PropertyDependsOn<SplineNodeBase<TSplineNode>>("TBC", nameof(Bias));
+            PropertyDependsOn<SplineNodeBase<TSplineNode>>("TBC", nameof(Continuity));
         }
 
         #region ISplineNode implementation

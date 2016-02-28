@@ -13,7 +13,7 @@ namespace SuperEngine {
         public DebugGUI() {
             InitializeComponent();
 
-            this.propertyGrid1.SelectedObject = SuperEngine.Instance;
+            propertyGrid1.SelectedObject = SuperEngine.Instance;
         }
 
         public new void Close() {

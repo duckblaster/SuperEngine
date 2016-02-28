@@ -16,14 +16,16 @@ namespace SuperEngineLib.Objects {
         public Vector3 Position {
             get { return position; }
             set {
-                SetProperty(ref position, value);
+                position = value;
+                OnPropertyChanged();
             }
         }
 
         public Quaternion Orientation {
             get { return orientation; }
             set {
-                SetProperty(ref orientation, value);
+                orientation = value;
+                OnPropertyChanged();
             }
         }
 

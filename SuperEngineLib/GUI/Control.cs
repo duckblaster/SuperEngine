@@ -6,46 +6,13 @@ namespace SuperEngineLib.GUI {
     public class Control {
         #region Positioning
 
-        private int x;
-        private int y;
-        private int width;
-        private int height;
+        public int X { get; set; }
 
-        public int X {
-            get {
-                return this.x;
-            }
-            set {
-                x = value;
-            }
-        }
+        public int Y { get; set; }
 
-        public int Y {
-            get {
-                return this.y;
-            }
-            set {
-                y = value;
-            }
-        }
+        public int Width { get; set; }
 
-        public int Width {
-            get {
-                return this.width;
-            }
-            set {
-                width = value;
-            }
-        }
-
-        public int Height {
-            get {
-                return this.height;
-            }
-            set {
-                height = value;
-            }
-        }
+        public int Height { get; set; }
 
         #endregion
 

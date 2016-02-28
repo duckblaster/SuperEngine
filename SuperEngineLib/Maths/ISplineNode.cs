@@ -1,7 +1,6 @@
 ﻿
 namespace SuperEngineLib.Maths {
     public interface ISplineNode<TSplineNode> {
-        //double Tension;
 
         TSplineNode Subtract(TSplineNode a);
         TSplineNode Add(TSplineNode a);

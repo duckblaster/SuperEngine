@@ -62,17 +62,21 @@ namespace SuperEngineLib.Maths {
                     return next;
                 }
                 set {
-                    SetProperty(ref next, value, (oldValue) => {
-                        if (oldValue != null) {
-                            oldValue.Prev = null;
-                        }
-                        if (next != null) {
-                            next.Prev = this;
-                            next_end = next.end;
-                        } else {
-                            next_end = end.Add(end.Subtract(start));
-                        }
-                    });
+                    if (next == value) {
+                        return;
+                    }
+                    var oldValue = next;
+                    next = value;
+                    if (oldValue != null) {
+                        oldValue.Prev = null;
+                    }
+                    if (next != null) {
+                        next.Prev = this;
+                        next_end = next.end;
+                    } else {
+                        next_end = end.Add(end.Subtract(start));
+                    }
+                    OnPropertyChanged(oldValue);
                 }
             }
 
@@ -81,17 +85,21 @@ namespace SuperEngineLib.Maths {
                     return prev;
                 }
                 set {
-                    SetProperty(ref prev, value, (oldValue) => {
-                        if (oldValue != null) {
-                            oldValue.Next = null;
-                        }
-                        if (prev != null) {
-                            prev.Next = this;
-                            prev_start = prev.start;
-                        } else {
-                            prev_start = start.Subtract(end.Subtract(start));
-                        }
-                    });
+                    if (prev == value) {
+                        return;
+                    }
+                    var oldValue = prev;
+                    prev = value;
+                    if (oldValue != null) {
+                        oldValue.Next = null;
+                    }
+                    if (prev != null) {
+                        prev.Next = this;
+                        prev_start = prev.start;
+                    } else {
+                        prev_start = start.Subtract(end.Subtract(start));
+                    }
+                    OnPropertyChanged(oldValue);
                 }
             }
 
@@ -100,11 +108,15 @@ namespace SuperEngineLib.Maths {
                     return start;
                 }
                 set {
-                    SetProperty(ref start, value, (oldValue) => {
-                        if (prev != null) {
-                            prev.End = start;
-                        }
-                    });
+                    if (start == value) {
+                        return;
+                    }
+                    var oldValue = start;
+                    start = value;
+                    if (prev != null) {
+                        prev.End = start;
+                    }
+                    OnPropertyChanged(oldValue);
                 }
             }
 
@@ -113,17 +125,26 @@ namespace SuperEngineLib.Maths {
                     return end;
                 }
                 set {
-                    SetProperty(ref end, value, (oldValue) => {
-                        if (next != null) {
-                            next.Start = end;
-                        }
-                    });
+                    if (end == value) {
+                        return;
+                    }
+                    var oldValue = end;
+                    end = value;
+                    if (next != null) {
+                        next.Start = end;
+                    }
+                    OnPropertyChanged(oldValue);
                 }
             }
 
+            private double? length;
+
             public double Length {
                 get {
-                    return CalcLength();
+                    if(length==null) {
+                        length = CalcLength();
+                    }
+                    return length ?? 0;
                 }
             }
 
@@ -169,16 +190,16 @@ namespace SuperEngineLib.Maths {
                     PointCalc_d = prev_start.Multiply(PointCalc_w1).Add(start.Multiply(PointCalc_w2)).Add(end.Multiply(PointCalc_w3)).Add(next_end.Multiply(PointCalc_w4));
                 }
 
-                TSplineNode p = PointCalc_a.Multiply(t).Add(PointCalc_b).Multiply(t).Add(PointCalc_c).Multiply(t).Add(PointCalc_d);
+                var p = PointCalc_a.Multiply(t).Add(PointCalc_b).Multiply(t).Add(PointCalc_c).Multiply(t).Add(PointCalc_d);
                 return p;
             }
 
             public delegate void DrawPoint(SplineSegment spline, double t, TSplineNode p, object data);
 
             public void DrawPoints(DrawPoint func, object data = null, double accuracy = 1, double u0 = 0.0, double u1 = 1.0) {
-                double umid = (u0 + u1) / 2;
-                TSplineNode P0 = Point(u0);
-                TSplineNode P1 = Point(u1);
+                var umid = (u0 + u1) / 2;
+                var P0 = Point(u0);
+                var P1 = Point(u1);
                 if (P0.Subtract(P1).LengthSquared > accuracy * accuracy) {
                     DrawPoints(func, data, accuracy, u0, umid);
                     DrawPoints(func, data, accuracy, umid, u1);
@@ -189,11 +210,11 @@ namespace SuperEngineLib.Maths {
             }
 
             public void DrawPointsOld(DrawPoint func, object data = null, double quality = 10) {
-                double len = CalcLength(1);
-                int iters = (int)Math.Ceiling(len * quality);
-                double inv_iters = 1.0 / iters;
+                var len = CalcLength(1);
+                var iters = (int)Math.Ceiling(len * quality);
+                var inv_iters = 1.0 / iters;
                 for (int i = 0; i < iters; i++) {
-                    double t = inv_iters * i;
+                    var t = inv_iters * i;
                     func(this, t, Point(t), data);
                 }
             }
@@ -211,16 +232,16 @@ namespace SuperEngineLib.Maths {
             }
 
             public double CalcLength(double u0, double u1, double accuracy) {
-                double umid = (u0 + u1) / 2;
-                TSplineNode P0 = Point(u0);
-                TSplineNode P1 = Point(u1);
-                TSplineNode Pmid = Point(umid);
-                double lenP0mid = P0.Subtract(Pmid).Length;
-                double lenP1mid = P1.Subtract(Pmid).Length;
-                double lenP0P1 = P0.Subtract(P1).Length;
+                var umid = (u0 + u1) / 2;
+                var P0 = Point(u0);
+                var P1 = Point(u1);
+                var Pmid = Point(umid);
+                var lenP0mid = P0.Subtract(Pmid).Length;
+                var lenP1mid = P1.Subtract(Pmid).Length;
+                var lenP0P1 = P0.Subtract(P1).Length;
                 if ((lenP0mid + lenP1mid) - lenP0P1 > accuracy) {
-                    double len0 = CalcLength(u0, umid, accuracy);
-                    double len1 = CalcLength(umid, u1, accuracy);
+                    var len0 = CalcLength(u0, umid, accuracy);
+                    var len1 = CalcLength(umid, u1, accuracy);
                     return len0 + len1;
                 }
                 return lenP0P1;
@@ -231,36 +252,57 @@ namespace SuperEngineLib.Maths {
             }
 
             double CalcLength(double u0, double u1, int maxDepth, int depth) {
-                double umid = (u0 + u1) / 2;
+                var umid = (u0 + u1) / 2;
                 if (depth < maxDepth) {
-                    double len0 = CalcLength(u0, umid, maxDepth, depth + 1);
-                    double len1 = CalcLength(umid, u1, maxDepth, depth + 1);
+                    var len0 = CalcLength(u0, umid, maxDepth, depth + 1);
+                    var len1 = CalcLength(umid, u1, maxDepth, depth + 1);
                     return len0 + len1;
                 }
-                TSplineNode P0 = Point(u0);
-                TSplineNode P1 = Point(u1);
+                var P0 = Point(u0);
+                var P1 = Point(u1);
                 return P0.Subtract(P1).Length;
             }
 
-            public SplineSegment(TSplineNode start, TSplineNode end) {
+            private SplineSegment() {
+                PropertyChanged += SplineSegment_PropertyChanged;
+            }
+
+            static SplineSegment() {
+                PropertyDependsOn<SplineSegment>(nameof(Length), nameof(Next));
+                PropertyDependsOn<SplineSegment>(nameof(Length), nameof(Prev));
+                PropertyDependsOn<SplineSegment>(nameof(Length), nameof(Start));
+                PropertyDependsOn<SplineSegment>(nameof(Length), nameof(End));
+            }
+
+            public SplineSegment(TSplineNode start, TSplineNode end) : this() {
                 Start = start;
                 End = end;
                 Next = null;
                 Prev = null;
             }
 
-            public SplineSegment(TSplineNode start, TSplineNode end, TSplineNode prevStart, TSplineNode nextEnd) {
+            public SplineSegment(TSplineNode start, TSplineNode end, TSplineNode prevStart, TSplineNode nextEnd) : this() {
                 Start = start;
                 End = end;
                 prev_start = prevStart;
                 next_end = nextEnd;
             }
 
-            public SplineSegment(TSplineNode start, TSplineNode end, SplineSegment prev, SplineSegment next) {
+            public SplineSegment(TSplineNode start, TSplineNode end, SplineSegment prev, SplineSegment next) : this() {
                 Start = start;
                 End = end;
                 Prev = prev;
                 Next = next;
+            }
+
+            private static void SplineSegment_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e) {
+                var self = sender as SplineSegment;
+
+                self.ForgetLength();
+            }
+
+            public void ForgetLength() {
+                length = null;
             }
         }
     }
