@@ -42,27 +42,27 @@ namespace OOGL.GUI.Widgets
             int size = clientRectangle.Height;
             if (size < 5) return;
 
-            RectangleF fontSize = frameMgr.textPrinter.Measure("0", Font).BoundingBox;
-			Rectangle screenRectClient = ClientToScreen(clientRectangle);
+            var fontSize = frameMgr.textPrinter.Measure("0", Font).BoundingBox;
+            var screenRectClient = ClientToScreen(clientRectangle);
 
-            object[] items = Items;
+            var items = Items;
             if (items.Length == 0) return;
             
-            Rectangle[] itemRects = new Rectangle[items.Length];
+            var itemRects = new Rectangle[items.Length];
             for (int i = 0; i < items.Length; i++)
             {
                 itemRects[i] = new Rectangle(screenRectClient.X, screenRectClient.Y + ((int)fontSize.Height * i), screenRectClient.Width, (int)fontSize.Height);
             }
             screenRectItems = itemRects;
 
-            List<PositionColor> verts = new List<PositionColor>();
+            var verts = new List<PositionColor>();
 
             for (int i = 0; i < items.Length; i++)
             {
                 if (screenRectItems[i].Bottom <= screenRectClient.Bottom)
                 {
-                    Rectangle frameRectDropListItem = ScreenToFrame(screenRectItems[i]);
-                    Color color = (i == selectedIndex) ? Color.SteelBlue : Color.Gray;
+                    var frameRectDropListItem = ScreenToFrame(screenRectItems[i]);
+                    var color = (i == selectedIndex) ? Color.SteelBlue : Color.Gray;
 
                     verts.Add(new PositionColor(new Vector3(frameRectDropListItem.Left, frameRectDropListItem.Top, 0f), color));
                     verts.Add(new PositionColor(new Vector3(frameRectDropListItem.Left, frameRectDropListItem.Bottom, 0f), color));
@@ -80,7 +80,7 @@ namespace OOGL.GUI.Widgets
             {
                 if (screenRectItems[i].Bottom <= screenRectClient.Bottom)
                 {
-                    Rectangle frameRectDropListItem = ScreenToFrame(screenRectItems[i]);
+                    var frameRectDropListItem = ScreenToFrame(screenRectItems[i]);
                     Frame.DrawText(Font, items[i].ToString(), frameRectDropListItem, DrawTextFormat.Left | DrawTextFormat.Bottom, Color.Black);
                 }
             }
@@ -124,7 +124,7 @@ namespace OOGL.GUI.Widgets
 
         public override bool OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Rectangle[] rects = screenRectItems;
+            var rects = screenRectItems;
             for (int i = 0; i < rects.Length; i++)
             {
                 if (rects[i].Contains(e.X, e.Y))
@@ -230,7 +230,7 @@ namespace OOGL.GUI.Widgets
         public event EventHandler SelectedIndexChanged;
         private void OnSelectedIndexChanged()
         {
-            EventHandler items = SelectedIndexChanged;
+            var items = SelectedIndexChanged;
             if (items == null) return;
             items(this, null);
         }

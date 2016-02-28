@@ -47,9 +47,6 @@ namespace OOGL.GUI.Abstract
             {
                 iDisposable.Dispose();
             }
-            catch
-            {
-            }
             finally
             {
                 iDisposable = null;
@@ -192,7 +189,7 @@ namespace OOGL.GUI.Abstract
             clientRectangle = ComputeClientRectangle();
             NeedUpdate();
 
-            BaseControl[] childControls = ChildControls;
+            var childControls = ChildControls;
             for (int i = 0; i < childControls.Length; i++) childControls[i].OnMove();
         }
 
@@ -201,7 +198,7 @@ namespace OOGL.GUI.Abstract
             clientRectangle = ComputeClientRectangle();
             NeedUpdate();
 
-            BaseControl[] childControls = ChildControls;
+            var childControls = ChildControls;
             for (int i = 0; i < childControls.Length; i++) childControls[i].OnResize();
         }
 
@@ -235,13 +232,13 @@ namespace OOGL.GUI.Abstract
 
         public virtual bool OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            BaseControl[] childControls = ChildControls;
+            var childControls = ChildControls;
             for (int i = 0; i < childControls.Length; i++)
             {
                 if (childControls[i].OnMouseDown(sender, e)) return true;
             }
 
-            Rectangle screenRectClient = ControlToScreen(controlRectangle);
+            var screenRectClient = ControlToScreen(controlRectangle);
             if (screenRectClient.Contains(e.X, e.Y))
             {
                 frameMgr.FocusedControl = this;
@@ -367,12 +364,12 @@ namespace OOGL.GUI.Abstract
         {
             if (controlRectangle.Width < 5 || controlRectangle.Height < 5) return;
 
-            Rectangle frameControlRect = ScreenToFrame(ClientToScreen(controlRectangle));
-            List<PositionColor> verts = new List<PositionColor>();
+            var frameControlRect = ScreenToFrame(ClientToScreen(controlRectangle));
+            var verts = new List<PositionColor>();
 
             int borderOffset = 1;
 
-            Color edgeColor = borderEdgeColor;
+            var edgeColor = borderEdgeColor;
 
             verts.Add(new PositionColor(new Vector3(frameControlRect.Left, frameControlRect.Top, 0f), edgeColor));
             verts.Add(new PositionColor(new Vector3(frameControlRect.Left, frameControlRect.Bottom - 1, 0f), edgeColor));
@@ -395,7 +392,7 @@ namespace OOGL.GUI.Abstract
 
             if (backGroundColor != Color.Transparent)
             {
-                Rectangle frameClientRect = ScreenToFrame(ClientToScreen(clientRectangle));
+                var frameClientRect = ScreenToFrame(ClientToScreen(clientRectangle));
 
                 float brightSkew = 0.25f;
                 float middleSkew = 0.00f;
@@ -412,7 +409,7 @@ namespace OOGL.GUI.Abstract
 
             PositionColor.Draw(BeginMode.Triangles, verts.ToArray());
 
-            BaseControl[] childControls = ChildControls;
+            var childControls = ChildControls;
             for (int i = 0; i < childControls.Length; i++) childControls[i].DrawToFrameBuffer(gameTime);
         }
 
@@ -427,7 +424,7 @@ namespace OOGL.GUI.Abstract
 
         public void AddChildControl(BaseControl child)
         {
-            List<BaseControl> list = new List<BaseControl>(childControls);
+            var list = new List<BaseControl>(childControls);
             list.Add(child);
             childControls = list.ToArray();
         }

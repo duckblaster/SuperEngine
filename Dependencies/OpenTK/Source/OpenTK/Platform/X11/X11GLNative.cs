@@ -126,7 +126,7 @@ namespace OpenTK.Platform.X11
             if (height <= 0)
                 throw new ArgumentOutOfRangeException("height", "Must be higher than zero.");
 
-            XVisualInfo info = new XVisualInfo();
+            var info = new XVisualInfo();
 
             Debug.Indent();
             
@@ -143,7 +143,7 @@ namespace OpenTK.Platform.X11
                 // Create a window on this display using the visual above
                 Debug.Write("Opening render window... ");
 
-                XSetWindowAttributes attributes = new XSetWindowAttributes();
+                var attributes = new XSetWindowAttributes();
                 attributes.background_pixel = IntPtr.Zero;
                 attributes.border_pixel = IntPtr.Zero;
                 attributes.colormap = Functions.XCreateColormap(window.Display, window.RootWindow, window.VisualInfo.Visual, 0/*AllocNone*/);
@@ -172,7 +172,7 @@ namespace OpenTK.Platform.X11
             // Set the window hints
             SetWindowMinMax(_min_width, _min_height, -1, -1);            
             
-            XSizeHints hints = new XSizeHints();
+            var hints = new XSizeHints();
             hints.base_width = width;
             hints.base_height = height;
             hints.flags = (IntPtr)(XSizeHintsFlags.PSize | XSizeHintsFlags.PPosition);
@@ -186,7 +186,7 @@ namespace OpenTK.Platform.X11
 
             // Set the initial window size to ensure X, Y, Width, Height and the rest
             // return the correct values inside the constructor and the Load event.
-            XEvent e = new XEvent();
+            var e = new XEvent();
             e.ConfigureEvent.x = x;
             e.ConfigureEvent.y = y;
             e.ConfigureEvent.width = width;
@@ -296,7 +296,7 @@ namespace OpenTK.Platform.X11
         void SetWindowMinMax(short min_width, short min_height, short max_width, short max_height)
         {
             IntPtr dummy;
-            XSizeHints hints = new XSizeHints();
+            var hints = new XSizeHints();
 
             using (new XLock(window.Display))
             {
@@ -451,7 +451,7 @@ namespace OpenTK.Platform.X11
                 {
                     //Functions.XGetWindowProperty(window.Display, window.WindowHandle, atom, IntPtr.Zero, IntPtr.Zero, false,
                                                  
-                    MotifWmHints hints = new MotifWmHints();
+                    var hints = new MotifWmHints();
                     hints.flags = (IntPtr)MotifFlags.Decorations;
                     Functions.XChangeProperty(this.window.Display, this.Handle, atom, atom, 32, PropertyMode.Replace,
                                               ref hints, Marshal.SizeOf(hints) / IntPtr.Size);
@@ -520,7 +520,7 @@ namespace OpenTK.Platform.X11
                 if (atom != IntPtr.Zero)
                 {
                     //Functions.XDeleteProperty(this.window.Display, this.Handle, atom);
-                    MotifWmHints hints = new MotifWmHints();
+                    var hints = new MotifWmHints();
                     hints.flags = (IntPtr)MotifFlags.Decorations;
                     hints.decorations = (IntPtr)MotifDecorations.All;
                     Functions.XChangeProperty(this.window.Display, this.Handle, atom, atom, 32, PropertyMode.Replace,
@@ -574,9 +574,9 @@ namespace OpenTK.Platform.X11
     
                 if (wmHints_ptr != IntPtr.Zero)
                 {
-                    XWMHints wmHints = (XWMHints)Marshal.PtrToStructure(wmHints_ptr, typeof(XWMHints));
-                    XWMHintsFlags flags = (XWMHintsFlags)wmHints.flags.ToInt32();
-    
+                    var wmHints = (XWMHints)Marshal.PtrToStructure(wmHints_ptr, typeof(XWMHints));
+                    var flags = (XWMHintsFlags)wmHints.flags.ToInt32();
+
                     if ((flags & XWMHintsFlags.IconPixmapHint) != 0)
                     {
                         wmHints.flags = new IntPtr((int)(flags & ~XWMHintsFlags.IconPixmapHint));
@@ -649,7 +649,7 @@ namespace OpenTK.Platform.X11
         {
             RefreshWindowBorders();
 
-            Point new_location = new Point(
+            var new_location = new Point(
                 e.ConfigureEvent.x - border_left,
                 e.ConfigureEvent.y - border_top);
             if (Location != new_location)
@@ -661,7 +661,7 @@ namespace OpenTK.Platform.X11
 
             // Note: width and height denote the internal (client) size.
             // To get the external (window) size, we need to add the border size.
-            Size new_size = new Size(
+            var new_size = new Size(
                 e.ConfigureEvent.width + border_left + border_right,
                 e.ConfigureEvent.height + border_top + border_bottom);
             if (Bounds.Size != new_size)
@@ -726,7 +726,7 @@ namespace OpenTK.Platform.X11
                         if (!isExiting && e.ClientMessageEvent.ptr1 == _atom_wm_destroy)
                         {
                             Debug.WriteLine("Exit message received.");
-                            CancelEventArgs ce = new CancelEventArgs();
+                            var ce = new CancelEventArgs();
                             if (Closing != null)
                                 Closing(this, ce);
 
@@ -764,7 +764,7 @@ namespace OpenTK.Platform.X11
                         status = Functions.XLookupString(ref e.KeyEvent, ascii, ascii.Length, null, IntPtr.Zero);
                         Encoding.Default.GetChars(ascii, 0, status, chars, 0);
 
-                        EventHandler<KeyPressEventArgs> key_press = KeyPress;
+                        var key_press = KeyPress;
                         if (key_press != null)
                         {
                             for (int i = 0; i < status; i++)
@@ -1016,9 +1016,9 @@ namespace OpenTK.Platform.X11
                 else
                 {
                     // Set _NET_WM_ICON
-                    System.Drawing.Bitmap bitmap = value.ToBitmap();
+                    var bitmap = value.ToBitmap();
                     int size = bitmap.Width * bitmap.Height + 2;
-                    IntPtr[] data = new IntPtr[size];
+                    var data = new IntPtr[size];
                     int index = 0;
     
                     data[index++] = (IntPtr)bitmap.Width;
@@ -1044,8 +1044,8 @@ namespace OpenTK.Platform.X11
                         if (wmHints_ptr == IntPtr.Zero)
                             wmHints_ptr = Functions.XAllocWMHints();
     
-                        XWMHints wmHints = (XWMHints)Marshal.PtrToStructure(wmHints_ptr, typeof(XWMHints));
-    
+                        var wmHints = (XWMHints)Marshal.PtrToStructure(wmHints_ptr, typeof(XWMHints));
+
                         wmHints.flags = new IntPtr(wmHints.flags.ToInt32() | (int)(XWMHintsFlags.IconPixmapHint | XWMHintsFlags.IconMaskHint));
                         wmHints.icon_pixmap = Functions.CreatePixmapFromImage(window.Display, bitmap);
                         wmHints.icon_mask = Functions.CreateMaskFromImage(window.Display, bitmap);
@@ -1138,7 +1138,7 @@ namespace OpenTK.Platform.X11
             }
             set
             {
-                OpenTK.WindowState current_state = this.WindowState;
+                var current_state = this.WindowState;
 
                 if (current_state == value)
                     return;
@@ -1164,7 +1164,7 @@ namespace OpenTK.Platform.X11
                 }
                 // We can't resize the window if its border is fixed, so make it resizable first.
                 bool temporary_resizable = false;
-                WindowBorder previous_state = WindowBorder;
+                var previous_state = WindowBorder;
                 if (WindowBorder != WindowBorder.Resizable)
                 {
                     temporary_resizable = true;
@@ -1430,7 +1430,7 @@ namespace OpenTK.Platform.X11
 
         public void Exit()
         {
-            XEvent ev = new XEvent();
+            var ev = new XEvent();
             ev.type = XEventName.ClientMessage;
             ev.ClientMessageEvent.format = 32;
             ev.ClientMessageEvent.display = window.Display;

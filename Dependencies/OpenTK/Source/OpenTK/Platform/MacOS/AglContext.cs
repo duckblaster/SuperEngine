@@ -47,10 +47,10 @@ namespace OpenTK.Platform.MacOS
                 shareContextRef = ((AglContext)shareContext).Handle.Handle;
 			if (shareContext is GraphicsContext)
 			{
-				ContextHandle shareHandle = shareContext != null ?
+				var shareHandle = shareContext != null ?
 					(shareContext as IGraphicsContextInternal).Context : (ContextHandle)IntPtr.Zero;
 
-				shareContextRef = shareHandle.Handle;
+                shareContextRef = shareHandle.Handle;
 			}
 
 			if (shareContextRef == IntPtr.Zero)
@@ -89,7 +89,7 @@ namespace OpenTK.Platform.MacOS
         void CreateContext(GraphicsMode mode, CarbonWindowInfo carbonWindow, 
             IntPtr shareContextRef, bool fullscreen)
         {
-            List<int> aglAttributes = new  List<int>();
+            var aglAttributes = new  List<int>();
 
             Debug.Print("AGL pixel format attributes:");
             Debug.Indent();
@@ -145,9 +145,9 @@ namespace OpenTK.Platform.MacOS
 				if (cgdevice == IntPtr.Zero)
 					cgdevice = QuartzDisplayDeviceDriver.MainDisplay;
 
-                OSStatus status = Carbon.API.DMGetGDeviceByDisplayID(
+                var status = Carbon.API.DMGetGDeviceByDisplayID(
                     cgdevice, out gdevice, false);
-                
+
                 if (status != OSStatus.NoError)
                     throw new MacOSException(status, "DMGetGDeviceByDisplayID failed.");
 
@@ -155,7 +155,7 @@ namespace OpenTK.Platform.MacOS
                     ref gdevice, 1,
                     aglAttributes.ToArray());
 
-                Agl.AglError err = Agl.GetError();
+                var err = Agl.GetError();
 
                 if (err == Agl.AglError.BadPixelFormat)
                 {
@@ -204,13 +204,13 @@ namespace OpenTK.Platform.MacOS
 			if (CarbonGLNative.WindowRefMap.ContainsKey(windowRef) == false)
 				return IntPtr.Zero;
 
-			WeakReference nativeRef = CarbonGLNative.WindowRefMap[windowRef];
-			if (nativeRef.IsAlive == false)
+			var nativeRef = CarbonGLNative.WindowRefMap[windowRef];
+            if (nativeRef.IsAlive == false)
 				return IntPtr.Zero;
 
-			CarbonGLNative window = nativeRef.Target as CarbonGLNative;
+			var window = nativeRef.Target as CarbonGLNative;
 
-			if (window == null)
+            if (window == null)
 				return IntPtr.Zero;
 
 			return QuartzDisplayDeviceDriver.HandleTo(window.TargetDisplayDevice);
@@ -222,15 +222,15 @@ namespace OpenTK.Platform.MacOS
             if (carbonWindow.IsControl == false)
                 return;
             
-            System.Windows.Forms.Control ctrl = Control.FromHandle(carbonWindow.WindowRef);
-                
+            var ctrl = Control.FromHandle(carbonWindow.WindowRef);
+
             if (ctrl.TopLevelControl == null)
                 return;
                 
-            Rect rect = API.GetControlBounds(carbonWindow.WindowRef);
-            System.Windows.Forms.Form frm = (System.Windows.Forms.Form) ctrl.TopLevelControl;
+            var rect = API.GetControlBounds(carbonWindow.WindowRef);
+            var frm = (System.Windows.Forms.Form) ctrl.TopLevelControl;
 
-            System.Drawing.Point loc =
+            var loc =
                 frm.PointToClient(ctrl.PointToScreen(System.Drawing.Point.Empty));
 
             rect.X = (short)loc.X;
@@ -242,7 +242,7 @@ namespace OpenTK.Platform.MacOS
             rect.Y = (short)(ctrl.TopLevelControl.ClientSize.Height - rect.Y - rect.Height);
             Debug.Print("  AGL Coordinate Rect:   {0}", rect);
             
-            int[] glrect = new int[4];
+            var glrect = new int[4];
 
             glrect[0] = rect.X;
             glrect[1] = rect.Y;
@@ -283,14 +283,14 @@ namespace OpenTK.Platform.MacOS
         }
         public override void Update(IWindowInfo window)      
         {
-            CarbonWindowInfo carbonWindow = (CarbonWindowInfo)window;
+            var carbonWindow = (CarbonWindowInfo)window;
 
-			if (carbonWindow.GoFullScreenHack)
+            if (carbonWindow.GoFullScreenHack)
 			{
 				carbonWindow.GoFullScreenHack = false;
-				CarbonGLNative wind = GetCarbonWindow(carbonWindow);
+				var wind = GetCarbonWindow(carbonWindow);
 
-				if (wind != null)
+                if (wind != null)
 					wind.SetFullscreen(this);
 				else
 					Debug.Print("Could not find window!");
@@ -300,9 +300,9 @@ namespace OpenTK.Platform.MacOS
 			else if (carbonWindow.GoWindowedHack)
 			{
 				carbonWindow.GoWindowedHack = false;
-				CarbonGLNative wind = GetCarbonWindow(carbonWindow);
+				var wind = GetCarbonWindow(carbonWindow);
 
-				if (wind != null)
+                if (wind != null)
 					wind.UnsetFullscreen(this);
 				else
 					Debug.Print("Could not find window!");
@@ -320,9 +320,9 @@ namespace OpenTK.Platform.MacOS
 
 		private CarbonGLNative GetCarbonWindow(CarbonWindowInfo carbonWindow)
 		{
-			WeakReference r = CarbonGLNative.WindowRefMap[carbonWindow.WindowRef];
+			var r = CarbonGLNative.WindowRefMap[carbonWindow.WindowRef];
 
-			if (r.IsAlive)
+            if (r.IsAlive)
 			{
 				return (CarbonGLNative) r.Target;
 			}
@@ -332,7 +332,7 @@ namespace OpenTK.Platform.MacOS
 
         void MyAGLReportError(string function)
         {
-            Agl.AglError err = Agl.GetError();
+            var err = Agl.GetError();
 
             if (err != Agl.AglError.NoError)
                 throw new MacOSException((OSStatus)err, string.Format(
@@ -344,9 +344,9 @@ namespace OpenTK.Platform.MacOS
 
         internal void SetFullScreen(CarbonWindowInfo info, out int width, out int height)
         {
-			CarbonGLNative wind = GetCarbonWindow(info);
+			var wind = GetCarbonWindow(info);
 
-			Debug.Print("Switching to full screen {0}x{1} on context {2}", 
+            Debug.Print("Switching to full screen {0}x{1} on context {2}", 
 				wind.TargetDisplayDevice.Width, wind.TargetDisplayDevice.Height, Handle.Handle);
 
 			CG.DisplayCapture(GetQuartzDevice(info));
@@ -495,7 +495,7 @@ namespace OpenTK.Platform.MacOS
 
         public override IntPtr GetAddress(string function)
         {
-            string fname = "_" + function;
+            var fname = "_" + function;
             if (!NSIsSymbolNameDefined(fname))
                 return IntPtr.Zero;
 

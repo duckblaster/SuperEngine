@@ -118,7 +118,7 @@ namespace OpenTK.Audio
         static AudioDeviceEnumerator()
         {
             IntPtr dummy_device = IntPtr.Zero;
-            ContextHandle dummy_context = ContextHandle.Zero;
+            var dummy_context = ContextHandle.Zero;
 
             try
             {
@@ -129,7 +129,7 @@ namespace OpenTK.Audio
                 dummy_device = Alc.OpenDevice(null);
                 dummy_context = Alc.CreateContext(dummy_device, (int[])null);
                 bool dummy_success = Alc.MakeContextCurrent(dummy_context);
-                AlcError dummy_error = Alc.GetError(dummy_device);
+                var dummy_error = Alc.GetError(dummy_device);
                 if (!dummy_success || dummy_error != AlcError.NoError)
                 {
                     throw new AudioContextException("Failed to create dummy Context. Device (" + dummy_device.ToString() +
@@ -158,7 +158,7 @@ namespace OpenTK.Audio
                     version = AlcVersion.Alc1_0;
                     Debug.Print("Device enumeration extension not available. Failed to enumerate playback devices.");
                 }
-                AlcError playback_err = Alc.GetError(dummy_device);
+                var playback_err = Alc.GetError(dummy_device);
                 if (playback_err != AlcError.NoError)
                     throw new AudioContextException("Alc Error occured when querying available playback devices. " + playback_err.ToString());
 
@@ -172,7 +172,7 @@ namespace OpenTK.Audio
                 {
                     Debug.Print("Capture extension not available. Failed to enumerate recording devices.");
                 }
-                AlcError record_err = Alc.GetError(dummy_device);
+                var record_err = Alc.GetError(dummy_device);
                 if (record_err != AlcError.NoError)
                     throw new AudioContextException("Alc Error occured when querying available recording devices. " + record_err.ToString());
 

@@ -52,9 +52,9 @@ namespace OOGL.GUI.Abstract
                 {
                     windows[i].Dispose();
                 }
-                catch
-                {
-                }
+#pragma warning disable CC0004 // Catch block cannot be empty
+                    catch { }
+#pragma warning restore CC0004 // Catch block cannot be empty
             }
 		}
 
@@ -159,7 +159,7 @@ namespace OOGL.GUI.Abstract
             }
             set
             {
-                BaseControl oldFocusedControl = focusedControl;
+                var oldFocusedControl = focusedControl;
                 focusedControl = value;
                 if (Object.ReferenceEquals(oldFocusedControl, focusedControl) == false)
                 {
@@ -198,7 +198,7 @@ namespace OOGL.GUI.Abstract
         
         public void SetTopMostWindow(BaseFrame window)
         {
-            List<BaseFrame> windows = new List<BaseFrame>(this.windows);
+            var windows = new List<BaseFrame>(this.windows);
             if (windows.Remove(window)) windows.Insert(0, window);
             this.windows = windows.ToArray();
         }
@@ -217,7 +217,7 @@ namespace OOGL.GUI.Abstract
 
         public void AddWindow(BaseFrame window)
         {
-            List<BaseFrame> windows = new List<BaseFrame>(this.windows);
+            var windows = new List<BaseFrame>(this.windows);
             windows.Add(window);
             this.windows = windows.ToArray();
 
@@ -226,7 +226,7 @@ namespace OOGL.GUI.Abstract
 
         public void RemoveWindow(BaseFrame window)
         {
-            List<BaseFrame> windows = new List<BaseFrame>(this.windows);
+            var windows = new List<BaseFrame>(this.windows);
             windows.Remove(window);
             this.windows = windows.ToArray();
 
@@ -306,32 +306,32 @@ namespace OOGL.GUI.Abstract
         {
             try
             {
-                string workspacePath = System.Environment.CurrentDirectory;
+                var workspacePath = System.Environment.CurrentDirectory;
 
                 for (int i = 0; i < windows.Length; i++)
                 {
                     windows[i].LoadSettings(workspacePath);
                 }
             }
-            catch
-            {
-            }
+#pragma warning disable CC0004 // Catch block cannot be empty
+            catch { }
+#pragma warning restore CC0004 // Catch block cannot be empty
         }
 
         public void SaveWorkspace()
         {
             try
             {
-                string workspacePath = System.Environment.CurrentDirectory;
+                var workspacePath = System.Environment.CurrentDirectory;
 
                 for (int i = 0; i < windows.Length; i++)
                 {
                     windows[i].SaveSettings(workspacePath);
                 }
             }
-            catch
-            {
-            }
+#pragma warning disable CC0004 // Catch block cannot be empty
+            catch { }
+#pragma warning restore CC0004 // Catch block cannot be empty
         }
     }
 }

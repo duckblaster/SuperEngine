@@ -106,11 +106,11 @@ namespace Jitter.Dynamics.Constraints
 
             JVector.Subtract(ref p2, ref p1, out dp);
 
-            JVector l = JVector.Transform(lineNormal, body1.orientation);
+            var l = JVector.Transform(lineNormal, body1.orientation);
             l.Normalize();
 
-            JVector t = (p1 - p2) % l;
-            if(t.LengthSquared() != 0.0f) t.Normalize();
+            var t = (p1 - p2) % l;
+            if (t.LengthSquared() != 0.0f) t.Normalize();
             t = t % l;
 
             jacobian[0] = t;                      // linearVel Body1

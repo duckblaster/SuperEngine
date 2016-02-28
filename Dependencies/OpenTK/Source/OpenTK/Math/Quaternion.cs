@@ -123,7 +123,7 @@ namespace OpenTK
         /// <param name="angle">The resultant angle</param>
         public void ToAxisAngle(out Vector3 axis, out float angle)
         {
-            Vector4 result = ToAxisAngle();
+            var result = ToAxisAngle();
             axis = result.Xyz;
             angle = result.W;
         }
@@ -134,13 +134,14 @@ namespace OpenTK
         /// <returns>A Vector4 that is the axis-angle representation of this quaternion.</returns>
         public Vector4 ToAxisAngle()
         {
-            Quaternion q = this;
+            var q = this;
             if (q.W > 1.0f)
                 q.Normalize();
 
-            Vector4 result = new Vector4();
-
-            result.W = 2.0f * (float)System.Math.Acos(q.W); // angle
+            var result = new Vector4
+            {
+                W = 2.0f * (float)System.Math.Acos(q.W) // angle
+            };
             float den = (float)System.Math.Sqrt(1.0 - q.W * q.W);
             if (den > 0.0001f)
             {
@@ -467,7 +468,7 @@ namespace OpenTK
             if (axis.LengthSquared == 0.0f)
                 return Identity;
 
-            Quaternion result = Identity;
+            var result = Identity;
 
             angle *= 0.5f;
             axis.Normalize();
@@ -537,7 +538,7 @@ namespace OpenTK
                 blendB = blend;
             }
 
-            Quaternion result = new Quaternion(blendA * q1.Xyz + blendB * q2.Xyz, blendA * q1.W + blendB * q2.W);
+            var result = new Quaternion(blendA * q1.Xyz + blendB * q2.Xyz, blendA * q1.W + blendB * q2.W);
             if (result.LengthSquared > 0.0f)
                 return Normalize(result);
             else

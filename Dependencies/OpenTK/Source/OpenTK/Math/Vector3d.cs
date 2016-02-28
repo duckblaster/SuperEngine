@@ -917,7 +917,7 @@ namespace OpenTK
         {
             result = a; // copy
 
-            Vector3d temp = b; // copy
+            var temp = b; // copy
             Subtract(ref temp, ref a, out temp);
             Multiply(ref temp, u, out temp);
             Add(ref result, ref temp, out result);
@@ -991,7 +991,7 @@ namespace OpenTK
         /// <param name="result">The transformed normal</param>
         public static void TransformNormal(ref Vector3d norm, ref Matrix4d mat, out Vector3d result)
         {
-            Matrix4d Inverse = Matrix4d.Invert(mat);
+            var Inverse = Matrix4d.Invert(mat);
             Vector3d.TransformNormalInverse(ref norm, ref Inverse, out result);
         }
 
@@ -1085,7 +1085,7 @@ namespace OpenTK
         /// <param name="result">The transformed vector</param>
         public static void Transform(ref Vector3d vec, ref Matrix4d mat, out Vector3d result)
         {
-            Vector4d v4 = new Vector4d(vec.X, vec.Y, vec.Z, 1.0);
+            var v4 = new Vector4d(vec.X, vec.Y, vec.Z, 1.0);
             Vector4d.Transform(ref v4, ref mat, out v4);
             result = v4.Xyz;
         }
@@ -1141,7 +1141,7 @@ namespace OpenTK
         /// <param name="result">The transformed vector</param>
         public static void TransformPerspective(ref Vector3d vec, ref Matrix4d mat, out Vector3d result)
         {
-            Vector4d v = new Vector4d(vec);
+            var v = new Vector4d(vec);
             Vector4d.Transform(ref v, ref mat, out v);
             result.X = v.X / v.W;
             result.Y = v.Y / v.W;

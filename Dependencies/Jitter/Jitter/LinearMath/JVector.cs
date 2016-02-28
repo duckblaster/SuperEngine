@@ -167,7 +167,7 @@ namespace Jitter.LinearMath
         public override bool Equals(object obj)
         {
             if (!(obj is JVector)) return false;
-            JVector other = (JVector)obj;
+            var other = (JVector)obj;
 
             return (((X == other.X) && (Y == other.Y)) && (Z == other.Z));
         }

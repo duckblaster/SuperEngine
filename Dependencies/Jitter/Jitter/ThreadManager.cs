@@ -98,7 +98,7 @@ namespace Jitter
 
             currentWaitHandle = waitHandleA;
 
-            AutoResetEvent initWaitHandle = new AutoResetEvent(false);
+            var initWaitHandle = new AutoResetEvent(false);
 
             for (int i = 1; i < threads.Length; i++)
             {

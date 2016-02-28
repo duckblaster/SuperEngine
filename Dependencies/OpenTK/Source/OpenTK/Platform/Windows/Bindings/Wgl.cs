@@ -1345,7 +1345,7 @@ namespace OpenTK.Platform.Windows
             {
                 unsafe
                 {
-                    System.Runtime.InteropServices.GCHandle pointer_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pointer, System.Runtime.InteropServices.GCHandleType.Pinned);
+                    var pointer_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pointer, System.Runtime.InteropServices.GCHandleType.Pinned);
                     try
                     {
                         Delegates.wglFreeMemoryNV((IntPtr)pointer_ptr.AddrOfPinnedObject());
@@ -2281,7 +2281,7 @@ namespace OpenTK.Platform.Windows
             {
                 unsafe
                 {
-                    System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                    var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                     try
                     {
                         return Delegates.wglDestroyImageBufferI3D((IntPtr)hDC, (IntPtr)pAddress_ptr.AddrOfPinnedObject());
@@ -2329,7 +2329,7 @@ namespace OpenTK.Platform.Windows
                     fixed (IntPtr* pEvent_ptr = pEvent)
                     fixed (Int32* pSize_ptr = pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent_ptr, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2350,7 +2350,7 @@ namespace OpenTK.Platform.Windows
                     fixed (IntPtr* pEvent_ptr = pEvent)
                     fixed (Int32* pSize_ptr = pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent_ptr, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2372,7 +2372,7 @@ namespace OpenTK.Platform.Windows
                     fixed (IntPtr* pEvent_ptr = pEvent)
                     fixed (Int32* pSize_ptr = &pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent_ptr, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2393,7 +2393,7 @@ namespace OpenTK.Platform.Windows
                     fixed (IntPtr* pEvent_ptr = pEvent)
                     fixed (Int32* pSize_ptr = &pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent_ptr, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2415,7 +2415,7 @@ namespace OpenTK.Platform.Windows
                     fixed (IntPtr* pEvent_ptr = &pEvent)
                     fixed (Int32* pSize_ptr = pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent_ptr, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2436,7 +2436,7 @@ namespace OpenTK.Platform.Windows
                     fixed (IntPtr* pEvent_ptr = &pEvent)
                     fixed (Int32* pSize_ptr = pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent_ptr, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2458,7 +2458,7 @@ namespace OpenTK.Platform.Windows
                     fixed (IntPtr* pEvent_ptr = &pEvent)
                     fixed (Int32* pSize_ptr = &pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent_ptr, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2479,7 +2479,7 @@ namespace OpenTK.Platform.Windows
                     fixed (IntPtr* pEvent_ptr = &pEvent)
                     fixed (Int32* pSize_ptr = &pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent_ptr, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2496,7 +2496,7 @@ namespace OpenTK.Platform.Windows
             public static 
             unsafe Boolean AssociateImageBufferEvents(IntPtr hDC, IntPtr* pEvent, [In, Out] object pAddress, Int32* pSize, UInt32 count)
             {
-                System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                 try
                 {
                     return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize, (UInt32)count);
@@ -2511,7 +2511,7 @@ namespace OpenTK.Platform.Windows
             public static 
             unsafe Boolean AssociateImageBufferEvents(IntPtr hDC, IntPtr* pEvent, [In, Out] object pAddress, Int32* pSize, Int32 count)
             {
-                System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                 try
                 {
                     return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize, (UInt32)count);
@@ -2530,7 +2530,7 @@ namespace OpenTK.Platform.Windows
                 {
                     fixed (Int32* pSize_ptr = pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2551,7 +2551,7 @@ namespace OpenTK.Platform.Windows
                 {
                     fixed (Int32* pSize_ptr = pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2572,7 +2572,7 @@ namespace OpenTK.Platform.Windows
                 {
                     fixed (Int32* pSize_ptr = &pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2593,7 +2593,7 @@ namespace OpenTK.Platform.Windows
                 {
                     fixed (Int32* pSize_ptr = &pSize)
                     {
-                        System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                        var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                         try
                         {
                             return Delegates.wglAssociateImageBufferEventsI3D((IntPtr)hDC, (IntPtr*)pEvent, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (Int32*)pSize_ptr, (UInt32)count);
@@ -2631,7 +2631,7 @@ namespace OpenTK.Platform.Windows
             {
                 unsafe
                 {
-                    System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                    var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                     try
                     {
                         return Delegates.wglReleaseImageBufferEventsI3D((IntPtr)hDC, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (UInt32)count);
@@ -2648,7 +2648,7 @@ namespace OpenTK.Platform.Windows
             {
                 unsafe
                 {
-                    System.Runtime.InteropServices.GCHandle pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
+                    var pAddress_ptr = System.Runtime.InteropServices.GCHandle.Alloc(pAddress, System.Runtime.InteropServices.GCHandleType.Pinned);
                     try
                     {
                         return Delegates.wglReleaseImageBufferEventsI3D((IntPtr)hDC, (IntPtr)pAddress_ptr.AddrOfPinnedObject(), (UInt32)count);

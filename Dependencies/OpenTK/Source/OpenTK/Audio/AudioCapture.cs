@@ -269,7 +269,7 @@ namespace OpenTK.Audio
             if (sampleCount * GetSampleSize(SampleFormat) > buffer_size)
                 throw new ArgumentOutOfRangeException("sampleCount");
 
-            GCHandle buffer_ptr = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+            var buffer_ptr = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             try { ReadSamples(buffer_ptr.AddrOfPinnedObject(), sampleCount); }
             finally { buffer_ptr.Free(); }
         }
@@ -353,7 +353,7 @@ namespace OpenTK.Audio
         string ErrorMessage(string devicename, int frequency, ALFormat bufferformat, int buffersize)
         {
             string alcerrmsg;
-            AlcError alcerrcode = CurrentError;
+            var alcerrcode = CurrentError;
             switch (alcerrcode)
             {
                 case AlcError.OutOfMemory:

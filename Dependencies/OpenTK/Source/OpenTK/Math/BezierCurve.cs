@@ -164,11 +164,11 @@ namespace OpenTK
         public static float CalculateLength(IList<Vector2> points, float precision, float parallel)
         {
             float length = 0.0f;
-            Vector2 old = BezierCurve.CalculatePoint(points, 0.0f, parallel);
+            var old = BezierCurve.CalculatePoint(points, 0.0f, parallel);
 
             for (float i = precision; i < (1.0f + precision); i += precision)
             {
-                Vector2 n = CalculatePoint(points, i, parallel);
+                var n = CalculatePoint(points, i, parallel);
                 length += (n - old).Length;
                 old = n;
             }
@@ -200,7 +200,7 @@ namespace OpenTK
         /// of 5.0f to the orignal curve.</remarks>
         public static Vector2 CalculatePoint(IList<Vector2> points, float t, float parallel)
         {
-            Vector2 r = new Vector2();
+            var r = new Vector2();
             double c = 1.0d - (double)t;
             float temp;
             int i = 0;
@@ -218,7 +218,7 @@ namespace OpenTK
             if (parallel == 0.0f)
                 return r;
 
-            Vector2 perpendicular = new Vector2();
+            var perpendicular = new Vector2();
 
             if (t != 0.0f)
                 perpendicular = r - BezierCurve.CalculatePointOfDerivative(points, t);
@@ -236,7 +236,7 @@ namespace OpenTK
         /// <returns>Resulting point.</returns>
         private static Vector2 CalculatePointOfDerivative(IList<Vector2> points, float t)
         {
-            Vector2 r = new Vector2();
+            var r = new Vector2();
             double c = 1.0d - (double)t;
             float temp;
             int i = 0;

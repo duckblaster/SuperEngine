@@ -119,7 +119,7 @@ namespace OpenTK
             if (!type.IsValueType)
                 return false;
 
-            FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             Debug.Indent();
             foreach (FieldInfo field in fields)
             {
@@ -135,7 +135,7 @@ namespace OpenTK
         // or [StructLayout(LayoutKind.Explicit)]
         static bool CheckStructLayoutAttribute(Type type)
         {
-            StructLayoutAttribute[] attr = (StructLayoutAttribute[])
+            var attr = (StructLayoutAttribute[])
                 type.GetCustomAttributes(typeof(StructLayoutAttribute), true);
 
             if ((attr == null) ||

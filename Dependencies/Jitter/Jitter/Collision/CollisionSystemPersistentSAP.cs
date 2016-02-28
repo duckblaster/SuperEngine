@@ -194,7 +194,7 @@ namespace Jitter.Collision
             /// <returns>Returns true if they are equal, otherwise false.</returns>
             public override bool Equals(object obj)
             {
-                BodyPair other = (BodyPair)obj;
+                var other = (BodyPair)obj;
                 return (other.body1.Equals(body1) && other.body2.Equals(body2) ||
                     other.body1.Equals(body2) && other.body2.Equals(body1));
             }
@@ -250,9 +250,8 @@ namespace Jitter.Collision
             axis.Sort(QuickSort);
             activeList.Clear();
 
-            for (int i = 0; i < axis.Count; i++)
+            foreach (var keyelement in axis)
             {
-                SweepPoint keyelement = axis[i];
 
                 if (keyelement.Begin)
                 {
@@ -278,14 +277,14 @@ namespace Jitter.Collision
         {
             for (int j = 1; j < axis.Count; j++)
             {
-                SweepPoint keyelement = axis[j];
+                var keyelement = axis[j];
                 float key = keyelement.GetValue();
 
                 int i = j - 1;
 
                 while (i >= 0 && axis[i].GetValue() > key)
                 {
-                    SweepPoint swapper = axis[i];
+                    var swapper = axis[i];
 
                     if (keyelement.Begin && !swapper.Begin)
                     {
@@ -296,7 +295,7 @@ namespace Jitter.Collision
 
                             if (count == 3)
                             {
-                                BodyPair pair = new BodyPair(keyelement.Body, swapper.Body);
+                                var pair = new BodyPair(keyelement.Body, swapper.Body);
                                 fullOverlaps.Add(pair);
                             }
                         }
@@ -311,7 +310,7 @@ namespace Jitter.Collision
 
                             if (count == 2)
                             {
-                                BodyPair pair = new BodyPair(keyelement.Body, swapper.Body);
+                                var pair = new BodyPair(keyelement.Body, swapper.Body);
                                 fullOverlaps.Remove(pair);
                             }
                         }
@@ -377,7 +376,7 @@ namespace Jitter.Collision
             foreach (var pair in fullOverlaps) if (pair.body1 == body || pair.body2 == body) depricated.Push(pair);
             while (depricated.Count > 0) fullOverlaps.Remove(depricated.Pop());
 
-            IBroadphaseEntity lastBody = bodyList[bodyList.Count - 1];
+            var lastBody = bodyList[bodyList.Count - 1];
 
             if (body == lastBody)
             {
@@ -454,7 +453,7 @@ namespace Jitter.Collision
 
                     if (base.RaisePassedBroadphase(key.body1, key.body2))
                     {
-                        Pair pair = Pair.Pool.GetNew();
+                        var pair = Pair.Pool.GetNew();
 
                         if (swapOrder) { pair.entity1 = key.body1; pair.entity2 = key.body2; }
                         else { pair.entity2 = key.body2; pair.entity1 = key.body1; }
@@ -491,7 +490,7 @@ namespace Jitter.Collision
 
         private void DetectCallback(object obj)
         {
-            Pair pair = obj as Pair;
+            var pair = obj as Pair;
             base.Detect(pair.entity1, pair.entity2);
             Pair.Pool.GiveBack(pair);
         }
@@ -515,7 +514,7 @@ namespace Jitter.Collision
             {
                 if (e is SoftBody)
                 {
-                    SoftBody softBody = e as SoftBody;
+                    var softBody = e as SoftBody;
                     foreach (RigidBody b in softBody.points)
                     {
                         if (this.Raycast(b, rayOrigin, rayDirection, out tempNormal, out tempFraction))
@@ -532,7 +531,7 @@ namespace Jitter.Collision
                 }
                 else
                 {
-                    RigidBody b = e as RigidBody;
+                    var b = e as RigidBody;
 
                     if (this.Raycast(b, rayOrigin, rayDirection, out tempNormal, out tempFraction))
                     {
@@ -566,8 +565,8 @@ namespace Jitter.Collision
 
             if (body.Shape is Multishape)
             {
-                Multishape ms = (body.Shape as Multishape).RequestWorkingClone();
-                
+                var ms = (body.Shape as Multishape).RequestWorkingClone();
+
                 JVector tempNormal;float tempFraction;
                 bool multiShapeCollides = false;
 

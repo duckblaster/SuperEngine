@@ -903,7 +903,7 @@ namespace OpenTK
         {
             result = a; // copy
 
-            Vector4 temp = b; // copy
+            var temp = b; // copy
             Subtract(ref temp, ref a, out temp);
             Multiply(ref temp, u, out temp);
             Add(ref result, ref temp, out result);

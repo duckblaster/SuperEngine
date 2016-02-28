@@ -286,7 +286,7 @@ namespace OpenTK.Audio
             CheckErrors();
 
             // Build the attribute list
-            List<int> attributes = new List<int>();
+            var attributes = new List<int>();
 
             if (freq != 0)
             {

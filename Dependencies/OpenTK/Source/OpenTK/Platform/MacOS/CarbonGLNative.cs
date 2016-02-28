@@ -186,7 +186,7 @@ namespace OpenTK.Platform.MacOS
 
             LoadSize();
 
-            Rect titleSize = API.GetWindowBounds(window.WindowRef, WindowRegionCode.TitleBarRegion);
+            var titleSize = API.GetWindowBounds(window.WindowRef, WindowRegionCode.TitleBarRegion);
             mTitlebarHeight = titleSize.Height;
 
             Debug.Print("Titlebar size: {0}", titleSize);
@@ -200,7 +200,7 @@ namespace OpenTK.Platform.MacOS
         {
             mInputDriver = new CarbonInput();
 
-            EventTypeSpec[] eventTypes = new EventTypeSpec[]
+            var eventTypes = new EventTypeSpec[]
             {
                 new EventTypeSpec(EventClass.Window, WindowEventKind.WindowClose),
                 new EventTypeSpec(EventClass.Window, WindowEventKind.WindowClosed),
@@ -314,7 +314,7 @@ namespace OpenTK.Platform.MacOS
             if (mWindows.ContainsKey(userData) == false)
                 return OSStatus.EventNotHandled;
 
-            WeakReference reference = mWindows[userData];
+            var reference = mWindows[userData];
 
             // bail out if the CarbonGLNative window has been garbage collected.
             if (reference.IsAlive == false)
@@ -323,8 +323,8 @@ namespace OpenTK.Platform.MacOS
                 return OSStatus.EventNotHandled;
             }
 
-			CarbonGLNative window = (CarbonGLNative)reference.Target;
-			EventInfo evt = new EventInfo(inEvent);
+			var window = (CarbonGLNative)reference.Target;
+            var evt = new EventInfo(inEvent);
 
             //Debug.Print("Processing {0} event for {1}.", evt, window.window);
 
@@ -353,7 +353,7 @@ namespace OpenTK.Platform.MacOS
         private OSStatus ProcessKeyboardEvent(IntPtr inCaller, IntPtr inEvent, EventInfo evt, IntPtr userData)
         {
             System.Diagnostics.Debug.Assert(evt.EventClass == EventClass.Keyboard);
-            MacOSKeyCode code = (MacOSKeyCode)0;
+            var code = (MacOSKeyCode)0;
             char charCode = '\0';
 
 			//Debug.Print("Processing keyboard event {0}", evt.KeyboardEventKind);
@@ -402,7 +402,7 @@ namespace OpenTK.Platform.MacOS
             switch (evt.WindowEventKind)
             {
                 case WindowEventKind.WindowClose:
-                    CancelEventArgs cancel = new CancelEventArgs();
+                    var cancel = new CancelEventArgs();
                     OnClosing(cancel);
 
                     if (cancel.Cancel)
@@ -444,11 +444,11 @@ namespace OpenTK.Platform.MacOS
         protected OSStatus ProcessMouseEvent(IntPtr inCaller, IntPtr inEvent, EventInfo evt, IntPtr userData)
         {
             System.Diagnostics.Debug.Assert(evt.EventClass == EventClass.Mouse);
-            MouseButton button = MouseButton.Primary;
-            HIPoint pt = new HIPoint();
-			HIPoint screenLoc =  new HIPoint();
+            var button = MouseButton.Primary;
+            var pt = new HIPoint();
+            var screenLoc =  new HIPoint();
 
-			OSStatus err = API.GetEventMouseLocation(inEvent, out screenLoc);
+            var err = API.GetEventMouseLocation(inEvent, out screenLoc);
 
             if (this.windowState == WindowState.Fullscreen)
             {
@@ -468,8 +468,8 @@ namespace OpenTK.Platform.MacOS
                 }
             }
 
-			Point mousePosInClient = new Point((int)pt.X, (int)pt.Y);
-			if (this.windowState != WindowState.Fullscreen)
+			var mousePosInClient = new Point((int)pt.X, (int)pt.Y);
+            if (this.windowState != WindowState.Fullscreen)
 			{
 				mousePosInClient.Y -= mTitlebarHeight;
 			}
@@ -595,7 +595,7 @@ namespace OpenTK.Platform.MacOS
         }
         private void ProcessModifierKey(IntPtr inEvent)
         {
-            MacOSKeyModifiers modifiers = API.GetEventKeyModifiers(inEvent);
+            var modifiers = API.GetEventKeyModifiers(inEvent);
 
             bool caps = (modifiers & MacOSKeyModifiers.CapsLock) != 0 ? true : false;
             bool control = (modifiers & MacOSKeyModifiers.Control) != 0 ? true : false;
@@ -605,7 +605,7 @@ namespace OpenTK.Platform.MacOS
 
             Debug.Print("Modifiers Changed: {0}", modifiers);
 
-            Input.KeyboardDevice keyboard = InputDriver.Keyboard[0];
+            var keyboard = InputDriver.Keyboard[0];
 
             if (keyboard[OpenTK.Input.Key.AltLeft] ^ option)
                 keyboard[OpenTK.Input.Key.AltLeft] = option;
@@ -626,7 +626,7 @@ namespace OpenTK.Platform.MacOS
 
         Rect GetRegion()
         {
-            Rect retval = API.GetWindowBounds(window.WindowRef, WindowRegionCode.ContentRegion);
+            var retval = API.GetWindowBounds(window.WindowRef, WindowRegionCode.ContentRegion);
 
             return retval;
         }
@@ -676,8 +676,8 @@ namespace OpenTK.Platform.MacOS
             if (WindowState == WindowState.Fullscreen)
                 return;
 
-			Rect r = API.GetWindowBounds(window.WindowRef, WindowRegionCode.StructureRegion);
-			bounds = new Rectangle(r.X, r.Y, r.Width, r.Height);
+			var r = API.GetWindowBounds(window.WindowRef, WindowRegionCode.StructureRegion);
+            bounds = new Rectangle(r.X, r.Y, r.Width, r.Height);
 
 			r = API.GetWindowBounds(window.WindowRef, WindowRegionCode.GlobalPortRegion);
 			clientRectangle = new Rectangle(0, 0, r.Width, r.Height);
@@ -696,7 +696,7 @@ namespace OpenTK.Platform.MacOS
         {
             IntPtr handle = window.WindowRef;
 
-            Rect r = Carbon.API.GetWindowBounds(window.WindowRef, WindowRegionCode.ContentRegion);
+            var r = Carbon.API.GetWindowBounds(window.WindowRef, WindowRegionCode.ContentRegion);
             Debug.Print("Rect: {0}", r);
 
             return new Point(point.X - r.X, point.Y - r.Y);
@@ -705,8 +705,8 @@ namespace OpenTK.Platform.MacOS
         {
 			IntPtr handle = window.WindowRef;
 
-			Rect r = Carbon.API.GetWindowBounds(window.WindowRef, WindowRegionCode.ContentRegion);
-			Debug.Print("Rect: {0}", r);
+			var r = Carbon.API.GetWindowBounds(window.WindowRef, WindowRegionCode.ContentRegion);
+            Debug.Print("Rect: {0}", r);
 
 			return new Point(point.X + r.X, point.Y + r.Y);
         }
@@ -927,8 +927,8 @@ namespace OpenTK.Platform.MacOS
 
         public void Close()
         {
-			CancelEventArgs e = new CancelEventArgs();
-			OnClosing(e);
+			var e = new CancelEventArgs();
+            OnClosing(e);
 
 			if (e.Cancel)
 				return;
@@ -961,9 +961,9 @@ namespace OpenTK.Platform.MacOS
                     return;
 
                 Debug.Print("Switching window state from {0} to {1}", WindowState, value);
-				WindowState oldState = WindowState;
+				var oldState = WindowState;
 
-				windowState = value;
+                windowState = value;
 
 				if (oldState == WindowState.Fullscreen)
                 {

@@ -53,7 +53,7 @@ namespace OpenTK.Platform.Egl
             if (window == null)
                 throw new ArgumentNullException("window");
 
-            EglContext shared = (EglContext)sharedContext;
+            var shared = (EglContext)sharedContext;
 
             int dummy_major, dummy_minor;
             if (!Egl.Initialize(window.Display, out dummy_major, out dummy_minor))
@@ -69,7 +69,7 @@ namespace OpenTK.Platform.Egl
             if (window.Surface == IntPtr.Zero)
                 window.CreateWindowSurface(config);
 
-            int[] attrib_list = new int[] { Egl.CONTEXT_CLIENT_VERSION, major, Egl.NONE };
+            var attrib_list = new int[] { Egl.CONTEXT_CLIENT_VERSION, major, Egl.NONE };
             HandleAsEGLContext = Egl.CreateContext(window.Display, config, shared != null ? shared.HandleAsEGLContext : IntPtr.Zero, attrib_list);
 
             MakeCurrent(window);

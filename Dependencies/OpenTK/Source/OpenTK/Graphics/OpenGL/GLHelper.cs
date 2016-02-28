@@ -474,7 +474,7 @@ namespace OpenTK.Graphics.OpenGL
         {
             int length;
             GetProgram(program, OpenTK.Graphics.OpenGL.ProgramParameter.ActiveAttributeMaxLength, out length);
-            StringBuilder sb = new StringBuilder(length == 0 ? 1 : length * 2);
+            var sb = new StringBuilder(length == 0 ? 1 : length * 2);
 
             GetActiveAttrib(program, index, sb.Capacity, out length, out size, out type, sb);
             return sb.ToString();
@@ -489,7 +489,7 @@ namespace OpenTK.Graphics.OpenGL
             int length;
             GetProgram(program, OpenTK.Graphics.OpenGL.ProgramParameter.ActiveUniformMaxLength, out length);
 
-            StringBuilder sb = new StringBuilder(length == 0 ? 1 : length);
+            var sb = new StringBuilder(length == 0 ? 1 : length);
             GetActiveUniform(program, uniformIndex, sb.Capacity, out length, out size, out type, sb);
             return sb.ToString();
         }
@@ -502,7 +502,7 @@ namespace OpenTK.Graphics.OpenGL
         {
             int length;
             GetProgram(program, OpenTK.Graphics.OpenGL.ProgramParameter.ActiveUniformMaxLength, out length);
-            StringBuilder sb = new StringBuilder(length == 0 ? 1 : length * 2);
+            var sb = new StringBuilder(length == 0 ? 1 : length * 2);
 
             GetActiveUniformName(program, uniformIndex, sb.Capacity, out length, sb);
             return sb.ToString();
@@ -516,7 +516,7 @@ namespace OpenTK.Graphics.OpenGL
         {
             int length;
             GetProgram(program, OpenTK.Graphics.OpenGL.ProgramParameter.ActiveUniformBlockMaxNameLength, out length);
-            StringBuilder sb = new StringBuilder(length == 0 ? 1 : length * 2);
+            var sb = new StringBuilder(length == 0 ? 1 : length * 2);
 
             GetActiveUniformBlockName(program, uniformIndex, sb.Capacity, out length, sb);
             return sb.ToString();
@@ -561,7 +561,7 @@ namespace OpenTK.Graphics.OpenGL
                     info = String.Empty;
                     return;
                 }
-                StringBuilder sb = new StringBuilder(length * 2);
+                var sb = new StringBuilder(length * 2);
                 GL.GetShaderInfoLog((UInt32)shader, sb.Capacity, &length, sb);
                 info = sb.ToString();
             }
@@ -592,7 +592,7 @@ namespace OpenTK.Graphics.OpenGL
                     info = String.Empty;
                     return;
                 }
-                StringBuilder sb = new StringBuilder(length * 2);
+                var sb = new StringBuilder(length * 2);
                 GL.GetProgramInfoLog((UInt32)program, sb.Capacity, &length, sb);
                 info = sb.ToString();
             }
@@ -932,7 +932,7 @@ namespace OpenTK.Graphics.OpenGL
 
         public static void TexEnv(TextureEnvTarget target, TextureEnvParameter pname, System.Drawing.Color color)
         {
-            Color4 c = new Color4(color);
+            var c = new Color4(color);
             unsafe
             {
                 TexEnv(target, pname, &c.R);

@@ -178,8 +178,8 @@ namespace Jitter.Collision
         {
             Debug.Assert(entity1 != entity2, "CollisionSystem reports selfcollision. Something is wrong.");
 
-            RigidBody rigidBody1 = entity1 as RigidBody;
-            RigidBody rigidBody2 = entity2 as RigidBody;
+            var rigidBody1 = entity1 as RigidBody;
+            var rigidBody2 = entity2 as RigidBody;
 
             if (rigidBody1 != null)
             { 
@@ -190,23 +190,23 @@ namespace Jitter.Collision
                 }
                 else
                 {
-                    SoftBody softBody2 = entity2 as SoftBody;
-                    if(softBody2 != null) DetectSoftRigid(rigidBody1,softBody2);
+                    var softBody2 = entity2 as SoftBody;
+                    if (softBody2 != null) DetectSoftRigid(rigidBody1,softBody2);
                 }
             }
             else
             {
-                SoftBody softBody1 = entity1 as SoftBody;
+                var softBody1 = entity1 as SoftBody;
 
-                if(rigidBody2 != null)
+                if (rigidBody2 != null)
                 {
                     if(softBody1 != null) DetectSoftRigid(rigidBody2,softBody1);
                 }
                 else
                 {
                     // less common
-                    SoftBody softBody2 = entity2 as SoftBody;
-                    if(softBody1 != null && softBody2 != null) DetectSoftSoft(softBody1,softBody2);
+                    var softBody2 = entity2 as SoftBody;
+                    if (softBody1 != null && softBody2 != null) DetectSoftSoft(softBody1,softBody2);
                 }
             }
         }
@@ -215,15 +215,15 @@ namespace Jitter.Collision
 
         private void DetectSoftSoft(SoftBody body1, SoftBody body2)
         {
-            List<int> my = potentialTriangleLists.GetNew();
-            List<int> other = potentialTriangleLists.GetNew();
+            var my = potentialTriangleLists.GetNew();
+            var other = potentialTriangleLists.GetNew();
 
             body1.dynamicTree.Query(other, my, body2.dynamicTree);
 
             for (int i = 0; i < other.Count; i++)
             {
-                SoftBody.Triangle myTriangle = body1.dynamicTree.GetUserData(my[i]);
-                SoftBody.Triangle otherTriangle = body2.dynamicTree.GetUserData(other[i]);
+                var myTriangle = body1.dynamicTree.GetUserData(my[i]);
+                var otherTriangle = body2.dynamicTree.GetUserData(other[i]);
 
                 JVector point, normal;
                 float penetration;
@@ -275,13 +275,13 @@ namespace Jitter.Collision
             }
             else if (b1IsMulti && b2IsMulti)
             {
-                Multishape ms1 = (body1.Shape as Multishape);
-                Multishape ms2 = (body2.Shape as Multishape);
+                var ms1 = (body1.Shape as Multishape);
+                var ms2 = (body2.Shape as Multishape);
 
                 ms1 = ms1.RequestWorkingClone();
                 ms2 = ms2.RequestWorkingClone();
 
-                JBBox transformedBoundingBox = body2.boundingBox;
+                var transformedBoundingBox = body2.boundingBox;
                 transformedBoundingBox.InverseTransform(ref body1.position, ref body1.orientation);
 
                 int ms1Length = ms1.Prepare(ref transformedBoundingBox);
@@ -331,11 +331,11 @@ namespace Jitter.Collision
                 if (body2.Shape is Multishape) { b1 = body2; b2 = body1; }
                 else { b2 = body2; b1 = body1; }
 
-                Multishape ms = (b1.Shape as Multishape);
+                var ms = (b1.Shape as Multishape);
 
                 ms = ms.RequestWorkingClone();
 
-                JBBox transformedBoundingBox = b2.boundingBox;
+                var transformedBoundingBox = b2.boundingBox;
                 transformedBoundingBox.InverseTransform(ref b1.position, ref b1.orientation);
 
                 int msLength = ms.Prepare(ref transformedBoundingBox);
@@ -383,20 +383,20 @@ namespace Jitter.Collision
         {
             if (rigidBody.Shape is Multishape)
             {
-                Multishape ms = (rigidBody.Shape as Multishape);
+                var ms = (rigidBody.Shape as Multishape);
                 ms = ms.RequestWorkingClone();
 
-                JBBox transformedBoundingBox = softBody.BoundingBox;
+                var transformedBoundingBox = softBody.BoundingBox;
                 transformedBoundingBox.InverseTransform(ref rigidBody.position, ref rigidBody.orientation);
 
                 int msLength = ms.Prepare(ref transformedBoundingBox);
 
-                List<int> detected = potentialTriangleLists.GetNew();
+                var detected = potentialTriangleLists.GetNew();
                 softBody.dynamicTree.Query(detected, ref rigidBody.boundingBox);
 
                 foreach (int i in detected)
                 {
-                    SoftBody.Triangle t = softBody.dynamicTree.GetUserData(i);
+                    var t = softBody.dynamicTree.GetUserData(i);
 
                     JVector point, normal;
                     float penetration;
@@ -430,12 +430,12 @@ namespace Jitter.Collision
             }
             else
             {
-                List<int> detected = potentialTriangleLists.GetNew();
+                var detected = potentialTriangleLists.GetNew();
                 softBody.dynamicTree.Query(detected, ref rigidBody.boundingBox);
 
                 foreach (int i in detected)
                 {
-                    SoftBody.Triangle t = softBody.dynamicTree.GetUserData(i);
+                    var t = softBody.dynamicTree.GetUserData(i);
 
                     JVector point, normal;
                     float penetration;
@@ -464,7 +464,7 @@ namespace Jitter.Collision
 
         public static int FindNearestTrianglePoint(SoftBody sb, int id, ref JVector point)
         {
-            SoftBody.Triangle triangle = sb.dynamicTree.GetUserData(id);
+            var triangle = sb.dynamicTree.GetUserData(id);
             JVector p;
 
             p = sb.points[triangle.indices.I0].position;
@@ -561,8 +561,8 @@ namespace Jitter.Collision
         /// <returns>Returns true if an intersection occours.</returns>
         public bool CheckBoundingBoxes(IBroadphaseEntity entity1, IBroadphaseEntity entity2)
         {
-            JBBox box1 = entity1.BoundingBox;
-            JBBox box2 = entity2.BoundingBox;
+            var box1 = entity1.BoundingBox;
+            var box2 = entity2.BoundingBox;
 
             return ((((box1.Max.Z >= box2.Min.Z) && (box1.Min.Z <= box2.Max.Z)) &&
                 ((box1.Max.Y >= box2.Min.Y) && (box1.Min.Y <= box2.Max.Y))) &&

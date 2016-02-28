@@ -38,8 +38,8 @@ namespace OpenTK.Platform.Egl
 
         public GraphicsMode SelectGraphicsMode(ColorFormat color, int depth, int stencil, int samples, ColorFormat accum, int buffers, bool stereo)
         {
-            IntPtr[] configs = new IntPtr[1];
-            int[] attribList = new int[] 
+            var configs = new IntPtr[1];
+            var attribList = new int[] 
             { 
                 //Egl.SURFACE_TYPE, Egl.WINDOW_BIT,
 

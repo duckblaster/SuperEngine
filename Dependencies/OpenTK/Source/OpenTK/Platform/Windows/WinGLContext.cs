@@ -62,9 +62,9 @@ namespace OpenTK.Platform.Windows
             lock (SyncRoot)
             {
                 if (window == null)
-                    throw new ArgumentNullException("window", "Must point to a valid window.");
+                    throw new ArgumentNullException(nameof(window), "Must point to a valid window.");
                 if (window.WindowHandle == IntPtr.Zero)
-                    throw new ArgumentException("window", "Must be a valid window.");
+                    throw new ArgumentException("Must be a valid window.", nameof(window));
 
                 Mode = format;
 
@@ -78,7 +78,7 @@ namespace OpenTK.Platform.Windows
                     // We cannot rely on OpenTK.Platform.Wgl until we create the context and call Wgl.LoadAll().
                     Debug.Print("Creating temporary context for wgl extensions.");
 
-                    ContextHandle temp_context = new ContextHandle(Wgl.Imports.CreateContext(window.DeviceContext));
+                    var temp_context = new ContextHandle(Wgl.Imports.CreateContext(window.DeviceContext));
                     Wgl.Imports.MakeCurrent(window.DeviceContext, temp_context.Handle);
                     Wgl.LoadAll();
                     Wgl.MakeCurrent(IntPtr.Zero, IntPtr.Zero);
@@ -92,7 +92,7 @@ namespace OpenTK.Platform.Windows
                     {
                         Debug.Write("Using WGL_ARB_create_context... ");
 
-                        List<int> attributes = new List<int>();
+                        var attributes = new List<int>();
                         attributes.Add((int)ArbCreateContext.MajorVersion);
                         attributes.Add(major);
                         attributes.Add((int)ArbCreateContext.MinorVersion);
@@ -184,7 +184,7 @@ namespace OpenTK.Platform.Windows
             if (window != null)
             {
                 if (((WinWindowInfo)window).WindowHandle == IntPtr.Zero)
-                    throw new ArgumentException("window", "Must point to a valid window.");
+                    throw new ArgumentException("Must point to a valid window.", nameof(window));
 
                 success = Wgl.Imports.MakeCurrent(((WinWindowInfo)window).DeviceContext, Handle.Handle);
             }
@@ -275,7 +275,7 @@ namespace OpenTK.Platform.Windows
 
             if (window == null) throw new ArgumentNullException("window", "Must point to a valid window.");
 
-            PixelFormatDescriptor pfd = new PixelFormatDescriptor();
+            var pfd = new PixelFormatDescriptor();
             Functions.DescribePixelFormat(window.DeviceContext, (int)mode.Index.Value,
                 API.PixelFormatDescriptorSize, ref pfd);
             Debug.WriteLine(mode.Index.ToString());

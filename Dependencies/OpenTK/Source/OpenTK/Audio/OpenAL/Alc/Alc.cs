@@ -276,9 +276,9 @@ namespace OpenTK.Audio.OpenAL
         /// <returns>A List of strings containing the names of the Devices.</returns>
         public static IList<string> GetString(IntPtr device, AlcGetStringList param)
         {
-            List<string> result = new List<string>();
+            var result = new List<string>();
             IntPtr t = GetStringPrivate(IntPtr.Zero, (AlcGetString)param);
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            var sb = new System.Text.StringBuilder();
             byte b;
             int offset = 0;
             do
@@ -394,7 +394,7 @@ namespace OpenTK.Audio.OpenAL
         public static void CaptureSamples<T>(IntPtr device, ref T buffer, int samples)
             where T : struct
         {
-            GCHandle handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+            var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             try
             {
                 CaptureSamples(device, handle.AddrOfPinnedObject(), samples);

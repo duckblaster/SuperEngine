@@ -179,10 +179,10 @@ namespace OpenTK.Platform.Windows
                 case WindowMessage.WINDOWPOSCHANGED:
                     unsafe
                     {
-                        WindowPosition* pos = (WindowPosition*)lParam;
+                        var pos = (WindowPosition*)lParam;
                         if (window != null && pos->hwnd == window.WindowHandle)
                         {
-                            Point new_location = new Point(pos->x, pos->y);
+                            var new_location = new Point(pos->x, pos->y);
                             if (Location != new_location)
                             {
                                 bounds.Location = new_location;
@@ -190,7 +190,7 @@ namespace OpenTK.Platform.Windows
                                     Move(this, EventArgs.Empty);
                             }
 
-                            Size new_size = new Size(pos->cx, pos->cy);
+                            var new_size = new Size(pos->cx, pos->cy);
                             if (Size != new_size)
                             {
                                 bounds.Width = pos->cx;
@@ -216,7 +216,7 @@ namespace OpenTK.Platform.Windows
                     {
                         if (wParam.ToInt64() == (long)GWL.STYLE)
                         {
-                            WindowStyle style = ((StyleStruct*)lParam)->New;
+                            var style = ((StyleStruct*)lParam)->New;
                             if ((style & WindowStyle.Popup) != 0)
                                 windowBorder = WindowBorder.Hidden;
                             else if ((style & WindowStyle.ThickFrame) != 0)
@@ -229,8 +229,8 @@ namespace OpenTK.Platform.Windows
                     break;
 
                 case WindowMessage.SIZE:
-                    SizeMessage state = (SizeMessage)wParam.ToInt64();
-                    WindowState new_state = windowState;
+                    var state = (SizeMessage)wParam.ToInt64();
+                    var new_state = windowState;
                     switch (state)
                     {
                         case SizeMessage.RESTORED: new_state = borderless_maximized_window_state ?
@@ -265,7 +265,7 @@ namespace OpenTK.Platform.Windows
                     break;
 
                 case WindowMessage.MOUSEMOVE:
-                    Point point = new Point(
+                    var point = new Point(
                         (short)((uint)lParam.ToInt32() & 0x0000FFFF),
                         (short)(((uint)lParam.ToInt32() & 0xFFFF0000) >> 16));
                     mouse.Position = point;
@@ -420,7 +420,7 @@ namespace OpenTK.Platform.Windows
                 #region Creation / Destruction events
 
                 case WindowMessage.CREATE:
-                    CreateStruct cs = (CreateStruct)Marshal.PtrToStructure(lParam, typeof(CreateStruct));
+                    var cs = (CreateStruct)Marshal.PtrToStructure(lParam, typeof(CreateStruct));
                     if (cs.hwndParent == IntPtr.Zero)
                     {
                         bounds.X = cs.x;
@@ -437,7 +437,7 @@ namespace OpenTK.Platform.Windows
                     break;
 
                 case WindowMessage.CLOSE:
-                    System.ComponentModel.CancelEventArgs e = new System.ComponentModel.CancelEventArgs();
+                    var e = new System.ComponentModel.CancelEventArgs();
 
                     if (Closing != null)
                         Closing(this, e);
@@ -473,7 +473,7 @@ namespace OpenTK.Platform.Windows
 
         private void EnableMouseTracking()
         {
-            TrackMouseEventStructure me = new TrackMouseEventStructure();
+            var me = new TrackMouseEventStructure();
             me.Size = TrackMouseEventStructure.SizeInBytes;
             me.TrackWindowHandle = child_window.WindowHandle;
             me.Flags = TrackMouseEventFlags.LEAVE;
@@ -513,7 +513,7 @@ namespace OpenTK.Platform.Windows
         {
             get
             {
-                MSG message = new MSG();
+                var message = new MSG();
                 return !Functions.PeekMessage(ref message, window.WindowHandle, 0, 0, 0);
             }
         }
@@ -543,7 +543,7 @@ namespace OpenTK.Platform.Windows
             }
 
             // Find out the final window rectangle, after the WM has added its chrome (titlebar, sidebars etc).
-            Win32Rectangle rect = new Win32Rectangle();
+            var rect = new Win32Rectangle();
             rect.left = x; rect.top = y; rect.right = x + width; rect.bottom = y + height;
             Functions.AdjustWindowRectEx(ref rect, style, false, ex_style);
 
@@ -551,7 +551,7 @@ namespace OpenTK.Platform.Windows
             // The current approach is to register a new class for each top-level WinGLWindow we create.
             if (!class_registered)
             {
-                ExtendedWindowClass wc = new ExtendedWindowClass();
+                var wc = new ExtendedWindowClass();
                 wc.Size = ExtendedWindowClass.SizeInBytes;
                 wc.Style = DefaultClassStyle;
                 wc.Instance = Instance;
@@ -704,8 +704,8 @@ namespace OpenTK.Platform.Windows
             }
             set
             {
-                WindowStyle style = (WindowStyle)Functions.GetWindowLong(window.WindowHandle, GetWindowLongOffsets.STYLE);
-                Win32Rectangle rect = Win32Rectangle.From(value);
+                var style = (WindowStyle)Functions.GetWindowLong(window.WindowHandle, GetWindowLongOffsets.STYLE);
+                var rect = Win32Rectangle.From(value);
                 Functions.AdjustWindowRect(ref rect, style, false);
                 Size = new Size(rect.Width, rect.Height);
             }
@@ -885,7 +885,7 @@ namespace OpenTK.Platform.Windows
                         if (WindowBorder == WindowBorder.Hidden)
                         {
                             IntPtr current_monitor = Functions.MonitorFromWindow(window.WindowHandle, MonitorFrom.Nearest);
-                            MonitorInfo info = new MonitorInfo();
+                            var info = new MonitorInfo();
                             info.Size = MonitorInfo.SizeInBytes;
                             Functions.GetMonitorInfo(current_monitor, ref info);
 
@@ -969,10 +969,10 @@ namespace OpenTK.Platform.Windows
 
                 // To ensure maximized/minimized windows work correctly, reset state to normal,
                 // change the border, then go back to maximized/minimized.
-                WindowState state = WindowState;
+                var state = WindowState;
                 ResetWindowState();
 
-                WindowStyle style = WindowStyle.ClipChildren | WindowStyle.ClipSiblings;
+                var style = WindowStyle.ClipChildren | WindowStyle.ClipSiblings;
 
                 switch (value)
                 {
@@ -991,8 +991,8 @@ namespace OpenTK.Platform.Windows
                 }
 
                 // Make sure client size doesn't change when changing the border style.
-                Size client_size = ClientSize;
-                Win32Rectangle rect = Win32Rectangle.From(client_size);
+                var client_size = ClientSize;
+                var rect = Win32Rectangle.From(client_size);
                 Functions.AdjustWindowRectEx(ref rect, style, false, ParentStyleEx);
 
                 // This avoids leaving garbage on the background window.

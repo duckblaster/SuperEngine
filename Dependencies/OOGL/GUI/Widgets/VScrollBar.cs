@@ -36,7 +36,7 @@ namespace OOGL.GUI.Widgets
 
         public override void DrawToFrameBuffer(double gameTime)
         {
-            Rectangle screenRectClient = ClientToScreen(clientRectangle);
+            var screenRectClient = ClientToScreen(clientRectangle);
 
             if (screenRectClient.Height < buttonSize * 3 || Width == 0)
             {
@@ -58,14 +58,14 @@ namespace OOGL.GUI.Widgets
 
             screenRectValueButton = new Rectangle(screenRectScrollRange.Left, screenRectScrollRange.Top + (int)((value - minValue) * pageSize), screenRectScrollRange.Width, (int)(buttonSize + pageSize));
 
-            List<PositionColor> verts = new List<PositionColor>();
+            var verts = new List<PositionColor>();
 
             int size = clientRectangle.Width;
 
             float brightSkew = 0.90f;
             float darkSkew = -0.50f;
 
-            Rectangle frameRectDecreaseValueButton = ScreenToFrame(screenRectDecreaseValueButton);
+            var frameRectDecreaseValueButton = ScreenToFrame(screenRectDecreaseValueButton);
             verts.Add(new PositionColor(new Vector3(frameRectDecreaseValueButton.Left, frameRectDecreaseValueButton.Top, 0f), Gradient(Color.Gray, 255)));
             verts.Add(new PositionColor(new Vector3(frameRectDecreaseValueButton.Left, frameRectDecreaseValueButton.Bottom, 0f), Gradient(Color.Gray, 127)));
             verts.Add(new PositionColor(new Vector3(frameRectDecreaseValueButton.Right, frameRectDecreaseValueButton.Top, 0f), Gradient(Color.Gray, 127)));
@@ -78,7 +78,7 @@ namespace OOGL.GUI.Widgets
             verts.Add(new PositionColor(new Vector3(frameRectDecreaseValueButton.Right - 2, frameRectDecreaseValueButton.Bottom - 2, 0f), Gradient(Color.LightGray, 100)));
             verts.Add(new PositionColor(new Vector3(frameRectDecreaseValueButton.Left + (size / 2), frameRectDecreaseValueButton.Top + 2, 0f), Gradient(Color.LightGray, 127)));
 
-            Rectangle frameRectIncreaseValueButton = ScreenToFrame(screenRectIncreaseValueButton);
+            var frameRectIncreaseValueButton = ScreenToFrame(screenRectIncreaseValueButton);
             verts.Add(new PositionColor(new Vector3(frameRectIncreaseValueButton.Left, frameRectIncreaseValueButton.Top, 0f), Gradient(Color.Gray, 255)));
             verts.Add(new PositionColor(new Vector3(frameRectIncreaseValueButton.Left, frameRectIncreaseValueButton.Bottom, 0f), Gradient(Color.Gray, 127)));
             verts.Add(new PositionColor(new Vector3(frameRectIncreaseValueButton.Right, frameRectIncreaseValueButton.Top, 0f), Gradient(Color.Gray, 127)));
@@ -91,7 +91,7 @@ namespace OOGL.GUI.Widgets
             verts.Add(new PositionColor(new Vector3(frameRectIncreaseValueButton.Left + (size / 2), frameRectIncreaseValueButton.Bottom - 2, 0f), Gradient(Color.LightGray, 100)));
             verts.Add(new PositionColor(new Vector3(frameRectIncreaseValueButton.Right - 2, frameRectIncreaseValueButton.Top + 2, 0f), Gradient(Color.LightGray, 127)));
 
-            Rectangle frameRectValueButton = ScreenToFrame(screenRectValueButton);
+            var frameRectValueButton = ScreenToFrame(screenRectValueButton);
             verts.Add(new PositionColor(new Vector3(frameRectValueButton.Left, frameRectValueButton.Top, 0f), Gradient(Color.Gray, brightSkew)));
             verts.Add(new PositionColor(new Vector3(frameRectValueButton.Left, frameRectValueButton.Bottom, 0f), Gradient(Color.Gray, brightSkew)));
             verts.Add(new PositionColor(new Vector3(frameRectValueButton.Right, frameRectValueButton.Top, 0f), Gradient(Color.Gray, darkSkew)));

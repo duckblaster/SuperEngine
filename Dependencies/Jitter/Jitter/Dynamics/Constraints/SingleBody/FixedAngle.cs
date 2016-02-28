@@ -115,7 +115,7 @@ namespace Jitter.Dynamics.Constraints.SingleBody
 
             JMatrix.Inverse(ref effectiveMass, out effectiveMass);
 
-            JMatrix q = JMatrix.Transpose(orientation) * body1.orientation;
+            var q = JMatrix.Transpose(orientation) * body1.orientation;
             JVector axis;
 
             float x = q.M32 - q.M23;
@@ -141,11 +141,11 @@ namespace Jitter.Dynamics.Constraints.SingleBody
         /// </summary>
         public override void Iterate()
         {
-            JVector jv = body1.angularVelocity;
+            var jv = body1.angularVelocity;
 
-            JVector softnessVector = accumulatedImpulse * softnessOverDt;
+            var softnessVector = accumulatedImpulse * softnessOverDt;
 
-            JVector lambda = -1.0f * JVector.Transform(jv + bias + softnessVector, effectiveMass);
+            var lambda = -1.0f * JVector.Transform(jv + bias + softnessVector, effectiveMass);
 
             accumulatedImpulse += lambda;
 

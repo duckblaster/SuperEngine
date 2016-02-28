@@ -55,7 +55,7 @@ namespace OOGL.GUI.Widgets
         {
             base.DrawToFrameBuffer(gameTime);
 
-            Rectangle frameClientRect = ScreenToFrame(ClientToScreen(clientRectangle));
+            var frameClientRect = ScreenToFrame(ClientToScreen(clientRectangle));
 
             quad[0].Position = new Vector3(frameClientRect.Left, frameClientRect.Top, 0f);
             quad[1].Position = new Vector3(frameClientRect.Left, frameClientRect.Bottom, 0f);

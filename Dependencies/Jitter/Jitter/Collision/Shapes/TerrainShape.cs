@@ -101,7 +101,7 @@ namespace Jitter.Collision.Shapes
  
         protected override Multishape CreateWorkingClone()
         {
-            TerrainShape clone = new TerrainShape();
+            var clone = new TerrainShape();
             clone.heights = this.heights;
             clone.scaleX = this.scaleX;
             clone.scaleZ = this.scaleZ;
@@ -148,7 +148,7 @@ namespace Jitter.Collision.Shapes
                 points[2].Set((minX + quadIndexX + 0) * scaleX, heights[minX + quadIndexX + 0, minZ + quadIndexZ + 1], (minZ + quadIndexZ + 1) * scaleZ);
             }
 
-            JVector sum = points[0];
+            var sum = points[0];
             JVector.Add(ref sum, ref points[1], out sum);
             JVector.Add(ref sum, ref points[2], out sum);
             JVector.Multiply(ref sum, 1.0f / 3.0f, out sum);
@@ -302,7 +302,7 @@ namespace Jitter.Collision.Shapes
         /// <returns></returns>
         public override int Prepare(ref JVector rayOrigin, ref JVector rayDelta)
         {
-            JBBox box = JBBox.SmallBox;
+            var box = JBBox.SmallBox;
 
             #region RayEnd + Expand Spherical
             JVector rayEnd;

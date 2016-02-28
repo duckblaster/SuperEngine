@@ -166,7 +166,7 @@ namespace OpenTK
             if (obj == null) return false;
             if (this.GetType() == obj.GetType())
             {
-                DisplayResolution res = (DisplayResolution)obj;
+                var res = (DisplayResolution)obj;
                 return
                     Width == res.Width &&
                     Height == res.Height &&

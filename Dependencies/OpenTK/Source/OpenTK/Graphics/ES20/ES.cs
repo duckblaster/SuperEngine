@@ -467,7 +467,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetPerfMonitorCounterInfoAMD((UInt32)group, (UInt32)counter, (OpenTK.Graphics.ES20.All)pname, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -490,7 +490,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetPerfMonitorCounterInfoAMD((UInt32)group, (UInt32)counter, (OpenTK.Graphics.ES20.All)pname, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -513,7 +513,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetPerfMonitorCounterInfoAMD((UInt32)group, (UInt32)counter, (OpenTK.Graphics.ES20.All)pname, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -536,7 +536,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetPerfMonitorCounterInfoAMD((UInt32)group, (UInt32)counter, (OpenTK.Graphics.ES20.All)pname, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -576,7 +576,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetPerfMonitorCounterInfoAMD((UInt32)group, (UInt32)counter, (OpenTK.Graphics.ES20.All)pname, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -600,7 +600,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetPerfMonitorCounterInfoAMD((UInt32)group, (UInt32)counter, (OpenTK.Graphics.ES20.All)pname, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -624,7 +624,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetPerfMonitorCounterInfoAMD((UInt32)group, (UInt32)counter, (OpenTK.Graphics.ES20.All)pname, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -648,7 +648,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetPerfMonitorCounterInfoAMD((UInt32)group, (UInt32)counter, (OpenTK.Graphics.ES20.All)pname, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -1781,7 +1781,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glBufferData((OpenTK.Graphics.ES20.BufferTarget)target, (IntPtr)size, (IntPtr)data_ptr.AddrOfPinnedObject(), (OpenTK.Graphics.ES20.BufferUsage)usage);
@@ -1828,7 +1828,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glBufferData((OpenTK.Graphics.ES20.BufferTarget)target, (IntPtr)size, (IntPtr)data_ptr.AddrOfPinnedObject(), (OpenTK.Graphics.ES20.BufferUsage)usage);
@@ -1875,7 +1875,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glBufferData((OpenTK.Graphics.ES20.BufferTarget)target, (IntPtr)size, (IntPtr)data_ptr.AddrOfPinnedObject(), (OpenTK.Graphics.ES20.BufferUsage)usage);
@@ -1922,7 +1922,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glBufferData((OpenTK.Graphics.ES20.BufferTarget)target, (IntPtr)size, (IntPtr)data_ptr.AddrOfPinnedObject(), (OpenTK.Graphics.ES20.BufferUsage)usage);
@@ -2008,7 +2008,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glBufferSubData((OpenTK.Graphics.ES20.BufferTarget)target, (IntPtr)offset, (IntPtr)size, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -2055,7 +2055,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glBufferSubData((OpenTK.Graphics.ES20.BufferTarget)target, (IntPtr)offset, (IntPtr)size, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -2102,7 +2102,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glBufferSubData((OpenTK.Graphics.ES20.BufferTarget)target, (IntPtr)offset, (IntPtr)size, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -2149,7 +2149,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glBufferSubData((OpenTK.Graphics.ES20.BufferTarget)target, (IntPtr)offset, (IntPtr)size, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -2451,7 +2451,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glCompressedTexImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (OpenTK.Graphics.ES20.PixelInternalFormat)internalformat, (Int32)width, (Int32)height, (Int32)border, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -2518,7 +2518,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glCompressedTexImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (OpenTK.Graphics.ES20.PixelInternalFormat)internalformat, (Int32)width, (Int32)height, (Int32)border, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -2585,7 +2585,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glCompressedTexImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (OpenTK.Graphics.ES20.PixelInternalFormat)internalformat, (Int32)width, (Int32)height, (Int32)border, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -2652,7 +2652,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glCompressedTexImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (OpenTK.Graphics.ES20.PixelInternalFormat)internalformat, (Int32)width, (Int32)height, (Int32)border, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -2788,7 +2788,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glCompressedTexSubImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -2860,7 +2860,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glCompressedTexSubImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -2932,7 +2932,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glCompressedTexSubImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -3004,7 +3004,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+            var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
             try
             {
                 Delegates.glCompressedTexSubImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -4206,7 +4206,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle indices_ptr = GCHandle.Alloc(indices, GCHandleType.Pinned);
+            var indices_ptr = GCHandle.Alloc(indices, GCHandleType.Pinned);
             try
             {
                 Delegates.glDrawElements((OpenTK.Graphics.ES20.BeginMode)mode, (Int32)count, (OpenTK.Graphics.ES20.DrawElementsType)type, (IntPtr)indices_ptr.AddrOfPinnedObject());
@@ -4253,7 +4253,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle indices_ptr = GCHandle.Alloc(indices, GCHandleType.Pinned);
+            var indices_ptr = GCHandle.Alloc(indices, GCHandleType.Pinned);
             try
             {
                 Delegates.glDrawElements((OpenTK.Graphics.ES20.BeginMode)mode, (Int32)count, (OpenTK.Graphics.ES20.DrawElementsType)type, (IntPtr)indices_ptr.AddrOfPinnedObject());
@@ -4300,7 +4300,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle indices_ptr = GCHandle.Alloc(indices, GCHandleType.Pinned);
+            var indices_ptr = GCHandle.Alloc(indices, GCHandleType.Pinned);
             try
             {
                 Delegates.glDrawElements((OpenTK.Graphics.ES20.BeginMode)mode, (Int32)count, (OpenTK.Graphics.ES20.DrawElementsType)type, (IntPtr)indices_ptr.AddrOfPinnedObject());
@@ -4347,7 +4347,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle indices_ptr = GCHandle.Alloc(indices, GCHandleType.Pinned);
+            var indices_ptr = GCHandle.Alloc(indices, GCHandleType.Pinned);
             try
             {
                 Delegates.glDrawElements((OpenTK.Graphics.ES20.BeginMode)mode, (Int32)count, (OpenTK.Graphics.ES20.DrawElementsType)type, (IntPtr)indices_ptr.AddrOfPinnedObject());
@@ -9464,7 +9464,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
+            var pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
             try
             {
                 Delegates.glGetVertexAttribPointerv((UInt32)index, (OpenTK.Graphics.ES20.VertexAttribPointerParameter)pname, (IntPtr)pointer_ptr.AddrOfPinnedObject());
@@ -9506,7 +9506,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
+            var pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
             try
             {
                 Delegates.glGetVertexAttribPointerv((UInt32)index, (OpenTK.Graphics.ES20.VertexAttribPointerParameter)pname, (IntPtr)pointer_ptr.AddrOfPinnedObject());
@@ -9548,7 +9548,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
+            var pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
             try
             {
                 Delegates.glGetVertexAttribPointerv((UInt32)index, (OpenTK.Graphics.ES20.VertexAttribPointerParameter)pname, (IntPtr)pointer_ptr.AddrOfPinnedObject());
@@ -9590,7 +9590,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
+            var pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
             try
             {
                 Delegates.glGetVertexAttribPointerv((UInt32)index, (OpenTK.Graphics.ES20.VertexAttribPointerParameter)pname, (IntPtr)pointer_ptr.AddrOfPinnedObject());
@@ -9668,7 +9668,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
+            var pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
             try
             {
                 Delegates.glGetVertexAttribPointerv((UInt32)index, (OpenTK.Graphics.ES20.VertexAttribPointerParameter)pname, (IntPtr)pointer_ptr.AddrOfPinnedObject());
@@ -9711,7 +9711,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
+            var pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
             try
             {
                 Delegates.glGetVertexAttribPointerv((UInt32)index, (OpenTK.Graphics.ES20.VertexAttribPointerParameter)pname, (IntPtr)pointer_ptr.AddrOfPinnedObject());
@@ -9754,7 +9754,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
+            var pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
             try
             {
                 Delegates.glGetVertexAttribPointerv((UInt32)index, (OpenTK.Graphics.ES20.VertexAttribPointerParameter)pname, (IntPtr)pointer_ptr.AddrOfPinnedObject());
@@ -9797,7 +9797,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
+            var pointer_ptr = GCHandle.Alloc(pointer, GCHandleType.Pinned);
             try
             {
                 Delegates.glGetVertexAttribPointerv((UInt32)index, (OpenTK.Graphics.ES20.VertexAttribPointerParameter)pname, (IntPtr)pointer_ptr.AddrOfPinnedObject());
@@ -10316,7 +10316,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glReadPixels((Int32)x, (Int32)y, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -10368,7 +10368,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glReadPixels((Int32)x, (Int32)y, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -10420,7 +10420,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glReadPixels((Int32)x, (Int32)y, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -10472,7 +10472,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glReadPixels((Int32)x, (Int32)y, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -10604,7 +10604,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (Int32* shaders_ptr = shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10633,7 +10633,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (Int32* shaders_ptr = shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10662,7 +10662,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (Int32* shaders_ptr = shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10691,7 +10691,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (Int32* shaders_ptr = shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10741,7 +10741,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (Int32* shaders_ptr = &shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10770,7 +10770,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (Int32* shaders_ptr = &shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10799,7 +10799,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (Int32* shaders_ptr = &shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10828,7 +10828,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (Int32* shaders_ptr = &shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10870,7 +10870,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+            var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
             try
             {
                 Delegates.glShaderBinary((Int32)n, (UInt32*)shaders, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10894,7 +10894,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+            var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
             try
             {
                 Delegates.glShaderBinary((Int32)n, (UInt32*)shaders, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10918,7 +10918,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+            var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
             try
             {
                 Delegates.glShaderBinary((Int32)n, (UInt32*)shaders, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10942,7 +10942,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+            var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
             try
             {
                 Delegates.glShaderBinary((Int32)n, (UInt32*)shaders, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -10992,7 +10992,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (UInt32* shaders_ptr = shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -11022,7 +11022,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (UInt32* shaders_ptr = shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -11052,7 +11052,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (UInt32* shaders_ptr = shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -11082,7 +11082,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (UInt32* shaders_ptr = shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -11134,7 +11134,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (UInt32* shaders_ptr = &shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -11164,7 +11164,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (UInt32* shaders_ptr = &shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -11194,7 +11194,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (UInt32* shaders_ptr = &shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -11224,7 +11224,7 @@ namespace OpenTK.Graphics.ES20
             {
                 fixed (UInt32* shaders_ptr = &shaders)
                 {
-                    GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                    var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                     try
                     {
                         Delegates.glShaderBinary((Int32)n, (UInt32*)shaders_ptr, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -11266,7 +11266,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+            var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
             try
             {
                 Delegates.glShaderBinary((Int32)n, (UInt32*)shaders, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -11290,7 +11290,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+            var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
             try
             {
                 Delegates.glShaderBinary((Int32)n, (UInt32*)shaders, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -11314,7 +11314,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+            var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
             try
             {
                 Delegates.glShaderBinary((Int32)n, (UInt32*)shaders, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -11338,7 +11338,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+            var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
             try
             {
                 Delegates.glShaderBinary((Int32)n, (UInt32*)shaders, (OpenTK.Graphics.ES20.ShaderBinaryFormat)binaryformat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -12049,7 +12049,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glTexImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (OpenTK.Graphics.ES20.PixelInternalFormat)internalformat, (Int32)width, (Int32)height, (Int32)border, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -12121,7 +12121,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glTexImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (OpenTK.Graphics.ES20.PixelInternalFormat)internalformat, (Int32)width, (Int32)height, (Int32)border, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -12193,7 +12193,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glTexImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (OpenTK.Graphics.ES20.PixelInternalFormat)internalformat, (Int32)width, (Int32)height, (Int32)border, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -12265,7 +12265,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glTexImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (OpenTK.Graphics.ES20.PixelInternalFormat)internalformat, (Int32)width, (Int32)height, (Int32)border, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -12613,7 +12613,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glTexSubImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -12685,7 +12685,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glTexSubImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -12757,7 +12757,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glTexSubImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -12829,7 +12829,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+            var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
             try
             {
                 Delegates.glTexSubImage2D((OpenTK.Graphics.ES20.TextureTarget)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)width, (Int32)height, (OpenTK.Graphics.ES20.PixelFormat)format, (OpenTK.Graphics.ES20.PixelType)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -15103,7 +15103,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
+            var ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
             try
             {
                 Delegates.glVertexAttribPointer((UInt32)indx, (Int32)size, (OpenTK.Graphics.ES20.VertexAttribPointerType)type, (bool)normalized, (Int32)stride, (IntPtr)ptr_ptr.AddrOfPinnedObject());
@@ -15160,7 +15160,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
+            var ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
             try
             {
                 Delegates.glVertexAttribPointer((UInt32)indx, (Int32)size, (OpenTK.Graphics.ES20.VertexAttribPointerType)type, (bool)normalized, (Int32)stride, (IntPtr)ptr_ptr.AddrOfPinnedObject());
@@ -15217,7 +15217,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
+            var ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
             try
             {
                 Delegates.glVertexAttribPointer((UInt32)indx, (Int32)size, (OpenTK.Graphics.ES20.VertexAttribPointerType)type, (bool)normalized, (Int32)stride, (IntPtr)ptr_ptr.AddrOfPinnedObject());
@@ -15274,7 +15274,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
+            var ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
             try
             {
                 Delegates.glVertexAttribPointer((UInt32)indx, (Int32)size, (OpenTK.Graphics.ES20.VertexAttribPointerType)type, (bool)normalized, (Int32)stride, (IntPtr)ptr_ptr.AddrOfPinnedObject());
@@ -15382,7 +15382,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
+            var ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
             try
             {
                 Delegates.glVertexAttribPointer((UInt32)indx, (Int32)size, (OpenTK.Graphics.ES20.VertexAttribPointerType)type, (bool)normalized, (Int32)stride, (IntPtr)ptr_ptr.AddrOfPinnedObject());
@@ -15440,7 +15440,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
+            var ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
             try
             {
                 Delegates.glVertexAttribPointer((UInt32)indx, (Int32)size, (OpenTK.Graphics.ES20.VertexAttribPointerType)type, (bool)normalized, (Int32)stride, (IntPtr)ptr_ptr.AddrOfPinnedObject());
@@ -15498,7 +15498,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
+            var ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
             try
             {
                 Delegates.glVertexAttribPointer((UInt32)indx, (Int32)size, (OpenTK.Graphics.ES20.VertexAttribPointerType)type, (bool)normalized, (Int32)stride, (IntPtr)ptr_ptr.AddrOfPinnedObject());
@@ -15556,7 +15556,7 @@ namespace OpenTK.Graphics.ES20
             using (new ErrorHelper(GraphicsContext.CurrentContext))
             {
             #endif
-            GCHandle ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
+            var ptr_ptr = GCHandle.Alloc(ptr, GCHandleType.Pinned);
             try
             {
                 Delegates.glVertexAttribPointer((UInt32)indx, (Int32)size, (OpenTK.Graphics.ES20.VertexAttribPointerType)type, (bool)normalized, (Int32)stride, (IntPtr)ptr_ptr.AddrOfPinnedObject());
@@ -16182,7 +16182,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glCompressedTexImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (OpenTK.Graphics.ES20.All)internalformat, (Int32)width, (Int32)height, (Int32)depth, (Int32)border, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -16254,7 +16254,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glCompressedTexImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (OpenTK.Graphics.ES20.All)internalformat, (Int32)width, (Int32)height, (Int32)depth, (Int32)border, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -16326,7 +16326,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glCompressedTexImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (OpenTK.Graphics.ES20.All)internalformat, (Int32)width, (Int32)height, (Int32)depth, (Int32)border, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -16398,7 +16398,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glCompressedTexImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (OpenTK.Graphics.ES20.All)internalformat, (Int32)width, (Int32)height, (Int32)depth, (Int32)border, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -16544,7 +16544,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glCompressedTexSubImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)zoffset, (Int32)width, (Int32)height, (Int32)depth, (OpenTK.Graphics.ES20.All)format, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -16621,7 +16621,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glCompressedTexSubImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)zoffset, (Int32)width, (Int32)height, (Int32)depth, (OpenTK.Graphics.ES20.All)format, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -16698,7 +16698,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glCompressedTexSubImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)zoffset, (Int32)width, (Int32)height, (Int32)depth, (OpenTK.Graphics.ES20.All)format, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -16775,7 +16775,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
+                var data_ptr = GCHandle.Alloc(data, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glCompressedTexSubImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)zoffset, (Int32)width, (Int32)height, (Int32)depth, (OpenTK.Graphics.ES20.All)format, (Int32)imageSize, (IntPtr)data_ptr.AddrOfPinnedObject());
@@ -16928,7 +16928,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle @params_ptr = GCHandle.Alloc(@params, GCHandleType.Pinned);
+                var @params_ptr = GCHandle.Alloc(@params, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetBufferPointervOES((OpenTK.Graphics.ES20.All)target, (OpenTK.Graphics.ES20.All)pname, (IntPtr)@params_ptr.AddrOfPinnedObject());
@@ -16951,7 +16951,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle @params_ptr = GCHandle.Alloc(@params, GCHandleType.Pinned);
+                var @params_ptr = GCHandle.Alloc(@params, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetBufferPointervOES((OpenTK.Graphics.ES20.All)target, (OpenTK.Graphics.ES20.All)pname, (IntPtr)@params_ptr.AddrOfPinnedObject());
@@ -16974,7 +16974,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle @params_ptr = GCHandle.Alloc(@params, GCHandleType.Pinned);
+                var @params_ptr = GCHandle.Alloc(@params, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetBufferPointervOES((OpenTK.Graphics.ES20.All)target, (OpenTK.Graphics.ES20.All)pname, (IntPtr)@params_ptr.AddrOfPinnedObject());
@@ -16997,7 +16997,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle @params_ptr = GCHandle.Alloc(@params, GCHandleType.Pinned);
+                var @params_ptr = GCHandle.Alloc(@params, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetBufferPointervOES((OpenTK.Graphics.ES20.All)target, (OpenTK.Graphics.ES20.All)pname, (IntPtr)@params_ptr.AddrOfPinnedObject());
@@ -17047,7 +17047,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17077,7 +17077,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17107,7 +17107,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17137,7 +17137,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17191,7 +17191,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = &length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = &binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17223,7 +17223,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = &length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = &binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17255,7 +17255,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = &length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = &binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17287,7 +17287,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = &length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = &binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17331,7 +17331,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length, (OpenTK.Graphics.ES20.All*)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17355,7 +17355,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length, (OpenTK.Graphics.ES20.All*)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17379,7 +17379,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length, (OpenTK.Graphics.ES20.All*)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17403,7 +17403,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length, (OpenTK.Graphics.ES20.All*)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17455,7 +17455,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17486,7 +17486,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17517,7 +17517,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17548,7 +17548,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17604,7 +17604,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = &length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = &binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17637,7 +17637,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = &length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = &binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17670,7 +17670,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = &length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = &binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17703,7 +17703,7 @@ namespace OpenTK.Graphics.ES20
                     fixed (Int32* length_ptr = &length)
                     fixed (OpenTK.Graphics.ES20.All* binaryFormat_ptr = &binaryFormat)
                     {
-                        GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                        var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                         try
                         {
                             Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length_ptr, (OpenTK.Graphics.ES20.All*)binaryFormat_ptr, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17747,7 +17747,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length, (OpenTK.Graphics.ES20.All*)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17771,7 +17771,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length, (OpenTK.Graphics.ES20.All*)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17795,7 +17795,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length, (OpenTK.Graphics.ES20.All*)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17819,7 +17819,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glGetProgramBinaryOES((UInt32)program, (Int32)bufSize, (Int32*)length, (OpenTK.Graphics.ES20.All*)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject());
@@ -17886,7 +17886,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glProgramBinaryOES((UInt32)program, (OpenTK.Graphics.ES20.All)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -17909,7 +17909,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glProgramBinaryOES((UInt32)program, (OpenTK.Graphics.ES20.All)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -17932,7 +17932,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glProgramBinaryOES((UInt32)program, (OpenTK.Graphics.ES20.All)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -17955,7 +17955,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glProgramBinaryOES((UInt32)program, (OpenTK.Graphics.ES20.All)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -17995,7 +17995,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glProgramBinaryOES((UInt32)program, (OpenTK.Graphics.ES20.All)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -18019,7 +18019,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glProgramBinaryOES((UInt32)program, (OpenTK.Graphics.ES20.All)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -18043,7 +18043,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glProgramBinaryOES((UInt32)program, (OpenTK.Graphics.ES20.All)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -18067,7 +18067,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
+                var binary_ptr = GCHandle.Alloc(binary, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glProgramBinaryOES((UInt32)program, (OpenTK.Graphics.ES20.All)binaryFormat, (IntPtr)binary_ptr.AddrOfPinnedObject(), (Int32)length);
@@ -18213,7 +18213,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+                var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glTexImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (OpenTK.Graphics.ES20.All)internalformat, (Int32)width, (Int32)height, (Int32)depth, (Int32)border, (OpenTK.Graphics.ES20.All)format, (OpenTK.Graphics.ES20.All)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -18290,7 +18290,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+                var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glTexImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (OpenTK.Graphics.ES20.All)internalformat, (Int32)width, (Int32)height, (Int32)depth, (Int32)border, (OpenTK.Graphics.ES20.All)format, (OpenTK.Graphics.ES20.All)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -18367,7 +18367,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+                var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glTexImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (OpenTK.Graphics.ES20.All)internalformat, (Int32)width, (Int32)height, (Int32)depth, (Int32)border, (OpenTK.Graphics.ES20.All)format, (OpenTK.Graphics.ES20.All)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -18444,7 +18444,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+                var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glTexImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (OpenTK.Graphics.ES20.All)internalformat, (Int32)width, (Int32)height, (Int32)depth, (Int32)border, (OpenTK.Graphics.ES20.All)format, (OpenTK.Graphics.ES20.All)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -18600,7 +18600,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+                var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glTexSubImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)zoffset, (Int32)width, (Int32)height, (Int32)depth, (OpenTK.Graphics.ES20.All)format, (OpenTK.Graphics.ES20.All)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -18682,7 +18682,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+                var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glTexSubImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)zoffset, (Int32)width, (Int32)height, (Int32)depth, (OpenTK.Graphics.ES20.All)format, (OpenTK.Graphics.ES20.All)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -18764,7 +18764,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+                var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glTexSubImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)zoffset, (Int32)width, (Int32)height, (Int32)depth, (OpenTK.Graphics.ES20.All)format, (OpenTK.Graphics.ES20.All)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());
@@ -18846,7 +18846,7 @@ namespace OpenTK.Graphics.ES20
                 using (new ErrorHelper(GraphicsContext.CurrentContext))
                 {
                 #endif
-                GCHandle pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
+                var pixels_ptr = GCHandle.Alloc(pixels, GCHandleType.Pinned);
                 try
                 {
                     Delegates.glTexSubImage3DOES((OpenTK.Graphics.ES20.All)target, (Int32)level, (Int32)xoffset, (Int32)yoffset, (Int32)zoffset, (Int32)width, (Int32)height, (Int32)depth, (OpenTK.Graphics.ES20.All)format, (OpenTK.Graphics.ES20.All)type, (IntPtr)pixels_ptr.AddrOfPinnedObject());

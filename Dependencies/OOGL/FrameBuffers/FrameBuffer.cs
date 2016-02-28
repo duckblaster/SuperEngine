@@ -54,7 +54,7 @@ namespace OOGL
 			GL.Ext.FramebufferTexture2D(FramebufferTarget.FramebufferExt, FramebufferAttachment.ColorAttachment0Ext, TextureTarget.Texture2D, handleTexture, 0);
 			GL.Ext.FramebufferTexture2D(FramebufferTarget.FramebufferExt, FramebufferAttachment.DepthAttachmentExt, TextureTarget.Texture2D, handleDepth, 0);
 			
-			FramebufferErrorCode errorCode = GL.Ext.CheckFramebufferStatus(FramebufferTarget.FramebufferExt);
+			var errorCode = GL.Ext.CheckFramebufferStatus(FramebufferTarget.FramebufferExt);
 
 			if(errorCode != FramebufferErrorCode.FramebufferCompleteExt)
 			{

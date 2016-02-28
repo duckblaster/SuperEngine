@@ -186,15 +186,15 @@ namespace Jitter.Collision
                 JVector.Max(ref rootNodeBox.Max, ref triBoxes[i].Max, out rootNodeBox.Max);
             }
 
-            List<BuildNode> buildNodes = new List<BuildNode>();
+            var buildNodes = new List<BuildNode>();
             buildNodes.Add(new BuildNode());
             buildNodes[0].box = rootNodeBox;
 
-            JBBox[] children = new JBBox[8];
+            var children = new JBBox[8];
             for (int triNum = 0; triNum < tris.Length; triNum++)
             {
                 int nodeIndex = 0;
-                JBBox box = rootNodeBox;
+                var box = rootNodeBox;
 
                 while (box.Contains(ref triBoxes[triNum]) == JBBox.ContainmentType.Contains)
                 {
@@ -232,8 +232,8 @@ namespace Jitter.Collision
                         if (childIndex == -1)
                         {
                             // nope create child
-                            BuildNode parentNode = buildNodes[nodeIndex];
-                            BuildNode newNode = new BuildNode();
+                            var parentNode = buildNodes[nodeIndex];
+                            var newNode = new BuildNode();
                             newNode.childType = childCon;
                             newNode.box = children[childCon];
                             buildNodes.Add(newNode);
@@ -297,7 +297,7 @@ namespace Jitter.Collision
             JVector.Subtract(ref aabb.Max, ref aabb.Min, out dims);
             JVector.Multiply(ref dims, 0.5f, out dims);
 
-            JVector offset = JVector.Zero;
+            var offset = JVector.Zero;
 
             switch (child)
             {
@@ -361,7 +361,7 @@ namespace Jitter.Collision
             int curStackIndex = 0;
             int endStackIndex = 1;
 
-            UInt16[] nodeStack = nodeStackPool.GetNew();
+            var nodeStack = nodeStackPool.GetNew();
 
             nodeStack[0] = 0;
 
@@ -413,7 +413,7 @@ namespace Jitter.Collision
             int curStackIndex = 0;
             int endStackIndex = 1;
 
-            UInt16[] nodeStack = nodeStackPool.GetNew();
+            var nodeStack = nodeStackPool.GetNew();
             nodeStack[0] = 0;
 
             int triCount = 0;

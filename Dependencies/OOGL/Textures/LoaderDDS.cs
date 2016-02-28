@@ -192,7 +192,7 @@ namespace TextureLoaders
             // invalidate whatever it was before
             dimension = (TextureTarget) 0;
             texturehandle = TextureLoaderParameters.OpenGLDefaultTexture;
-            ErrorCode GLError = ErrorCode.NoError;
+            var GLError = ErrorCode.NoError;
 
             _IsCompressed = false;
             _Width = 0;
@@ -348,7 +348,7 @@ namespace TextureLoaders
                         if ( Width > 2 && Height > 2 )
                         { // Note: there could be a potential problem with non-power-of-two cube maps
                             #region Prepare Array for TexImage
-                            byte[] RawDataOfSurface = new byte[SurfaceSizeInBytes];
+                            var RawDataOfSurface = new byte[SurfaceSizeInBytes];
                             if ( !TextureLoaderParameters.FlipImages )
                             { // no changes to the image, copy as is
                                 Array.Copy( _RawDataFromFile, Cursor, RawDataOfSurface, 0, SurfaceSizeInBytes );
@@ -632,7 +632,7 @@ namespace TextureLoaders
         /// <summary>DXT5 Alpha block flipping, inspired by code from Evan Hart (nVidia SDK)</summary>
         private static uint FlipUInt24( uint inputUInt24 )
         {
-            byte[][] ThreeBits = new byte[2][];
+            var ThreeBits = new byte[2][];
             for ( int i = 0 ; i < 2 ; i++ )
                 ThreeBits[i] = new byte[4];
 

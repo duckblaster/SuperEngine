@@ -71,7 +71,7 @@ namespace OOGL.GUI.Abstract
 
         public void LoadSettings(string workspacePath)
         {
-            Dictionary<string, string> settings = new Dictionary<string, string>();
+            var settings = new Dictionary<string, string>();
             using (FileStream file = File.OpenRead(GetSettingFile(workspacePath)))
             {
                 using (StreamReader r = new StreamReader(file))
@@ -79,7 +79,7 @@ namespace OOGL.GUI.Abstract
                     string line;
                     while ((line = r.ReadLine()) != null)
                     {
-                        string[] rows = line.Split('=');
+                        var rows = line.Split('=');
                         if (rows != null && rows.Length == 2)
                         {
                             settings[rows[0].Trim()] = rows[1].Trim();
@@ -241,12 +241,12 @@ namespace OOGL.GUI.Abstract
 
         public override bool OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Rectangle screenControlRect = ClientToScreen(controlRectangle);
-            Rectangle screenTitleBar = ControlToScreen(titleRectangle);
+            var screenControlRect = ClientToScreen(controlRectangle);
+            var screenTitleBar = ControlToScreen(titleRectangle);
 
             if (screenControlRect.Contains(e.X, e.Y) == false && screenTitleBar.Contains(e.X, e.Y) == false) return false;
 
-            Rectangle screenSizeBar = screenControlRect;
+            var screenSizeBar = screenControlRect;
             screenSizeBar.X = screenControlRect.Right - 10;
             screenSizeBar.Width = 10;
             screenSizeBar.Y = screenControlRect.Bottom - 10;
@@ -345,8 +345,8 @@ namespace OOGL.GUI.Abstract
 
         private void UpdateTitleRect()
 		{
-			RectangleF extent = frameMgr.textPrinter.Measure(text, titleFont).BoundingBox; 
-			if (extent.Height == 0 || extent.Width == 0 || String.IsNullOrEmpty(text))
+			var extent = frameMgr.textPrinter.Measure(text, titleFont).BoundingBox;
+            if (extent.Height == 0 || extent.Width == 0 || String.IsNullOrEmpty(text))
             {
 				extent.Width = 20;
 				extent.Height = 10;
@@ -412,14 +412,14 @@ namespace OOGL.GUI.Abstract
         {
             base.DrawToFrameBuffer(gameTime);
 
-            List<PositionColor> verts = new List<PositionColor>();
+            var verts = new List<PositionColor>();
 
-            Rectangle frameTitleRect = ScreenToFrame(ClientToScreen(this.titleRectangle));
+            var frameTitleRect = ScreenToFrame(ClientToScreen(this.titleRectangle));
 
             int borderSize = BorderSize > 0 ? 1 : 0;
             if (borderSize > 0)
             {
-                Color edgeColor = BorderEdgeColor;
+                var edgeColor = BorderEdgeColor;
 
                 verts.Add(new PositionColor(new Vector3(frameTitleRect.Left, frameTitleRect.Top, 0f), edgeColor));
                 verts.Add(new PositionColor(new Vector3(frameTitleRect.Left, frameTitleRect.Bottom, 0f), edgeColor));
@@ -430,7 +430,7 @@ namespace OOGL.GUI.Abstract
                 verts.Add(new PositionColor(new Vector3(frameTitleRect.Right, frameTitleRect.Top, 0f), edgeColor));
             }
 
-            Color color = titleColor;
+            var color = titleColor;
             verts.Add(new PositionColor(new Vector3(frameTitleRect.Left + borderSize, frameTitleRect.Top + borderSize, 0f), color));
             verts.Add(new PositionColor(new Vector3(frameTitleRect.Left + borderSize, frameTitleRect.Bottom, 0f), color));
             verts.Add(new PositionColor(new Vector3(frameTitleRect.Right - borderSize, frameTitleRect.Top + borderSize, 0f), color));
@@ -460,9 +460,9 @@ namespace OOGL.GUI.Abstract
                 default: break;
             }
 
-            RectangleF textSize = frameMgr.textPrinter.Measure(text, font).BoundingBox;
-			
-			int leftPadding;
+            var textSize = frameMgr.textPrinter.Measure(text, font).BoundingBox;
+
+            int leftPadding;
             if ((drawTextFormat & DrawTextFormat.Right) == DrawTextFormat.Right)
             {
                 leftPadding = (int)(rectangle.Width - textSize.Width);
@@ -490,7 +490,7 @@ namespace OOGL.GUI.Abstract
                 topPadding = 0;
             }
 
-            Vector2 position = new Vector2(rectangle.X + leftPadding, rectangle.Y + topPadding);
+            var position = new Vector2(rectangle.X + leftPadding, rectangle.Y + topPadding);
 
             ShaderProgram.UseDefault();
             GL.Disable(EnableCap.Lighting);

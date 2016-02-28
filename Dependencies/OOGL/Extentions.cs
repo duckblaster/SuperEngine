@@ -24,8 +24,8 @@ namespace OOGL
 		{
 			if(Extentions.extensions == null)
 			{
-        		string[] extensions = GL.GetString(StringName.Extensions).Split(' ');
-        		Array.Sort<string>(extensions);
+        		var extensions = GL.GetString(StringName.Extensions).Split(' ');
+                Array.Sort<string>(extensions);
         		Extentions.extensions = extensions;
 			}
 			

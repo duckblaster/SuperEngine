@@ -245,7 +245,7 @@ namespace OpenTK
         /// <returns>The resulting Vector3.</returns>
         public static explicit operator Vector3(Vector3h h3)
         {
-            Vector3 result = new Vector3();
+            var result = new Vector3();
             result.X = h3.X.ToSingle();
             result.Y = h3.Y.ToSingle();
             result.Z = h3.Z.ToSingle();
@@ -257,7 +257,7 @@ namespace OpenTK
         /// <returns>The resulting Vector3d.</returns>
         public static explicit operator Vector3d(Vector3h h3)
         {
-            Vector3d result = new Vector3d();
+            var result = new Vector3d();
             result.X = h3.X.ToSingle();
             result.Y = h3.Y.ToSingle();
             result.Z = h3.Z.ToSingle();
@@ -348,9 +348,9 @@ namespace OpenTK
         /// <returns>The input as byte array.</returns>
         public static byte[] GetBytes(Vector3h h)
         {
-            byte[] result = new byte[SizeInBytes];
+            var result = new byte[SizeInBytes];
 
-            byte[] temp = Half.GetBytes(h.X);
+            var temp = Half.GetBytes(h.X);
             result[0] = temp[0];
             result[1] = temp[1];
             temp = Half.GetBytes(h.Y);
@@ -369,7 +369,7 @@ namespace OpenTK
         /// <returns>A new Half3 instance.</returns>
         public static Vector3h FromBytes(byte[] value, int startIndex)
         {
-            Vector3h h3 = new Vector3h();
+            var h3 = new Vector3h();
             h3.X = Half.FromBytes(value, startIndex);
             h3.Y = Half.FromBytes(value, startIndex + 2);
             h3.Z = Half.FromBytes(value, startIndex + 4);

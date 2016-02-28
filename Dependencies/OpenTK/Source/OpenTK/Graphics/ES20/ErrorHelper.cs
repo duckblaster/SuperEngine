@@ -91,7 +91,7 @@ namespace OpenTK.Graphics.ES20
         {
             if (Context.ErrorChecking)
             {
-                List<ErrorCode> error_list = ContextErrors[Context];
+                var error_list = ContextErrors[Context];
                 error_list.Clear();
                 ErrorCode error;
                 do
@@ -102,7 +102,7 @@ namespace OpenTK.Graphics.ES20
 
                 if (error_list.Count != 1)
                 {
-                    StringBuilder sb = new StringBuilder();
+                    var sb = new StringBuilder();
                     foreach (ErrorCode e in error_list)
                     {
                         if (e != ErrorCode.NoError)

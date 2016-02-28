@@ -123,8 +123,8 @@ namespace Jitter.LinearMath
 
         public void Transform(ref JMatrix orientation)
         {
-            JVector halfExtents = 0.5f * (Max - Min);
-            JVector center = 0.5f * (Max + Min);
+            var halfExtents = 0.5f * (Max - Min);
+            var center = 0.5f * (Max + Min);
 
             JVector.Transform(ref center, ref orientation, out center);
 
@@ -269,8 +269,8 @@ namespace Jitter.LinearMath
 
         public static JBBox CreateFromPoints(JVector[] points)
         {
-            JVector vector3 = new JVector(float.MaxValue);
-            JVector vector2 = new JVector(float.MinValue);
+            var vector3 = new JVector(float.MaxValue);
+            var vector2 = new JVector(float.MinValue);
 
             for (int i = 0; i < points.Length; i++)
             {
@@ -303,7 +303,7 @@ namespace Jitter.LinearMath
         /// <returns>The ContainmentType of the box.</returns>
         public ContainmentType Contains(ref JBBox box)
         {
-            ContainmentType result = ContainmentType.Disjoint;
+            var result = ContainmentType.Disjoint;
             if ((((this.Max.X >= box.Min.X) && (this.Min.X <= box.Max.X)) && ((this.Max.Y >= box.Min.Y) && (this.Min.Y <= box.Max.Y))) && ((this.Max.Z >= box.Min.Z) && (this.Min.Z <= box.Max.Z)))
             {
                 result = ((((this.Min.X <= box.Min.X) && (box.Max.X <= this.Max.X)) && ((this.Min.Y <= box.Min.Y) && (box.Max.Y <= this.Max.Y))) && ((this.Min.Z <= box.Min.Z) && (box.Max.Z <= this.Max.Z))) ? ContainmentType.Contains : ContainmentType.Intersects;

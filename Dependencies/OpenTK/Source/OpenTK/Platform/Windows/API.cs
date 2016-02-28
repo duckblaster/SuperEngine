@@ -2232,7 +2232,7 @@ namespace OpenTK.Platform.Windows
         {
             unsafe
             {
-                byte[] dump = new byte[API.RawInputSize];
+                var dump = new byte[API.RawInputSize];
                 fixed (RawInputDeviceType* ptr = &Header.Type)
                 {
                     for (int i = 0; i < API.RawInputSize; i++)
@@ -2681,7 +2681,7 @@ namespace OpenTK.Platform.Windows
 
         internal static Win32Rectangle From(Rectangle value)
         {
-            Win32Rectangle rect = new Win32Rectangle();
+            var rect = new Win32Rectangle();
             rect.left = value.Left;
             rect.right = value.Right;
             rect.top = value.Top;
@@ -2691,7 +2691,7 @@ namespace OpenTK.Platform.Windows
 
         internal static Win32Rectangle From(Size value)
         {
-            Win32Rectangle rect = new Win32Rectangle();
+            var rect = new Win32Rectangle();
             rect.left = 0;
             rect.right = value.Width;
             rect.top = 0;

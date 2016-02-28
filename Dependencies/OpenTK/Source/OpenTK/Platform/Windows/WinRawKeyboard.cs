@@ -49,7 +49,7 @@ namespace OpenTK.Platform.Windows
         internal void UpdateKeyboardList()
         {
             int count = WinRawInput.DeviceCount;
-            RawInputDeviceList[] ridl = new RawInputDeviceList[count];
+            var ridl = new RawInputDeviceList[count];
             for (int i = 0; i < count; i++)
                 ridl[i] = new RawInputDeviceList();
             Functions.GetRawInputDeviceList(ridl, ref count, API.RawInputDeviceListSize);
@@ -61,7 +61,7 @@ namespace OpenTK.Platform.Windows
                 Functions.GetRawInputDeviceInfo(ridl[i].Device, RawInputDeviceInfoEnum.DEVICENAME, IntPtr.Zero, ref size);
                 IntPtr name_ptr = Marshal.AllocHGlobal((IntPtr)size);
                 Functions.GetRawInputDeviceInfo(ridl[i].Device, RawInputDeviceInfoEnum.DEVICENAME, name_ptr, ref size);
-                string name = Marshal.PtrToStringAnsi(name_ptr);
+                var name = Marshal.PtrToStringAnsi(name_ptr);
                 Marshal.FreeHGlobal(name_ptr);
                 if (name.ToLower().Contains("root"))
                 {
@@ -76,30 +76,30 @@ namespace OpenTK.Platform.Windows
                     // remove the \??\
                     name = name.Substring(4);
 
-                    string[] split = name.Split('#');
+                    var split = name.Split('#');
 
-                    string id_01 = split[0];    // ACPI (Class code)
-                    string id_02 = split[1];    // PNP0303 (SubClass code)
-                    string id_03 = split[2];    // 3&13c0b0c5&0 (Protocol code)
+                    var id_01 = split[0];    // ACPI (Class code)
+                    var id_02 = split[1];    // PNP0303 (SubClass code)
+                    var id_03 = split[2];    // 3&13c0b0c5&0 (Protocol code)
                     // The final part is the class GUID and is not needed here
 
-                    string findme = string.Format(
+                    var findme = string.Format(
                         @"System\CurrentControlSet\Enum\{0}\{1}\{2}",
                         id_01, id_02, id_03);
 
-                    RegistryKey regkey = Registry.LocalMachine.OpenSubKey(findme);
+                    var regkey = Registry.LocalMachine.OpenSubKey(findme);
 
-                    string deviceDesc =
+                    var deviceDesc =
                         (string)regkey.GetValue("DeviceDesc");
-                    string deviceClass =
+                    var deviceClass =
                         (string)regkey.GetValue("Class");
                     if (!String.IsNullOrEmpty(deviceClass) && deviceClass.ToLower().Equals("keyboard"))
                     {
-                        KeyboardDevice kb = new KeyboardDevice();
+                        var kb = new KeyboardDevice();
                         kb.Description = deviceDesc;
 
                         // Register the keyboard:
-                        RawInputDeviceInfo info = new RawInputDeviceInfo();
+                        var info = new RawInputDeviceInfo();
                         int devInfoSize = API.RawInputDeviceInfoSize;
                         Functions.GetRawInputDeviceInfo(ridl[i].Device, RawInputDeviceInfoEnum.DEVICEINFO,
                                 info, ref devInfoSize);
@@ -126,7 +126,7 @@ namespace OpenTK.Platform.Windows
 
         internal void RegisterKeyboardDevice(KeyboardDevice kb)
         {
-            RawInputDevice[] rid = new RawInputDevice[1];
+            var rid = new RawInputDevice[1];
             // Keyboard is 1/6 (page/id). See http://www.microsoft.com/whdc/device/input/HID_HWID.mspx
             rid[0] = new RawInputDevice();
             rid[0].UsagePage = 1;

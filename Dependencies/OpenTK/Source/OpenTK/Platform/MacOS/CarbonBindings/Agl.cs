@@ -330,12 +330,9 @@ namespace OpenTK.Platform.MacOS
         [DllImport(agl,EntryPoint="aglSetCurrentContext")] static extern byte _aglSetCurrentContext(AGLContext ctx);
         internal static bool aglSetCurrentContext(IntPtr context)
         {
-            byte retval = _aglSetCurrentContext(context);
+            var retval = _aglSetCurrentContext(context);
 
-            if (retval != 0)
-                return true;
-            else
-                return false;
+            return retval != 0;
         }
 
         #endregion
@@ -355,7 +352,7 @@ namespace OpenTK.Platform.MacOS
 
             if (retval == 0)
             {
-                AglError err = GetError();
+                var err = GetError();
 
                 throw new MacOSException(err, ErrorString(err));
             }
@@ -371,7 +368,7 @@ namespace OpenTK.Platform.MacOS
 
             if (retval == 0)
             {
-                AglError err = GetError();
+                var err = GetError();
                 Debug.Print("AGL Error: {0}", err);
                 Debug.Indent();
                 Debug.Print(ErrorString(err));

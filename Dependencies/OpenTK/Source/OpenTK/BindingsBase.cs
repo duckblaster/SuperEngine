@@ -72,7 +72,7 @@ namespace OpenTK
 
             if (CoreClass != null)
             {
-                MethodInfo[] methods = CoreClass.GetMethods(BindingFlags.Static | BindingFlags.NonPublic);
+                var methods = CoreClass.GetMethods(BindingFlags.Static | BindingFlags.NonPublic);
                 CoreFunctionMap = new SortedList<string, MethodInfo>(methods.Length); // Avoid resizing
                 foreach (MethodInfo m in methods)
                 {
@@ -133,19 +133,19 @@ namespace OpenTK
 
             int supported = 0;
 
-            FieldInfo[] delegates = DelegatesClass.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            var delegates = DelegatesClass.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
             if (delegates == null)
                 throw new InvalidOperationException("The specified type does not have any loadable extensions.");
 
             Debug.Write("Loading extensions for " + this.GetType().FullName + "... ");
 
-            Stopwatch time = new Stopwatch();
+            var time = new Stopwatch();
             time.Reset();
             time.Start();
 
             foreach (FieldInfo f in delegates)
             {
-                Delegate d = LoadDelegate(f.Name, f.FieldType);
+                var d = LoadDelegate(f.Name, f.FieldType);
                 if (d != null)
                     ++supported;
 
@@ -168,12 +168,12 @@ namespace OpenTK
 
         internal bool LoadEntryPoint(string function)
         {
-            FieldInfo f = DelegatesClass.GetField(function, BindingFlags.Static | BindingFlags.NonPublic);
+            var f = DelegatesClass.GetField(function, BindingFlags.Static | BindingFlags.NonPublic);
             if (f == null)
                 return false;
 
-            Delegate old = f.GetValue(null) as Delegate;
-            Delegate @new = LoadDelegate(f.Name, f.FieldType);
+            var old = f.GetValue(null) as Delegate;
+            var @new = LoadDelegate(f.Name, f.FieldType);
             lock (SyncRoot)
             {
                 if (old.Target != @new.Target)

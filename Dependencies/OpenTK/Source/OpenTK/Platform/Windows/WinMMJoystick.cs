@@ -62,7 +62,7 @@ namespace OpenTK.Platform.Windows
             int number = 0;
             while (number < UnsafeNativeMethods.joyGetNumDevs())
             {
-                JoystickDevice<WinMMJoyDetails> stick = OpenJoystick(number++);
+                var stick = OpenJoystick(number++);
                 if (stick != null)
                 {
                     sticks.Add(stick);
@@ -79,7 +79,7 @@ namespace OpenTK.Platform.Windows
             JoystickDevice<WinMMJoyDetails> stick = null;
 
             JoyCaps caps;
-            JoystickError result = UnsafeNativeMethods.joyGetDevCaps(number, out caps, JoyCaps.SizeInBytes);
+            var result = UnsafeNativeMethods.joyGetDevCaps(number, out caps, JoyCaps.SizeInBytes);
             if (result != JoystickError.NoError)
                 return null;
 
@@ -151,7 +151,7 @@ namespace OpenTK.Platform.Windows
         {
             foreach (JoystickDevice<WinMMJoyDetails> js in sticks)
             {
-                JoyInfoEx info = new JoyInfoEx();
+                var info = new JoyInfoEx();
                 info.Size = JoyInfoEx.SizeInBytes;
                 info.Flags = JoystickFlags.All;
                 UnsafeNativeMethods.joyGetPosEx(js.Id, ref info);

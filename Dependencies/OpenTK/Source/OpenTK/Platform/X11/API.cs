@@ -1490,7 +1490,7 @@ XF86VidModeGetGammaRampSize(
             {
                 //ptr = XRRSizes(dpy, screen, &nsizes);
 
-                byte* data = (byte*)XRRSizes(dpy, screen, &count);//(byte*)ptr;
+                var data = (byte*)XRRSizes(dpy, screen, &count);//(byte*)ptr;
                 if (count == 0)
                     return null;
                 sizes = new XRRScreenSize[count];
@@ -1514,7 +1514,7 @@ XF86VidModeGetGammaRampSize(
             int count;
             unsafe
             {
-                short* data = (short*)XRRRates(dpy, screen, size_index, &count);
+                var data = (short*)XRRRates(dpy, screen, size_index, &count);
                 if (count == 0)
                     return null;
                 rates = new short[count];
@@ -1548,10 +1548,10 @@ XF86VidModeGetGammaRampSize(
             unsafe
             {
                 int count;
-                int* data = XListDepths(display, screen_number, &count);
+                var data = XListDepths(display, screen_number, &count);
                 if (count == 0)
                     return null;
-                int[] depths = new int[count];
+                var depths = new int[count];
                 for (int i = 0; i < count; i++)
                     depths[i] = *(data + i);
 

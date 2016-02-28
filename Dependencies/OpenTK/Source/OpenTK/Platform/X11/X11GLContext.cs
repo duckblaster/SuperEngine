@@ -54,9 +54,9 @@ namespace OpenTK.Platform.X11
             currentWindow = (X11WindowInfo)window;
             currentWindow.VisualInfo = SelectVisual(mode, currentWindow);
             
-            ContextHandle shareHandle = shared != null ?
+            var shareHandle = shared != null ?
                 (shared as IGraphicsContextInternal).Context : (ContextHandle)IntPtr.Zero;
-            
+
             Debug.Write("Creating X11GLContext context: ");
             Debug.Write(direct ? "direct, " : "indirect, ");
             Debug.WriteLine(shareHandle.Handle == IntPtr.Zero ? "not shared... " :
@@ -67,7 +67,7 @@ namespace OpenTK.Platform.X11
                 Debug.WriteLine("Creating temporary context to load GLX extensions.");
                 
                 // Create a temporary context to obtain the necessary function pointers.
-                XVisualInfo visual = currentWindow.VisualInfo;
+                var visual = currentWindow.VisualInfo;
                 IntPtr ctx = IntPtr.Zero;
 
                 using (new XLock(Display))
@@ -103,16 +103,16 @@ namespace OpenTK.Platform.X11
                 {
                     // We need the FB config for the current GraphicsMode.
                     int count;
-                    IntPtr* fbconfigs = Glx.ChooseFBConfig(Display, currentWindow.Screen,
+                    var fbconfigs = Glx.ChooseFBConfig(Display, currentWindow.Screen,
                         new int[] {
                         (int)GLXAttribute.VISUAL_ID,
                         (int)mode.Index,
                         0
                     }, out count);
-                    
+
                     if (count > 0)
                     {
-                        List<int> attributes = new List<int>();
+                        var attributes = new List<int>();
                         attributes.Add((int)ArbCreateContext.MajorVersion);
                         attributes.Add(major);
                         attributes.Add((int)ArbCreateContext.MinorVersion);
@@ -160,7 +160,7 @@ namespace OpenTK.Platform.X11
             {
                 Debug.Write("Using legacy context creation... ");
                 
-                XVisualInfo info = currentWindow.VisualInfo;
+                var info = currentWindow.VisualInfo;
                 using (new XLock(Display))
                 {
                     // Cannot pass a Property by reference.
@@ -220,7 +220,7 @@ namespace OpenTK.Platform.X11
 
         XVisualInfo SelectVisual(GraphicsMode mode, X11WindowInfo currentWindow)
         {
-            XVisualInfo info = new XVisualInfo();
+            var info = new XVisualInfo();
             info.VisualID = (IntPtr)mode.Index;
             info.Screen = currentWindow.Screen;
             int items;
@@ -304,7 +304,7 @@ namespace OpenTK.Platform.X11
             }
             else
             {
-                X11WindowInfo w = (X11WindowInfo)window;
+                var w = (X11WindowInfo)window;
                 bool result;
 
                 Debug.Write(String.Format("Making context {0} current on thread {1} (Display: {2}, Screen: {3}, Window: {4})... ",

@@ -75,9 +75,9 @@ namespace OOGL.Animation
 			else
 			{
 				float blend = (time - first.time) / (second.time - first.time);
-				Quaternion q = Quaternion.Slerp(first.rotation, second.rotation, blend);
-				
-				if (q.Xyz.Length == 0)
+				var q = Quaternion.Slerp(first.rotation, second.rotation, blend);
+
+                if (q.Xyz.Length == 0)
 				{
 					rotationMatrix = Matrix4.Identity;
 				}

@@ -173,7 +173,7 @@ namespace Jitter.Dynamics
                 }
                 else
                 {
-                    Contact contact = Contact.Pool.GetNew();
+                    var contact = Contact.Pool.GetNew();
                     contact.Initialize(body1, body2, ref point1, ref point2, ref normal, penetration, true, contactSettings);
                     contactList.Add(contact);
                     return contact;
@@ -184,7 +184,7 @@ namespace Jitter.Dynamics
         private void ReplaceContact(ref JVector point1, ref JVector point2, ref JVector n, float p, int index,
             ContactSettings contactSettings)
         {
-            Contact contact = contactList[index];
+            var contact = contactList[index];
 
             Debug.Assert(body1 == contact.body1, "Body1 and Body2 not consistent.");
 

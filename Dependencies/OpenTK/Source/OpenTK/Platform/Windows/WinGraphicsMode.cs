@@ -95,7 +95,7 @@ namespace OpenTK.Platform.Windows
                 Debug.WriteLine(String.Format("Device context: {0}", deviceContext));
 
                 Debug.Write("Selecting pixel format... ");
-                PixelFormatDescriptor pixelFormat = new PixelFormatDescriptor();
+                var pixelFormat = new PixelFormatDescriptor();
                 pixelFormat.Size = API.PixelFormatDescriptorSize;
                 pixelFormat.Version = API.PixelFormatDescriptorVersion;
                 pixelFormat.Flags =
@@ -130,11 +130,11 @@ namespace OpenTK.Platform.Windows
                     throw new GraphicsModeException("The requested GraphicsMode is not available.");
 
                 // Find out what we really got as a format:
-                PixelFormatDescriptor pfd = new PixelFormatDescriptor();
+                var pfd = new PixelFormatDescriptor();
                 pixelFormat.Size = API.PixelFormatDescriptorSize;
                 pixelFormat.Version = API.PixelFormatDescriptorVersion;
                 Functions.DescribePixelFormat(deviceContext, pixel, API.PixelFormatDescriptorSize, ref pfd);
-                GraphicsMode fmt = new GraphicsMode((IntPtr)pixel,
+                var fmt = new GraphicsMode((IntPtr)pixel,
                     new ColorDepth(pfd.RedBits, pfd.GreenBits, pfd.BlueBits, pfd.AlphaBits),
                     pfd.DepthBits,
                     pfd.StencilBits,
@@ -157,7 +157,7 @@ namespace OpenTK.Platform.Windows
             using (INativeWindow native_window = new NativeWindow())
             using (IGraphicsContext context = new GraphicsContext(new GraphicsMode(new ColorFormat(), 0, 0, 0, new ColorFormat(), 2, false), native_window.WindowInfo, 1, 0, GraphicsContextFlags.Default))
             {
-                WinWindowInfo window = (WinWindowInfo)native_window.WindowInfo;
+                var window = (WinWindowInfo)native_window.WindowInfo;
 
                 // See http://www.opengl.org/registry/specs/ARB/wgl_pixel_format.txt
                 // for more details
@@ -168,7 +168,7 @@ namespace OpenTK.Platform.Windows
                     return null;
                 }
 
-                int[] attribs = new int[]
+                var attribs = new int[]
                 {
                     (int)WGL_ARB_pixel_format.AccelerationArb,
 
@@ -195,9 +195,9 @@ namespace OpenTK.Platform.Windows
                     0
                 };
 
-                int[] values = new int[attribs.Length];
+                var values = new int[attribs.Length];
 
-                int[] attribs_values = new int[]
+                var attribs_values = new int[]
                 {
                     (int)WGL_ARB_pixel_format.AccelerationArb, (int)WGL_ARB_pixel_format.FullAccelerationArb,
                     (int)WGL_ARB_pixel_format.DrawToWindowArb, 1,
@@ -225,7 +225,8 @@ namespace OpenTK.Platform.Windows
                     0, 0
                 };
 
-                int[] pixel = new int[1], num_formats = new int[1];
+                var pixel = new int[1];
+                var num_formats = new int[1];
                 bool success = Wgl.Arb.ChoosePixelFormat(window.DeviceContext, attribs_values, null, 1, pixel, num_formats);
                 if (!success || num_formats[0] == 0 || pixel[0] == 0)
                 {
@@ -250,7 +251,7 @@ namespace OpenTK.Platform.Windows
                     return null;
                 }
                     
-                GraphicsMode mode = new GraphicsMode(new IntPtr(pixel[0]),
+                var mode = new GraphicsMode(new IntPtr(pixel[0]),
                     new ColorDepth(values[1], values[2], values[3], values[4]),
                     values[6],
                     values[7],

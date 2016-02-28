@@ -128,7 +128,7 @@ namespace OpenTK.Platform.X11
 
         JoystickDevice<X11JoyDetails> OpenJoystick(string base_path, int number)
         {
-            string path = base_path + number.ToString();
+            var path = base_path + number.ToString();
             JoystickDevice<X11JoyDetails> stick = null;
 
             int fd = -1;

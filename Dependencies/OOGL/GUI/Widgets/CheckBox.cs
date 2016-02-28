@@ -37,11 +37,11 @@ namespace OOGL.GUI.Widgets
         {
             base.DrawToFrameBuffer(gameTime);
 
-            Rectangle frameClientRect = ScreenToFrame(ClientToScreen(clientRectangle));
+            var frameClientRect = ScreenToFrame(ClientToScreen(clientRectangle));
 
-            List<PositionColor> verts = new List<PositionColor>();
+            var verts = new List<PositionColor>();
 
-            Color color = BackgroundColor;
+            var color = BackgroundColor;
 
             float topSkew;
             float bottomSkew;
@@ -102,7 +102,7 @@ namespace OOGL.GUI.Widgets
         public event EventHandler ValueChanged;
         private void OnValueChanged()
         {
-            EventHandler items = ValueChanged;
+            var items = ValueChanged;
             if (items == null) return;
             items(this, null);
         }

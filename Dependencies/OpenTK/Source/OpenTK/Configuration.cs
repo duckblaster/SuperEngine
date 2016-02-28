@@ -54,7 +54,7 @@ namespace OpenTK
                      System.Environment.OSVersion.Platform == (PlatformID)4)
             {
                 // Distinguish between Linux, Mac OS X and other Unix operating systems.
-                string kernel_name = DetectUnixKernel();
+                var kernel_name = DetectUnixKernel();
                 switch (kernel_name)
                 {
                     case null:
@@ -85,11 +85,13 @@ namespace OpenTK
             if (!RunningOnMacOS)
             {
                 try { runningOnX11 = OpenTK.Platform.X11.API.DefaultDisplay != IntPtr.Zero; }
+#pragma warning disable CC0004 // Catch block cannot be empty
                 catch { }
+#pragma warning restore CC0004 // Catch block cannot be empty
             }
 
             // Detect the Mono runtime (code taken from http://mono.wikia.com/wiki/Detecting_if_program_is_running_in_Mono).
-            Type t = Type.GetType("Mono.Runtime");
+            var t = Type.GetType("Mono.Runtime");
             if (t != null)
                 runningOnMono = true;
             
@@ -186,7 +188,7 @@ namespace OpenTK
         {
             Debug.Print("Size: {0}", Marshal.SizeOf(typeof(utsname)).ToString());
             Debug.Flush();
-            utsname uts = new utsname();
+            var uts = new utsname();
             uname(out uts);
 
             Debug.WriteLine("System:");

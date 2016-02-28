@@ -433,7 +433,7 @@ namespace Jitter
             body.island = null;
 
             // remove all arbiters and contacts connected with this body
-            Stack<Arbiter> orphanArbiters = new Stack<Arbiter>();
+            var orphanArbiters = new Stack<Arbiter>();
             foreach (Arbiter arbiter in arbiterMap.Values)
             {
                 if (arbiter.body1 == body || arbiter.body2 == body)
@@ -442,7 +442,7 @@ namespace Jitter
 
             while (orphanArbiters.Count > 0)
             {
-                Arbiter arbiter = orphanArbiters.Pop();
+                var arbiter = orphanArbiters.Pop();
 
                 int contactCount = arbiter.contactList.Count;
                 for (int e = 0; e < contactCount; e++)
@@ -458,7 +458,7 @@ namespace Jitter
             }
 
             // remove all constraints connected with this body
-            Stack<Constraint> orphanConstraints = new Stack<Constraint>();
+            var orphanConstraints = new Stack<Constraint>();
             foreach (Constraint constraint in constraints)
             {
                 if (constraint.body1 == body || constraint.body2 == body)
@@ -681,7 +681,7 @@ namespace Jitter
 
             for (int i = arbiter.contactList.Count - 1; i >= 0; i--)
             {
-                Contact c = arbiter.contactList[i];
+                var c = arbiter.contactList[i];
                 c.UpdatePosition();
 
                 if (c.penetration < -contactSettings.breakThreshold)
@@ -719,7 +719,7 @@ namespace Jitter
 
             while (garbageArbiterStack.Count > 0)
             {
-                Arbiter arbiter = garbageArbiterStack.Pop();
+                var arbiter = garbageArbiterStack.Pop();
                 Arbiter.Pool.GiveBack(arbiter);
                 arbiterMap.Remove(arbiter);
 
@@ -731,7 +731,7 @@ namespace Jitter
         #region private void ArbiterCallback(object obj)
         private void ArbiterCallback(object obj)
         {
-            CollisionIsland island = obj as CollisionIsland;
+            var island = obj as CollisionIsland;
 
             int thisIterations;
             if (island.bodies.Count + island.constraints.Count > 3) thisIterations = contactIterations;
@@ -818,7 +818,7 @@ namespace Jitter
         #region private void IntegrateCallback(object obj)
         private void IntegrateCallback(object obj)
         {
-            RigidBody body = obj as RigidBody;
+            var body = obj as RigidBody;
 
             JVector temp;
             JVector.Multiply(ref body.linearVelocity, timestep, out temp);
@@ -843,7 +843,7 @@ namespace Jitter
                     JVector.Multiply(ref body.angularVelocity, ((float)Math.Sin(0.5f * angle * timestep) / angle), out axis);
                 }
 
-                JQuaternion dorn = new JQuaternion(axis.X, axis.Y, axis.Z, (float)Math.Cos(angle * timestep * 0.5f));
+                var dorn = new JQuaternion(axis.X, axis.Y, axis.Z, (float)Math.Cos(angle * timestep * 0.5f));
                 JQuaternion ornA; JQuaternion.CreateFromMatrix(ref body.orientation, out ornA);
 
                 JQuaternion.Multiply(ref dorn, ref ornA, out dorn);
@@ -951,7 +951,7 @@ namespace Jitter
                         largeIslandOwner = body1;
                     }
 
-                    CollisionIsland giveBackIsland = smallIslandOwner.island;
+                    var giveBackIsland = smallIslandOwner.island;
 
                     CollisionIsland.Pool.GiveBack(giveBackIsland);
                     islands.Remove(giveBackIsland);
@@ -970,7 +970,7 @@ namespace Jitter
             else if (body0.island == null)
             {
                 // both are null
-                CollisionIsland island = CollisionIsland.Pool.GetNew();
+                var island = CollisionIsland.Pool.GetNew();
                 body0.island = body1.island = island;
 
                 body0.island.bodies.Add(body0);
@@ -1015,8 +1015,8 @@ namespace Jitter
             // Connect islands by arbiters
             foreach (Arbiter arbiter in arbiterMap.Values)
             {
-                RigidBody body0 = arbiter.body1;
-                RigidBody body1 = arbiter.body2;
+                var body0 = arbiter.body1;
+                var body1 = arbiter.body2;
 
                 if (body0.isStatic || body1.isStatic) continue;
 
@@ -1026,8 +1026,8 @@ namespace Jitter
             // Connect islands by constraints
             foreach (Constraint constraint in constraints)
             {
-                RigidBody body0 = constraint.body1;
-                RigidBody body1 = constraint.body2;
+                var body0 = constraint.body1;
+                var body1 = constraint.body2;
 
                 if (body0 == null || body1 == null) continue;
 
@@ -1063,8 +1063,8 @@ namespace Jitter
             foreach (Arbiter arbiter in arbiterMap.Values)
             {
                 // that must be the same islands OR one or both are null
-                CollisionIsland island1 = arbiter.body1.island;
-                CollisionIsland island2 = arbiter.body2.island;
+                var island1 = arbiter.body1.island;
+                var island2 = arbiter.body2.island;
 
                 if (island1 != null)
                 {

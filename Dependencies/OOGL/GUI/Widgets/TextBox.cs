@@ -151,20 +151,20 @@ namespace OOGL.GUI.Widgets
         {
             base.DrawToFrameBuffer(gameTime);
 
-            string[] lines = this.lines;
+            var lines = this.lines;
             if (lines == null) return;
 
             int adjLength = scrollBar.Value + 1;
             if (adjLength > lines.Length) adjLength = lines.Length;
 
-            StringBuilder text = new StringBuilder();
+            var text = new StringBuilder();
             for (int i = 0; i < adjLength; i++)
             {
                 if (i > 0) text.AppendLine();
                 text.Append(lines[i]);
             }
 
-            Rectangle textRectangle = new Rectangle(clientRectangle.X + 1, clientRectangle.Y + 1, clientRectangle.Width - scrollBar.Width - 2, clientRectangle.Height - 2);
+            var textRectangle = new Rectangle(clientRectangle.X + 1, clientRectangle.Y + 1, clientRectangle.Width - scrollBar.Width - 2, clientRectangle.Height - 2);
             Frame.DrawText(Font, text.ToString(), ScreenToFrame(ClientToScreen(textRectangle)), DrawTextFormat.Bottom | DrawTextFormat.WordBreak, Color.Black);
         }
 
@@ -191,8 +191,8 @@ namespace OOGL.GUI.Widgets
         //}
 
         public override void OnKeyDown(object sender, KeyboardKeyEventArgs e) {
-            string text = Text;
-            KeyboardDevice keyboard = sender as KeyboardDevice;
+            var text = Text;
+            var keyboard = sender as KeyboardDevice;
             if (e.Key == Key.BackSpace) {
                 if (text.Length > 0) Text = text.Substring(0, text.Length - 1);
             }

@@ -46,7 +46,7 @@ namespace OpenTK.Platform.MacOS.Carbon
 
 		private static void TransformProcessToForeground()
 		{
-			Carbon.ProcessSerialNumber psn = new ProcessSerialNumber();
+			var psn = new ProcessSerialNumber();
 
 			Debug.Print("Setting process to be foreground application.");
 
@@ -63,7 +63,7 @@ namespace OpenTK.Platform.MacOS.Carbon
 
         static void ConnectEvents()
         {
-            EventTypeSpec[] eventTypes = new EventTypeSpec[]
+            var eventTypes = new EventTypeSpec[]
             {
                 new EventTypeSpec(EventClass.Application, AppEventKind.AppActivated),
                 new EventTypeSpec(EventClass.Application, AppEventKind.AppDeactivated),
@@ -96,8 +96,8 @@ namespace OpenTK.Platform.MacOS.Carbon
 
         static OSStatus EventHandler(IntPtr inCaller, IntPtr inEvent, IntPtr userData)
         {
-            EventInfo evt = new EventInfo(inEvent);
-            
+            var evt = new EventInfo(inEvent);
+
             switch (evt.EventClass)
             {
                 case EventClass.Application:

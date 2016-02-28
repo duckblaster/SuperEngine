@@ -53,7 +53,7 @@ namespace OpenTK.Platform.X11
                 throw new ArgumentException("A valid parent window must be defined, in order to create an X11Input driver.");
 
             //window = new X11WindowInfo(attach);
-            X11WindowInfo window = (X11WindowInfo)attach;
+            var window = (X11WindowInfo)attach;
 
             // Init mouse
             mouse.Description = "Default X11 mouse";
@@ -76,7 +76,7 @@ namespace OpenTK.Platform.X11
                 Marshal.PtrToStructure(keysym_ptr, keysyms);
                 API.Free(keysym_ptr);
     
-                KeyboardDevice kb = new KeyboardDevice();
+                var kb = new KeyboardDevice();
                 keyboard.Description = "Default X11 keyboard";
                 keyboard.NumberOfKeys = lastKeyCode - firstKeyCode + 1;
                 keyboard.DeviceID = IntPtr.Zero;

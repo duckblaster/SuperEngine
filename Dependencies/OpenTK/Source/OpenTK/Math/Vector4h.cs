@@ -268,7 +268,7 @@ namespace OpenTK
         /// <returns>The resulting Vector4.</returns>
         public static explicit operator Vector4(Vector4h h4)
         {
-            Vector4 result = new Vector4();
+            var result = new Vector4();
             result.X = h4.X.ToSingle();
             result.Y = h4.Y.ToSingle();
             result.Z = h4.Z.ToSingle();
@@ -281,7 +281,7 @@ namespace OpenTK
         /// <returns>The resulting Vector4d.</returns>
         public static explicit operator Vector4d(Vector4h h4)
         {
-            Vector4d result = new Vector4d();
+            var result = new Vector4d();
             result.X = h4.X.ToSingle();
             result.Y = h4.Y.ToSingle();
             result.Z = h4.Z.ToSingle();
@@ -377,9 +377,9 @@ namespace OpenTK
         /// <returns>The input as byte array.</returns>
         public static byte[] GetBytes(Vector4h h)
         {
-            byte[] result = new byte[SizeInBytes];
+            var result = new byte[SizeInBytes];
 
-            byte[] temp = Half.GetBytes(h.X);
+            var temp = Half.GetBytes(h.X);
             result[0] = temp[0];
             result[1] = temp[1];
             temp = Half.GetBytes(h.Y);
@@ -401,7 +401,7 @@ namespace OpenTK
         /// <returns>A new Half4 instance.</returns>
         public static Vector4h FromBytes(byte[] value, int startIndex)
         {
-            Vector4h h4 = new Vector4h();
+            var h4 = new Vector4h();
             h4.X = Half.FromBytes(value, startIndex);
             h4.Y = Half.FromBytes(value, startIndex + 2);
             h4.Z = Half.FromBytes(value, startIndex + 4);

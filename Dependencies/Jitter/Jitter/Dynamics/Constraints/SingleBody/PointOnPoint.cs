@@ -94,7 +94,7 @@ namespace Jitter.Dynamics.Constraints.SingleBody
             JVector.Subtract(ref p1, ref anchor, out dp);
             float deltaLength = dp.Length();
 
-            JVector n = anchor - p1;
+            var n = anchor - p1;
             if (n.LengthSquared() != 0.0f) n.Normalize();
 
             jacobian[0] = -1.0f * n;

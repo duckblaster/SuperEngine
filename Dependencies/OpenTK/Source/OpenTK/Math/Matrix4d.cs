@@ -697,7 +697,7 @@ namespace OpenTK
         [Obsolete("Use CreateTranslation instead.")]
         public static Matrix4d Translation(double x, double y, double z)
         {
-            Matrix4d result = Identity;
+            var result = Identity;
             result.Row3 = new Vector4d(x, y, z, 1.0);
             return result;
         }
@@ -851,16 +851,16 @@ namespace OpenTK
         /// <returns>A Matrix that transforms world space to camera space</returns>
         public static Matrix4d LookAt(Vector3d eye, Vector3d target, Vector3d up)
         {
-            Vector3d z = Vector3d.Normalize(eye - target);
-            Vector3d x = Vector3d.Normalize(Vector3d.Cross(up, z));
-            Vector3d y = Vector3d.Normalize(Vector3d.Cross(z, x));
+            var z = Vector3d.Normalize(eye - target);
+            var x = Vector3d.Normalize(Vector3d.Cross(up, z));
+            var y = Vector3d.Normalize(Vector3d.Cross(z, x));
 
-            Matrix4d rot = new Matrix4d(new Vector4d (x.X, y.X, z.X, 0.0),
+            var rot = new Matrix4d(new Vector4d (x.X, y.X, z.X, 0.0),
                                         new Vector4d (x.Y, y.Y, z.Y, 0.0),
                                         new Vector4d (x.Z, y.Z, z.Z, 0.0),
                                         Vector4d .UnitW);
 
-            Matrix4d trans = Matrix4d.CreateTranslation(-eye);
+            var trans = Matrix4d.CreateTranslation(-eye);
 
             return trans * rot;
         }

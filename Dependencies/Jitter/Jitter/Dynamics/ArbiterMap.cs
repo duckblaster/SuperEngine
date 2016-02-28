@@ -69,7 +69,7 @@ namespace Jitter.Dynamics
         /// <returns>Returns true if they are equal, otherwise false.</returns>
         public override bool Equals(object obj)
         {
-            ArbiterKey other = (ArbiterKey)obj;
+            var other = (ArbiterKey)obj;
             return (other.body1.Equals(body1) && other.body2.Equals(body2) ||
                 other.body1.Equals(body2) && other.body2.Equals(body1));
         }

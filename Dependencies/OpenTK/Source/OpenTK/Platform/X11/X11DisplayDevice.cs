@@ -38,16 +38,18 @@ namespace OpenTK.Platform.X11
         {
             using (new XLock(API.DefaultDisplay))
             {
-                List<DisplayDevice> devices = new List<DisplayDevice>();
+                var devices = new List<DisplayDevice>();
                 bool xinerama_supported = false;
                 try
                 {
                     xinerama_supported = QueryXinerama(devices);
                 }
+#pragma warning disable CC0003 // Your catch maybe include some Exception
                 catch
                 {
                     Debug.Print("Xinerama query failed.");
                 }
+#pragma warning restore CC0003 // Your catch maybe include some Exception
 
                 if (!xinerama_supported)
                 {
@@ -55,8 +57,10 @@ namespace OpenTK.Platform.X11
                     // Note: this won't work correctly in the case of distinct X servers.
                     for (int i = 0; i < API.ScreenCount; i++)
                     {
-                        DisplayDevice dev = new DisplayDevice();
-                        dev.IsPrimary = i == Functions.XDefaultScreen(API.DefaultDisplay);
+                        var dev = new DisplayDevice
+                        {
+                            IsPrimary = i == Functions.XDefaultScreen(API.DefaultDisplay)
+                        };
                         devices.Add(dev);
                         deviceToScreen.Add(dev, i);
                     }
@@ -66,7 +70,9 @@ namespace OpenTK.Platform.X11
                 {
                     xrandr_supported = QueryXRandR(devices);
                 }
+#pragma warning disable CC0004 // Catch block cannot be empty
                 catch { }
+#pragma warning restore CC0004 // Catch block cannot be empty
 
                 if (!xrandr_supported)
                 {
@@ -75,7 +81,9 @@ namespace OpenTK.Platform.X11
                     {
                         xf86_supported = QueryXF86(devices);
                     }
+#pragma warning disable CC0004 // Catch block cannot be empty
                     catch { }
+#pragma warning restore CC0004 // Catch block cannot be empty
 
                     if (!xf86_supported)
                     {
@@ -98,11 +106,11 @@ namespace OpenTK.Platform.X11
             if (NativeMethods.XineramaQueryExtension(API.DefaultDisplay, out event_base, out error_base) &&
                 NativeMethods.XineramaIsActive(API.DefaultDisplay))
             {
-                IList<XineramaScreenInfo> screens = NativeMethods.XineramaQueryScreens(API.DefaultDisplay);
+                var screens = NativeMethods.XineramaQueryScreens(API.DefaultDisplay);
                 bool first = true;
                 foreach (XineramaScreenInfo screen in screens)
                 {
-                    DisplayDevice dev = new DisplayDevice();
+                    var dev = new DisplayDevice();
                     dev.Bounds = new Rectangle(screen.X, screen.Y, screen.Width, screen.Height);
                     if (first)
                     {
@@ -130,12 +138,12 @@ namespace OpenTK.Platform.X11
                 Functions.XRRTimes(API.DefaultDisplay, screen, out timestamp_of_last_update);
                 lastConfigUpdate.Add(timestamp_of_last_update);
 
-                List<DisplayResolution> available_res = new List<DisplayResolution>();
+                var available_res = new List<DisplayResolution>();
 
                 // Add info for a new screen.
                 screenResolutionToIndex.Add(new Dictionary<DisplayResolution, int>());
 
-                int[] depths = FindAvailableDepths(screen);
+                var depths = FindAvailableDepths(screen);
 
                 int resolution_count = 0;
                 foreach (XRRScreenSize size in FindAvailableResolutions(screen))
@@ -166,7 +174,7 @@ namespace OpenTK.Platform.X11
                         // not distinguish between the two as far as resolutions are supported (since XRandR
                         // operates on X screens, not display devices) - we need to be careful not to add the
                         // same resolution twice!
-                        DisplayResolution res = new DisplayResolution(0, 0, size.Width, size.Height, depth, 0);
+                        var res = new DisplayResolution(0, 0, size.Width, size.Height, depth, 0);
                         if (!screenResolutionToIndex[screen].ContainsKey(res))
                             screenResolutionToIndex[screen].Add(res, resolution_count);
                     }
@@ -329,11 +337,11 @@ namespace OpenTK.Platform.X11
             {
                 int number;
                 IntPtr screen_ptr = XineramaQueryScreens(dpy, out number);
-                List<XineramaScreenInfo> screens = new List<XineramaScreenInfo>(number);
+                var screens = new List<XineramaScreenInfo>(number);
 
                 unsafe
                 {
-                    XineramaScreenInfo* ptr = (XineramaScreenInfo*)screen_ptr;
+                    var ptr = (XineramaScreenInfo*)screen_ptr;
                     while (--number >= 0)
                     {
                         screens.Add(*ptr);

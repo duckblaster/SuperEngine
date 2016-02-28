@@ -343,7 +343,7 @@ namespace OpenTK.Graphics
         {
             if (index == null)
             {
-                GraphicsMode mode = implementation.SelectGraphicsMode(color_format, depth, stencil, samples, accumulator_format, buffers, stereo);
+                var mode = implementation.SelectGraphicsMode(color_format, depth, stencil, samples, accumulator_format, buffers, stereo);
 
                 Index = mode.Index;
                 ColorFormat = mode.ColorFormat;

@@ -55,11 +55,11 @@ namespace Jitter.LinearMath
 
         public static int[] Build(List<JVector> pointCloud, Approximation factor)
         {
-            List<int> allIndices = new List<int>();
+            var allIndices = new List<int>();
 
             int iterations = (int)factor;
 
-            Random rnd = new Random();
+            var rnd = new Random();
 
             for (int i = 0; i < iterations; i++)
             {
@@ -67,15 +67,15 @@ namespace Jitter.LinearMath
                 {
                     for (int k = 0; k < iterations; k++)
                     {
-                        JMatrix rot = JMatrix.CreateRotationX(JMath.PiOver2 / iterations * i) *
+                        var rot = JMatrix.CreateRotationX(JMath.PiOver2 / iterations * i) *
                          JMatrix.CreateRotationY(JMath.PiOver2 / iterations * e) *
                          JMatrix.CreateRotationZ(JMath.PiOver2 / iterations * k);
 
-                        JVector vec0 = JVector.Transform(JVector.Right, rot);
-                        JVector vec1 = JVector.Transform(JVector.Up, rot);
-                        JVector vec2 = JVector.Transform(JVector.Forward, rot);
+                        var vec0 = JVector.Transform(JVector.Right, rot);
+                        var vec1 = JVector.Transform(JVector.Up, rot);
+                        var vec2 = JVector.Transform(JVector.Forward, rot);
 
-                        int[] indices = FindExtremePoints(pointCloud, ref vec0, ref vec1, ref vec2);
+                        var indices = FindExtremePoints(pointCloud, ref vec0, ref vec1, ref vec2);
                         allIndices.AddRange(indices);
                     }
                 }
@@ -100,8 +100,8 @@ namespace Jitter.LinearMath
         private static int[] FindExtremePoints(List<JVector> points,
             ref JVector dirX, ref JVector dirY, ref JVector dirZ)
         {
-            int[] indices = new int[6];
-            float[] current = new float[6];
+            var indices = new int[6];
+            var current = new float[6];
 
             JVector point; float value;
 

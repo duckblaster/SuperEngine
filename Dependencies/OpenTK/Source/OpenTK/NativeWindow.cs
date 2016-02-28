@@ -161,7 +161,7 @@ namespace OpenTK
         {
             // Here we use the fact that PointToClient just translates the point, and PointToScreen
             // should perform the inverse operation.
-            Point trans = PointToClient(Point.Empty);
+            var trans = PointToClient(Point.Empty);
             point.X -= trans.X;
             point.Y -= trans.Y;
             return point;

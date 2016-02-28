@@ -475,7 +475,7 @@ namespace Jitter.Dynamics
 
             float kNormal = 0.0f;
 
-            JVector rantra = JVector.Zero;
+            var rantra = JVector.Zero;
             if (!body1.isStatic)
             {
                 kNormal += body1.inverseMass;
@@ -504,7 +504,7 @@ namespace Jitter.Dynamics
                 }
             }
 
-            JVector rbntrb = JVector.Zero;
+            var rbntrb = JVector.Zero;
             if (!body2.isStatic)
             {
                 kNormal += body2.inverseMass;

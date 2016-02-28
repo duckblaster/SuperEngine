@@ -129,7 +129,7 @@ namespace Jitter.Dynamics
                 {
                     skipConstraint = false;
 
-                    JVector n = dp;
+                    var n = dp;
                     if (n.LengthSquared() != 0.0f) n.Normalize();
 
                     jacobian[0] = -1.0f * n;
@@ -321,7 +321,7 @@ namespace Jitter.Dynamics
                 float min = JVector.Dot(ref owner.points[indices.I0].position, ref direction);
                 float dot = JVector.Dot(ref owner.points[indices.I1].position, ref direction);
 
-                JVector minVertex = owner.points[indices.I0].position;
+                var minVertex = owner.points[indices.I0].position;
 
                 if (dot > min)
                 {
@@ -398,8 +398,8 @@ namespace Jitter.Dynamics
         /// <param name="scale"></param>
         public SoftBody(int sizeX,int sizeY, float scale)
         {
-            List<TriangleVertexIndices> indices = new List<TriangleVertexIndices>();
-            List<JVector> vertices = new List<JVector>();
+            var indices = new List<TriangleVertexIndices>();
+            var vertices = new List<JVector>();
 
             for (int i = 0; i < sizeY; i++)
             {
@@ -413,7 +413,7 @@ namespace Jitter.Dynamics
             {
                 for (int e = 0; e < sizeY-1; e++)
                 {
-                    TriangleVertexIndices index = new TriangleVertexIndices();
+                    var index = new TriangleVertexIndices();
                     {
 
                         index.I0 = (e + 0) * sizeX + i + 0;
@@ -441,7 +441,7 @@ namespace Jitter.Dynamics
             {
                 for (int e = 0; e < sizeY - 1; e++)
                 {
-                    Spring spring = new Spring(points[(e + 0) * sizeX + i + 1], points[(e + 1) * sizeX + i + 0]);
+                    var spring = new Spring(points[(e + 0) * sizeX + i + 1], points[(e + 1) * sizeX + i + 0]);
                     spring.Softness = 0.01f; spring.BiasFactor = 0.1f;
                     springs.Add(spring);
                 }
@@ -449,7 +449,7 @@ namespace Jitter.Dynamics
 
             foreach (Spring spring in springs)
             {
-                JVector delta = spring.body1.position - spring.body2.position;
+                var delta = spring.body1.position - spring.body2.position;
 
                 if (delta.Z != 0.0f && delta.X != 0.0f) spring.SpringType = SpringType.ShearSpring;
                 else spring.SpringType = SpringType.EdgeSpring;
@@ -460,10 +460,10 @@ namespace Jitter.Dynamics
             {
                 for (int e = 0; e < sizeY - 2; e++)
                 {
-                    Spring spring1 = new Spring(points[(e + 0) * sizeX + i + 0], points[(e + 0) * sizeX + i + 2]);
+                    var spring1 = new Spring(points[(e + 0) * sizeX + i + 0], points[(e + 0) * sizeX + i + 2]);
                     spring1.Softness = 0.01f; spring1.BiasFactor = 0.1f;
 
-                    Spring spring2 = new Spring(points[(e + 0) * sizeX + i + 0], points[(e + 2) * sizeX + i + 0]);
+                    var spring2 = new Spring(points[(e + 0) * sizeX + i + 0], points[(e + 2) * sizeX + i + 0]);
                     spring2.Softness = 0.01f; spring2.BiasFactor = 0.1f;
 
                     spring1.SpringType = SpringType.BendSpring;
@@ -506,7 +506,7 @@ namespace Jitter.Dynamics
 
             public override bool Equals(object obj)
             {
-                Edge e = (Edge)obj;
+                var e = (Edge)obj;
                 return (e.Index1 == Index1 && e.Index2 == Index2 || e.Index1 == Index2 && e.Index2 == Index1);
             }
         }
@@ -520,12 +520,12 @@ namespace Jitter.Dynamics
 
             foreach (Triangle t in triangles)
             {
-                JVector v1 = points[t.indices.I0].position;
-                JVector v2 = points[t.indices.I1].position;
-                JVector v3 = points[t.indices.I2].position;
+                var v1 = points[t.indices.I0].position;
+                var v2 = points[t.indices.I1].position;
+                var v3 = points[t.indices.I2].position;
 
-                JVector cross = (v3 - v1) % (v2 - v1);
-                JVector center = (v1 + v2 + v3) * (1.0f / 3.0f);
+                var cross = (v3 - v1) % (v2 - v1);
+                var center = (v1 + v2 + v3) * (1.0f / 3.0f);
 
                 points[t.indices.I0].AddForce(invVolume * cross * pressure);
                 points[t.indices.I1].AddForce(invVolume * cross * pressure);
@@ -563,7 +563,7 @@ namespace Jitter.Dynamics
 
         private HashSet<Edge> GetEdges(List<TriangleVertexIndices> indices)
         {
-            HashSet<Edge> edges = new HashSet<Edge>();
+            var edges = new HashSet<Edge>();
 
             for (int i = 0; i < indices.Count; i++)
             {
@@ -598,7 +598,7 @@ namespace Jitter.Dynamics
 
                 for (int e = 0; e < queryList.Count; e++)
                 {
-                    Triangle t = this.dynamicTree.GetUserData(queryList[e]);
+                    var t = this.dynamicTree.GetUserData(queryList[e]);
 
                     if (!(t.VertexBody1 == points[i] || t.VertexBody2 == points[i] || t.VertexBody3 == points[i]))
                     {
@@ -622,7 +622,7 @@ namespace Jitter.Dynamics
         {
             for (int i = 0; i < vertices.Count; i++)
             {
-                MassPoint point = new MassPoint(sphere, this,material);
+                var point = new MassPoint(sphere, this,material);
                 point.Position = vertices[i];
 
                 point.Mass = 0.1f;
@@ -630,11 +630,10 @@ namespace Jitter.Dynamics
                 points.Add(point);
             }
 
-            for (int i = 0; i < indices.Count; i++)
+            foreach (var index in indices)
             {
-                TriangleVertexIndices index = indices[i];
-                
-                Triangle t = new Triangle(this);
+
+                var t = new Triangle(this);
 
                 t.indices = index;
                 triangles.Add(t);
@@ -647,13 +646,13 @@ namespace Jitter.Dynamics
                 t.dynamicTreeID = dynamicTree.AddProxy(ref t.boundingBox, t);
             }
 
-            HashSet<Edge> edges = GetEdges(indices);
+            var edges = GetEdges(indices);
 
             int count = 0;
 
             foreach (Edge edge in edges)
             {
-                Spring spring = new Spring(points[edge.Index1], points[edge.Index2]);
+                var spring = new Spring(points[edge.Index1], points[edge.Index2]);
                 spring.Softness = 0.01f; spring.BiasFactor = 0.1f;
                 spring.SpringType = SpringType.EdgeSpring;
 
@@ -707,10 +706,10 @@ namespace Jitter.Dynamics
             foreach (Triangle t in triangles)
             {
                 // Update bounding box and move proxy in dynamic tree.
-                JVector prevCenter = t.boundingBox.Center;
+                var prevCenter = t.boundingBox.Center;
                 t.UpdateBoundingBox();
 
-                JVector linVel = t.VertexBody1.linearVelocity + 
+                var linVel = t.VertexBody1.linearVelocity + 
                     t.VertexBody2.linearVelocity + 
                     t.VertexBody3.linearVelocity;
 
@@ -718,9 +717,9 @@ namespace Jitter.Dynamics
 
                 dynamicTree.MoveProxy(t.dynamicTreeID, ref t.boundingBox, linVel * timestep);
 
-                JVector v1 = points[t.indices.I0].position;
-                JVector v2 = points[t.indices.I1].position;
-                JVector v3 = points[t.indices.I2].position;
+                var v1 = points[t.indices.I0].position;
+                var v2 = points[t.indices.I1].position;
+                var v3 = points[t.indices.I2].position;
 
                 volume -= ((v2.Y - v1.Y) * (v3.Z - v1.Z) -
                     (v2.Z - v1.Z) * (v3.Y - v1.Y)) * (v1.X + v2.X + v3.X);

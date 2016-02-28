@@ -43,7 +43,7 @@ namespace OOGL.Animation
 
         public Track CrossfadeTo(string sampleName, float fadeDuration)
         {
-            Track fadeTo = AddTrack(sampleName);
+            var fadeTo = AddTrack(sampleName);
 
             foreach (var track in Tracks)
             {
@@ -69,7 +69,7 @@ namespace OOGL.Animation
 
         public Track CrossfadeTo(string sampleName)
         {
-            Track fadeTo = AddTrack(sampleName);
+            var fadeTo = AddTrack(sampleName);
             float fadeDuration = (fadeTo.sample.endTime - fadeTo.sample.startTime) / 0.75f;
 
             foreach (var track in Tracks)
@@ -96,12 +96,12 @@ namespace OOGL.Animation
 
         public Track AddTrack(string sampleName)
         {
-            Track track = FindSample(sampleName);
+            var track = FindSample(sampleName);
             if (track != null) return track;
 
             track = new Track(Sample.FindSample(this.samples, sampleName));
 
-            List<Track> tracks = new List<Track>(this.tracks);
+            var tracks = new List<Track>(this.tracks);
             tracks.Add(track);
             this.tracks = tracks.ToArray();
 
@@ -110,7 +110,7 @@ namespace OOGL.Animation
 
         public void RemoveTrack(string sampleName)
         {
-            List<Track> tracks = new List<Track>(this.tracks);
+            var tracks = new List<Track>(this.tracks);
             for (int i = tracks.Count - 1; i >= 0; i--)
             {
                 if (tracks[i].sample.name == sampleName) tracks.RemoveAt(i);

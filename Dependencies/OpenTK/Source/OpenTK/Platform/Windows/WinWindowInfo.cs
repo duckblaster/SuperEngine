@@ -106,7 +106,7 @@ namespace OpenTK.Platform.Windows
         {
             if (obj == null) return false;
             if (this.GetType() != obj.GetType()) return false;
-            WinWindowInfo info = (WinWindowInfo)obj; 
+            var info = (WinWindowInfo)obj;
 
             if (info == null) return false;
             // TODO: Assumes windows will always have unique handles.

@@ -28,7 +28,7 @@ namespace OpenTK.Platform.MacOS
                 // The main DisplayDevice constructor adds the newly constructed device
                 // to the list of available devices.
                 const int maxDisplayCount = 20;
-                IntPtr[] displays = new IntPtr[maxDisplayCount];
+                var displays = new IntPtr[maxDisplayCount];
                 int displayCount;
 
                 unsafe
@@ -59,18 +59,18 @@ namespace OpenTK.Platform.MacOS
                     Debug.Print("Display {0} is at  {1}x{2}", i, currentWidth, currentHeight);
 
                     IntPtr displayModesPtr = CG.DisplayAvailableModes(currentDisplay);                
-                    CFArray displayModes = new CFArray(displayModesPtr);
+                    var displayModes = new CFArray(displayModesPtr);
                     Debug.Print("Supports {0} display modes.", displayModes.Count);
 
                     DisplayResolution opentk_dev_current_res = null;
-                    List<DisplayResolution> opentk_dev_available_res = new List<DisplayResolution>();
+                    var opentk_dev_available_res = new List<DisplayResolution>();
                     IntPtr currentModePtr = CG.DisplayCurrentMode(currentDisplay);
-                    CFDictionary currentMode = new CFDictionary(currentModePtr);
+                    var currentMode = new CFDictionary(currentModePtr);
 
                     for (int j = 0; j < displayModes.Count; j++)
                     {
-                        CFDictionary dict = new CFDictionary(displayModes[j]);
-                        
+                        var dict = new CFDictionary(displayModes[j]);
+
                         int width = (int) dict.GetNumberValue("Width");
                         int height = (int) dict.GetNumberValue("Height");
                         int bpp = (int) dict.GetNumberValue("BitsPerPixel");
@@ -82,7 +82,7 @@ namespace OpenTK.Platform.MacOS
 
                         //Debug.Print("Mode {0} is {1}x{2}x{3} @ {4}.", j, width, height, bpp, freq);
 
-                        DisplayResolution thisRes = new DisplayResolution(0, 0, width, height, bpp, (float)freq);
+                        var thisRes = new DisplayResolution(0, 0, width, height, bpp, (float)freq);
                         opentk_dev_available_res.Add(thisRes);
 
                         if (current)
@@ -90,13 +90,13 @@ namespace OpenTK.Platform.MacOS
 
                     }
 
-					HIRect bounds = CG.DisplayBounds(currentDisplay);
-					Rectangle newRect = new Rectangle(
+					var bounds = CG.DisplayBounds(currentDisplay);
+                    var newRect = new Rectangle(
 						(int)bounds.Origin.X, (int)bounds.Origin.Y, (int)bounds.Size.Width, (int)bounds.Size.Height);
 
-					Debug.Print("Display {0} bounds: {1}", i, newRect);
+                    Debug.Print("Display {0} bounds: {1}", i, newRect);
 
-                    DisplayDevice opentk_dev =
+                    var opentk_dev =
                         new DisplayDevice(opentk_dev_current_res, primary, opentk_dev_available_res, newRect);
 
                     displayMap.Add(opentk_dev, currentDisplay);
@@ -131,11 +131,11 @@ namespace OpenTK.Platform.MacOS
             }
 
             IntPtr displayModesPtr = CG.DisplayAvailableModes(display);
-            CFArray displayModes = new CFArray(displayModesPtr);
+            var displayModes = new CFArray(displayModesPtr);
 
             for (int j = 0; j < displayModes.Count; j++)
             {
-                CFDictionary dict = new CFDictionary(displayModes[j]);
+                var dict = new CFDictionary(displayModes[j]);
 
                 int width = (int)dict.GetNumberValue("Width");
                 int height = (int)dict.GetNumberValue("Height");

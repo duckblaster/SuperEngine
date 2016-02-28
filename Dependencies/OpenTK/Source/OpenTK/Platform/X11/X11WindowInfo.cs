@@ -125,7 +125,7 @@ namespace OpenTK.Platform.X11
         {
             if (obj == null) return false;
             if (this.GetType() != obj.GetType()) return false;
-            X11WindowInfo info = (X11WindowInfo)obj;
+            var info = (X11WindowInfo)obj;
 
             if (info == null) return false;
             // TODO: Assumes windows will have unique handles per X11 display.

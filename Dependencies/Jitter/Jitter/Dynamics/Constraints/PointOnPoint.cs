@@ -92,7 +92,7 @@ namespace Jitter.Dynamics.Constraints
 
             float deltaLength = dp.Length();
 
-            JVector n = p2 - p1;
+            var n = p2 - p1;
             if (n.LengthSquared() != 0.0f) n.Normalize();
 
             jacobian[0] = -1.0f * n;

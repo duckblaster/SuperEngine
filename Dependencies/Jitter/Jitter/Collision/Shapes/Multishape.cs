@@ -110,7 +110,7 @@ namespace Jitter.Collision.Shapes
         /// <param name="box">The axis aligned bounding box of the shape.</param>
         public override void GetBoundingBox(ref JMatrix orientation, out JBBox box)
         {
-            JBBox helpBox = JBBox.LargeBox;
+            var helpBox = JBBox.LargeBox;
             int length = this.Prepare(ref helpBox);
 
             box = JBBox.SmallBox;

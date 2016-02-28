@@ -68,13 +68,13 @@ namespace OOGL.Animation
 		{
 			for (int i = 0; i < this.vertexTransformations.Length && i < this.bones.Length; i++ ) 
 			{
-                Matrix4 blended = new Matrix4();
+                var blended = new Matrix4();
                 float sumWeights = 0;
                 if (tracks != null)
                 {
                     for (int j = 0; j < tracks.Length; j++)
                     {
-                        Matrix4 trackMatrix = this.bones[i].GetAnimationMatrix(tracks[j].Time);
+                        var trackMatrix = this.bones[i].GetAnimationMatrix(tracks[j].Time);
                         float trackWeight = tracks[j].Weight;
 
                         blended.Row0 += trackMatrix.Row0 * trackWeight;

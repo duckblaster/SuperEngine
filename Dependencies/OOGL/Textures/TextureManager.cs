@@ -46,9 +46,9 @@ namespace OOGL.Textures
 		{
 			try
 			{
-				string key = string.Format("{0}:{1}:{2}:{3}:{4}", file, magFilter, minFilter, wrapModeS, wrapModeT);
-			
-				Texture texture;
+				var key = string.Format("{0}:{1}:{2}:{3}:{4}", file, magFilter, minFilter, wrapModeS, wrapModeT);
+
+                Texture texture;
 				if(textures.TryGetValue(key, out texture))return texture;
 
 				TextureLoaderParameters.MagnificationFilter = magFilter;
@@ -66,11 +66,13 @@ namespace OOGL.Textures
 				
 				return texture;
 			}
-			catch
-			{
+#pragma warning disable CC0003 // Your catch maybe include some Exception
+            catch
+            {
 				Console.WriteLine(string.Format("TextureManager: Failed to load texture {0}", file));
 				return new Texture(0); // TODO remove
-			}
-		}
+            }
+#pragma warning restore CC0003 // Your catch maybe include some Exception
+        }
 	}
 }

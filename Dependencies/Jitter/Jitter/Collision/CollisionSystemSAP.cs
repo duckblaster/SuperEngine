@@ -123,7 +123,7 @@ namespace Jitter.Collision
 
             for (int i = 0; i != n; )
             {
-                IBroadphaseEntity ac = active[i];
+                var ac = active[i];
                 acBox = ac.BoundingBox;
 
                 if (acBox.Max.X < xmin)
@@ -168,7 +168,7 @@ namespace Jitter.Collision
 
             for (int i = 0; i != n; )
             {
-                IBroadphaseEntity ac = active[i];
+                var ac = active[i];
                 acBox = ac.BoundingBox;
 
                 if (acBox.Max.X < xmin)
@@ -186,7 +186,7 @@ namespace Jitter.Collision
                     {
                         if (base.RaisePassedBroadphase(ac, body))
                         {
-                            Pair pair = Pair.Pool.GetNew();
+                            var pair = Pair.Pool.GetNew();
 
                             if (swapOrder) { pair.entity1 = body; pair.entity2 = ac; }
                             else { pair.entity2 = body; pair.entity1 = ac; }
@@ -206,7 +206,7 @@ namespace Jitter.Collision
 
         private void DetectCallback(object obj)
         {
-            Pair pair = obj as Pair;
+            var pair = obj as Pair;
             base.Detect(pair.entity1, pair.entity2);
             Pair.Pool.GiveBack(pair);
         }
@@ -236,7 +236,7 @@ namespace Jitter.Collision
             {
                 if (e is SoftBody)
                 {
-                    SoftBody softBody = e as SoftBody;
+                    var softBody = e as SoftBody;
                     foreach (RigidBody b in softBody.points)
                     {
                         if (this.Raycast(b, rayOrigin, rayDirection, out tempNormal, out tempFraction))
@@ -253,7 +253,7 @@ namespace Jitter.Collision
                 }
                 else
                 {
-                    RigidBody b = e as RigidBody;
+                    var b = e as RigidBody;
 
                     if (this.Raycast(b, rayOrigin, rayDirection, out tempNormal, out tempFraction))
                     {
@@ -287,7 +287,7 @@ namespace Jitter.Collision
 
             if (body.Shape is Multishape)
             {
-                Multishape ms = (body.Shape as Multishape).RequestWorkingClone();
+                var ms = (body.Shape as Multishape).RequestWorkingClone();
 
                 JVector tempNormal; float tempFraction;
                 bool multiShapeCollides = false;

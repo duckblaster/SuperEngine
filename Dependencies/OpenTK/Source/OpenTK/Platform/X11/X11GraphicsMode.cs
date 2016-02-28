@@ -50,8 +50,8 @@ namespace OpenTK.Platform.X11
             if (visual == IntPtr.Zero)
                 throw new GraphicsModeException("Requested GraphicsMode not available.");
             
-            XVisualInfo info = (XVisualInfo)Marshal.PtrToStructure(visual, typeof(XVisualInfo));
-            
+            var info = (XVisualInfo)Marshal.PtrToStructure(visual, typeof(XVisualInfo));
+
             // See what we *really* got:
             int r, g, b, a;
             Glx.GetConfig(display, ref info, GLXAttribute.ALPHA_SIZE, out a);
@@ -93,7 +93,7 @@ namespace OpenTK.Platform.X11
         IntPtr SelectVisualUsingFBConfig(ColorFormat color, int depth, int stencil, int samples, ColorFormat accum,
                                                int buffers, bool stereo)
         {
-            List<int> visualAttributes = new List<int>();
+            var visualAttributes = new List<int>();
             IntPtr visual = IntPtr.Zero;
 
             Debug.Print("Bits per pixel: {0}", color.BitsPerPixel);
@@ -178,7 +178,7 @@ namespace OpenTK.Platform.X11
                         Debug.Print("Getting FB config.");
                         int fbcount;
                         // Note that ChooseFBConfig returns an array of GLXFBConfig opaque structures (i.e. mapped to IntPtrs).
-                        IntPtr* fbconfigs = Glx.ChooseFBConfig(display, screen, visualAttributes.ToArray(), out fbcount);
+                        var fbconfigs = Glx.ChooseFBConfig(display, screen, visualAttributes.ToArray(), out fbcount);
                         if (fbcount > 0 && fbconfigs != null)
                         {
                             // We want to use the first GLXFBConfig from the fbconfigs array (the first one is the best match).
@@ -201,7 +201,7 @@ namespace OpenTK.Platform.X11
         IntPtr SelectVisualUsingChooseVisual(ColorFormat color, int depth, int stencil, int samples, ColorFormat accum,
                                                   int buffers, bool stereo)
         {
-            List<int> visualAttributes = new List<int>();
+            var visualAttributes = new List<int>();
 
             Debug.Print("Bits per pixel: {0}", color.BitsPerPixel);
 

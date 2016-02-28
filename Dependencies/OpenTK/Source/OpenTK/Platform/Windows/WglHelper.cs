@@ -58,7 +58,7 @@ namespace OpenTK.Platform.Windows
         static Delegate LoadDelegate(string name, Type signature)
         {
             Delegate d;
-            string realName = name.StartsWith("wgl") ? name.Substring(3) : name;
+            var realName = name.StartsWith("wgl") ? name.Substring(3) : name;
 
             if (importsClass.GetMethod(realName,
                 BindingFlags.NonPublic | BindingFlags.Static) != null)
@@ -145,7 +145,7 @@ namespace OpenTK.Platform.Windows
                 // static WGL/GL classes. Fortunately, this issue is extremely unlikely to arise in practice, as you'd
                 // have to create one accelerated and one non-accelerated context in the same application, with the
                 // non-accelerated context coming second.
-                Wgl.Delegates.GetExtensionsStringARB get = Wgl.Delegates.wglGetExtensionsStringARB;
+                var get = Wgl.Delegates.wglGetExtensionsStringARB;
 
                 if (get != null)
                 {

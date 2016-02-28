@@ -307,9 +307,9 @@ namespace OpenTK
         /// <returns>The input as byte array.</returns>
         public static byte[] GetBytes(Vector2h h)
         {
-            byte[] result = new byte[SizeInBytes];
+            var result = new byte[SizeInBytes];
 
-            byte[] temp = Half.GetBytes(h.X);
+            var temp = Half.GetBytes(h.X);
             result[0] = temp[0];
             result[1] = temp[1];
             temp = Half.GetBytes(h.Y);
@@ -325,7 +325,7 @@ namespace OpenTK
         /// <returns>A new Half2 instance.</returns>
         public static Vector2h FromBytes(byte[] value, int startIndex)
         {
-            Vector2h h2 = new Vector2h();
+            var h2 = new Vector2h();
             h2.X = Half.FromBytes(value, startIndex);
             h2.Y = Half.FromBytes(value, startIndex + 2);
             return h2;

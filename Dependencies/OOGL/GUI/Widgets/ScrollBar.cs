@@ -125,7 +125,7 @@ namespace OOGL.GUI.Widgets
         public event EventHandler ValueChanged;
         protected void OnValueChanged()
         {
-            EventHandler items = ValueChanged;
+            var items = ValueChanged;
             if (items == null) return;
             items(this, null);
         }

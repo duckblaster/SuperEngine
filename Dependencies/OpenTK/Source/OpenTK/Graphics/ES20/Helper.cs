@@ -156,7 +156,7 @@ namespace OpenTK.Graphics.ES20
         {
             int length;
             GetProgram(program, ProgramParameter.ActiveAttributeMaxLength, out length);
-            StringBuilder sb = new StringBuilder(length == 0 ? 1 : length * 2);
+            var sb = new StringBuilder(length == 0 ? 1 : length * 2);
 
             GetActiveAttrib(program, index, sb.Capacity, out length, out size, out type, sb);
             return sb.ToString();
@@ -171,7 +171,7 @@ namespace OpenTK.Graphics.ES20
             int length;
             GetProgram(program, ProgramParameter.ActiveUniformMaxLength, out length);
 
-            StringBuilder sb = new StringBuilder(length == 0 ? 1 : length);
+            var sb = new StringBuilder(length == 0 ? 1 : length);
             GetActiveUniform(program, uniformIndex, sb.Capacity, out length, out size, out type, sb);
             return sb.ToString();
         }
@@ -215,7 +215,7 @@ namespace OpenTK.Graphics.ES20
                     info = String.Empty;
                     return;
                 }
-                StringBuilder sb = new StringBuilder(length * 2);
+                var sb = new StringBuilder(length * 2);
                 GL.GetShaderInfoLog((UInt32)shader, sb.Capacity, &length, sb);
                 info = sb.ToString();
             }
@@ -246,7 +246,7 @@ namespace OpenTK.Graphics.ES20
                     info = String.Empty;
                     return;
                 }
-                StringBuilder sb = new StringBuilder(length * 2);
+                var sb = new StringBuilder(length * 2);
                 GL.GetProgramInfoLog((UInt32)program, sb.Capacity, &length, sb);
                 info = sb.ToString();
             }

@@ -132,7 +132,7 @@ namespace Jitter.Collision
             _nodes[proxyId].MinorRandomExtension = (float)rnd.NextDouble() * settingsRndExtension;
 
             // Fatten the aabb.
-            JVector r = new JVector(_nodes[proxyId].MinorRandomExtension);
+            var r = new JVector(_nodes[proxyId].MinorRandomExtension);
             _nodes[proxyId].AABB.Min = aabb.Min - r;
             _nodes[proxyId].AABB.Max = aabb.Max + r;
             _nodes[proxyId].UserData = userData;
@@ -179,13 +179,13 @@ namespace Jitter.Collision
             RemoveLeaf(proxyId);
 
             // Extend AABB.
-            JBBox b = aabb;
-            JVector r = new JVector(_nodes[proxyId].MinorRandomExtension);
+            var b = aabb;
+            var r = new JVector(_nodes[proxyId].MinorRandomExtension);
             b.Min = b.Min - r;
             b.Max = b.Max + r;
 
             // Predict AABB displacement.
-            JVector d = SettingsAABBMultiplier * displacement;
+            var d = SettingsAABBMultiplier * displacement;
             //JVector randomExpansion = new JVector((float)rnd.Next(0, 10) * 0.1f, (float)rnd.Next(0, 10) * 0.1f, (float)rnd.Next(0, 10) * 0.1f);
 
             //d += randomExpansion;
@@ -258,14 +258,14 @@ namespace Jitter.Collision
 
         public void Query(JVector origin, JVector direction, List<int> collisions)
         {
-            Stack<int> stack = stackPool.GetNew();
+            var stack = stackPool.GetNew();
 
             stack.Push(_root);
 
             while (stack.Count > 0)
             {
                 int nodeId = stack.Pop();
-                DynamicTreeNode<T> node = _nodes[nodeId];
+                var node = _nodes[nodeId];
 
                 if (node.AABB.RayIntersect(ref origin, ref direction))
                 {
@@ -283,8 +283,8 @@ namespace Jitter.Collision
 
         public void Query(List<int> other, List<int> my, DynamicTree<T> tree)
         {
-            Stack<int> stack1 = stackPool.GetNew();
-            Stack<int> stack2 = stackPool.GetNew();
+            var stack1 = stackPool.GetNew();
+            var stack2 = stackPool.GetNew();
 
             stack1.Push(_root);
             stack2.Push(tree._root);
@@ -355,7 +355,7 @@ namespace Jitter.Collision
         public void Query(List<int> my, ref JBBox aabb)
         {
             //Stack<int> _stack = new Stack<int>(256);
-            Stack<int> _stack = stackPool.GetNew();
+            var _stack = stackPool.GetNew();
 
             _stack.Push(_root);
 
@@ -367,7 +367,7 @@ namespace Jitter.Collision
                     continue;
                 }
 
-                DynamicTreeNode<T> node = _nodes[nodeId];
+                var node = _nodes[nodeId];
 
                 //if (JBBox.TestOverlap(ref node.AABB, ref aabb))
                 if(aabb.Contains(ref node.AABB) != JBBox.ContainmentType.Disjoint)
@@ -400,7 +400,7 @@ namespace Jitter.Collision
             }
 
             Debug.Assert(0 <= nodeId && nodeId < _nodeCapacity);
-            DynamicTreeNode<T> node = _nodes[nodeId];
+            var node = _nodes[nodeId];
 
             if (node.IsLeaf())
             {
@@ -428,7 +428,7 @@ namespace Jitter.Collision
                 Debug.Assert(_nodeCount == _nodeCapacity);
 
                 // The free list is empty. Rebuild a bigger pool.
-                DynamicTreeNode<T>[] oldNodes = _nodes;
+                var oldNodes = _nodes;
                 _nodeCapacity *= 2;
                 _nodes = new DynamicTreeNode<T>[_nodeCapacity];
                 Array.Copy(oldNodes, _nodes, _nodeCount);
@@ -475,7 +475,7 @@ namespace Jitter.Collision
             }
 
             // Find the best sibling for this node
-            JBBox leafAABB = _nodes[leaf].AABB;
+            var leafAABB = _nodes[leaf].AABB;
             int sibling = _root;
             while (_nodes[sibling].IsLeaf() == false)
             {
@@ -489,7 +489,7 @@ namespace Jitter.Collision
                 _nodes[sibling].LeafCount += 1;
 
                 float siblingArea = _nodes[sibling].AABB.Perimeter;
-                JBBox parentAABB = new JBBox();
+                var parentAABB = new JBBox();
                 //parentAABB.Combine(ref _nodes[sibling].AABB, ref leafAABB);
                 JBBox.CreateMerged(ref _nodes[sibling].AABB, ref leafAABB, out _nodes[sibling].AABB);
 
@@ -501,14 +501,14 @@ namespace Jitter.Collision
                 float cost2;
                 if (_nodes[child1].IsLeaf())
                 {
-                    JBBox aabb = new JBBox();
+                    var aabb = new JBBox();
                     //aabb.Combine(ref leafAABB, ref _nodes[child1].AABB);
                     JBBox.CreateMerged(ref leafAABB, ref _nodes[child1].AABB, out aabb);
                     cost2 = aabb.Perimeter + inheritanceCost;
                 }
                 else
                 {
-                    JBBox aabb = new JBBox();
+                    var aabb = new JBBox();
                     //aabb.Combine(ref leafAABB, ref _nodes[child1].AABB);
                     JBBox.CreateMerged(ref leafAABB, ref _nodes[child1].AABB, out aabb);
 
@@ -520,14 +520,14 @@ namespace Jitter.Collision
                 float cost3;
                 if (_nodes[child2].IsLeaf())
                 {
-                    JBBox aabb = new JBBox();
+                    var aabb = new JBBox();
                     //aabb.Combine(ref leafAABB, ref _nodes[child2].AABB);
                     JBBox.CreateMerged(ref leafAABB, ref _nodes[child2].AABB, out aabb);
                     cost3 = aabb.Perimeter + inheritanceCost;
                 }
                 else
                 {
-                    JBBox aabb = new JBBox();
+                    var aabb = new JBBox();
                     //aabb.Combine(ref leafAABB, ref _nodes[child2].AABB);
                     JBBox.CreateMerged(ref leafAABB, ref _nodes[child2].AABB, out aabb);
                     float oldArea = _nodes[child2].AABB.Perimeter;
@@ -659,7 +659,7 @@ namespace Jitter.Collision
             }
 
             Debug.Assert(0 <= nodeId && nodeId < _nodeCapacity);
-            DynamicTreeNode<T> node = _nodes[nodeId];
+            var node = _nodes[nodeId];
             int height1 = ComputeHeight(node.Child1);
             int height2 = ComputeHeight(node.Child2);
             return 1 + Math.Max(height1, height2);

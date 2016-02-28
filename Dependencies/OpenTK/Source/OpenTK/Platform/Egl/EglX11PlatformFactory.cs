@@ -37,15 +37,15 @@ namespace OpenTK.Platform.Egl
     {
         public override IGraphicsContext CreateGLContext(GraphicsMode mode, IWindowInfo window, IGraphicsContext shareContext, bool directRendering, int major, int minor, GraphicsContextFlags flags)
         {
-            X11WindowInfo x11_win = (X11WindowInfo)window;
-            EglWindowInfo egl_win = new OpenTK.Platform.Egl.EglWindowInfo(x11_win.WindowHandle, Egl.GetDisplay(x11_win.Display));
+            var x11_win = (X11WindowInfo)window;
+            var egl_win = new OpenTK.Platform.Egl.EglWindowInfo(x11_win.WindowHandle, Egl.GetDisplay(x11_win.Display));
             return new EglContext(mode, egl_win, shareContext, major, minor, flags);
         }
 
         public override IGraphicsContext CreateGLContext(ContextHandle handle, IWindowInfo window, IGraphicsContext shareContext, bool directRendering, int major, int minor, GraphicsContextFlags flags)
         {
-            X11WindowInfo x11_win = (X11WindowInfo)window;
-            EglWindowInfo egl_win = new OpenTK.Platform.Egl.EglWindowInfo(x11_win.WindowHandle, Egl.GetDisplay(x11_win.Display));
+            var x11_win = (X11WindowInfo)window;
+            var egl_win = new OpenTK.Platform.Egl.EglWindowInfo(x11_win.WindowHandle, Egl.GetDisplay(x11_win.Display));
             return new EglContext(handle, egl_win, shareContext, major, minor, flags);
         }
 

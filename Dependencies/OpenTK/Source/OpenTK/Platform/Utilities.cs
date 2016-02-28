@@ -77,36 +77,36 @@ namespace OpenTK.Platform
             // than with reflection, but the first time is more significant.
 
             int supported = 0;
-            Type extensions_class = type.GetNestedType("Delegates", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            var extensions_class = type.GetNestedType("Delegates", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
             if (extensions_class == null)
                 throw new InvalidOperationException("The specified type does not have any loadable extensions.");
 
-            FieldInfo[] delegates = extensions_class.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            var delegates = extensions_class.GetFields(BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
             if (delegates == null)
                 throw new InvalidOperationException("The specified type does not have any loadable extensions.");
 
-            MethodInfo load_delegate_method_info = type.GetMethod("LoadDelegate", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            var load_delegate_method_info = type.GetMethod("LoadDelegate", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
             if (load_delegate_method_info == null)
                 throw new InvalidOperationException(type.ToString() + " does not contain a static LoadDelegate method.");
-            LoadDelegateFunction LoadDelegate = (LoadDelegateFunction)Delegate.CreateDelegate(
+            var LoadDelegate = (LoadDelegateFunction)Delegate.CreateDelegate(
                 typeof(LoadDelegateFunction), load_delegate_method_info);
 
             Debug.Write("Load extensions for " + type.ToString() + "... ");
 
-            System.Diagnostics.Stopwatch time = new System.Diagnostics.Stopwatch();
+            var time = new System.Diagnostics.Stopwatch();
             time.Reset();
             time.Start();
 
             foreach (FieldInfo f in delegates)
             {
-                Delegate d = LoadDelegate(f.Name, f.FieldType);
+                var d = LoadDelegate(f.Name, f.FieldType);
                 if (d != null)
                     ++supported;
 
                 f.SetValue(null, d);
             }
 
-            FieldInfo rebuildExtensionList = type.GetField("rebuildExtensionList", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            var rebuildExtensionList = type.GetField("rebuildExtensionList", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
             if (rebuildExtensionList != null)
                 rebuildExtensionList.SetValue(null, true);
 
@@ -135,14 +135,14 @@ namespace OpenTK.Platform
         /// </remarks>
         internal static bool TryLoadExtension(Type type, string extension)
         {
-            Type extensions_class = type.GetNestedType("Delegates", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            var extensions_class = type.GetNestedType("Delegates", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
             if (extensions_class == null)
             {
                 Debug.Print(type.ToString(), " does not contain extensions.");
                 return false;
             }
 
-            LoadDelegateFunction LoadDelegate = (LoadDelegateFunction)Delegate.CreateDelegate(typeof(LoadDelegateFunction),
+            var LoadDelegate = (LoadDelegateFunction)Delegate.CreateDelegate(typeof(LoadDelegateFunction),
                 type.GetMethod("LoadDelegate", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public));
             if (LoadDelegate == null)
             {
@@ -150,19 +150,19 @@ namespace OpenTK.Platform
                 return false;
             }
 
-            FieldInfo f = extensions_class.GetField(extension, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            var f = extensions_class.GetField(extension, BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
             if (f == null)
             {
                 Debug.Print("Extension \"", extension, "\" not found in ", type.ToString());
                 return false;
             }
 
-            Delegate old = f.GetValue(null) as Delegate;
-            Delegate @new = LoadDelegate(f.Name, f.FieldType);
+            var old = f.GetValue(null) as Delegate;
+            var @new = LoadDelegate(f.Name, f.FieldType);
             if ((old != null ? old.Target : null) != (@new != null ? @new.Target : null))
             {
                 f.SetValue(null, @new);
-                FieldInfo rebuildExtensionList = type.GetField("rebuildExtensionList", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+                var rebuildExtensionList = type.GetField("rebuildExtensionList", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
                 if (rebuildExtensionList != null)
                     rebuildExtensionList.SetValue(null, true);
             }
@@ -187,7 +187,7 @@ namespace OpenTK.Platform
             GraphicsMode mode, IWindowInfo window,
             int major, int minor, GraphicsContextFlags flags)
         {
-            GraphicsContext context = new GraphicsContext(mode, window, major, minor, flags);
+            var context = new GraphicsContext(mode, window, major, minor, flags);
             context.MakeCurrent(window);
 
             (context as IGraphicsContextInternal).LoadAll();
@@ -208,7 +208,7 @@ namespace OpenTK.Platform
         /// <returns>A new IWindowInfo instance.</returns>
         public static IWindowInfo CreateX11WindowInfo(IntPtr display, int screen, IntPtr windowHandle, IntPtr rootWindow, IntPtr visualInfo)
         {
-            Platform.X11.X11WindowInfo window = new OpenTK.Platform.X11.X11WindowInfo();
+            var window = new OpenTK.Platform.X11.X11WindowInfo();
             window.Display = display;
             window.Screen = screen;
             window.WindowHandle = windowHandle;

@@ -179,7 +179,7 @@ namespace OpenTK
         /// </remarks>
         public DisplayResolution SelectResolution(int width, int height, int bitsPerPixel, float refreshRate)
         {
-            DisplayResolution resolution = FindResolution(width, height, bitsPerPixel, refreshRate);
+            var resolution = FindResolution(width, height, bitsPerPixel, refreshRate);
             if (resolution == null)
                 resolution = FindResolution(width, height, bitsPerPixel, 0);
             if (resolution == null)

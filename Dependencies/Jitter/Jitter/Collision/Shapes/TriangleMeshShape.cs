@@ -65,7 +65,7 @@ namespace Jitter.Collision.Shapes
  
         protected override Multishape CreateWorkingClone()
         {
-            TriangleMeshShape clone = new TriangleMeshShape(this.octree);
+            var clone = new TriangleMeshShape(this.octree);
             clone.sphericalExpansion = this.sphericalExpansion;
             return clone;
         }
@@ -83,7 +83,7 @@ namespace Jitter.Collision.Shapes
             potentialTriangles.Clear();
 
             #region Expand Spherical
-            JBBox exp = box;
+            var exp = box;
 
             exp.Min.X -= sphericalExpansion;
             exp.Min.Y -= sphericalExpansion;
@@ -100,9 +100,9 @@ namespace Jitter.Collision.Shapes
 
         public override void MakeHull(ref List<JVector> triangleList, int generationThreshold)
         {
-            JBBox large = JBBox.LargeBox;
+            var large = JBBox.LargeBox;
 
-            List<int> indices = new List<int>();
+            var indices = new List<int>();
             octree.GetTrianglesIntersectingtAABox(indices, ref large);
 
             for (int i = 0; i < indices.Count; i++)
@@ -204,7 +204,7 @@ namespace Jitter.Collision.Shapes
             vecs[1] = octree.GetVertex(octree.tris[potentialTriangles[index]].I1);
             vecs[2] = octree.GetVertex(octree.tris[potentialTriangles[index]].I2);
 
-            JVector sum = vecs[0];
+            var sum = vecs[0];
             JVector.Add(ref sum, ref vecs[1], out sum);
             JVector.Add(ref sum, ref vecs[2], out sum);
             JVector.Multiply(ref sum, 1.0f / 3.0f, out sum);

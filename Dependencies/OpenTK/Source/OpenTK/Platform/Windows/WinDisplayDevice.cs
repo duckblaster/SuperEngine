@@ -37,18 +37,19 @@ namespace OpenTK.Platform.Windows
                 // to the list of available devices.
                 DisplayDevice opentk_dev;
                 DisplayResolution opentk_dev_current_res = null;
-                List<DisplayResolution> opentk_dev_available_res = new List<DisplayResolution>();
+                var opentk_dev_available_res = new List<DisplayResolution>();
                 bool opentk_dev_primary = false;
                 int device_count = 0, mode_count = 0;
 
                 // Get available video adapters and enumerate all monitors
-                WindowsDisplayDevice dev1 = new WindowsDisplayDevice(), dev2 = new WindowsDisplayDevice();
+                var dev1 = new WindowsDisplayDevice();
+                var dev2 = new WindowsDisplayDevice();
                 while (Functions.EnumDisplayDevices(null, device_count++, dev1, 0))
                 {
                     if ((dev1.StateFlags & DisplayDeviceStateFlags.AttachedToDesktop) == DisplayDeviceStateFlags.None)
                         continue;
 
-                    DeviceMode monitor_mode = new DeviceMode();
+                    var monitor_mode = new DeviceMode();
 
                     // The second function should only be executed when the first one fails
                     // (e.g. when the monitor is disabled)
@@ -67,7 +68,7 @@ namespace OpenTK.Platform.Windows
                     mode_count = 0;
                     while (Functions.EnumDisplaySettings(dev1.DeviceName.ToString(), mode_count++, monitor_mode))
                     {
-                        DisplayResolution res = new DisplayResolution(
+                        var res = new DisplayResolution(
                             monitor_mode.Position.X, monitor_mode.Position.Y,
                             monitor_mode.PelsWidth, monitor_mode.PelsHeight,
                             monitor_mode.BitsPerPel, monitor_mode.DisplayFrequency);

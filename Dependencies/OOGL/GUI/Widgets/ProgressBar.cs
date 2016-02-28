@@ -101,8 +101,8 @@ namespace OOGL.GUI.Widgets
             double perc = (double)(value - minValue) / (double)(maxValue - minValue);
             int mid = (int)(perc * clientRectangle.Width);
 
-            Rectangle frameClientRect = ScreenToFrame(ClientToScreen(clientRectangle));
-            PositionColor[] barQuad = new PositionColor[4];
+            var frameClientRect = ScreenToFrame(ClientToScreen(clientRectangle));
+            var barQuad = new PositionColor[4];
 
             barQuad[0].Position = new Vector3(frameClientRect.Left, frameClientRect.Top, 0);
             barQuad[1].Position = new Vector3(frameClientRect.Left, frameClientRect.Bottom, 0);

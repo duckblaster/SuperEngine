@@ -81,7 +81,7 @@ namespace Jitter.Collision
             JVector.Add(ref position, ref r, out r);
             JVector.Subtract(ref point, ref r, out r);
 
-            JVector x = point;
+            var x = point;
             JVector w, p;
             float VdotR;
 
@@ -91,7 +91,7 @@ namespace Jitter.Collision
 
             int maxIter = MaxIterations;
 
-            VoronoiSimplexSolver simplexSolver = simplexSolverPool.GetNew();
+            var simplexSolver = simplexSolverPool.GetNew();
 
             simplexSolver.Reset();
 
@@ -139,7 +139,7 @@ namespace Jitter.Collision
         public static bool Raycast(ISupportMappable support, ref JMatrix orientation, ref JMatrix invOrientation,
             ref JVector position,ref JVector origin,ref JVector direction, out float fraction, out JVector normal)
         {
-            VoronoiSimplexSolver simplexSolver = simplexSolverPool.GetNew();
+            var simplexSolver = simplexSolverPool.GetNew();
             simplexSolver.Reset();
 
             normal = JVector.Zero;
@@ -147,8 +147,8 @@ namespace Jitter.Collision
 
             float lambda = 0.0f;
 
-            JVector r = direction;
-            JVector x = origin;
+            var r = direction;
+            var x = origin;
             JVector w, p, v;
 
             JVector arbitraryPoint; 
@@ -487,12 +487,12 @@ namespace Jitter.Collision
                             break;
                         case 2:
                             //closest point origin from line segment
-                            JVector from = _simplexVectorW[0];
-                            JVector to = _simplexVectorW[1];
+                            var from = _simplexVectorW[0];
+                            var to = _simplexVectorW[1];
                             JVector nearest;
 
-                            JVector diff = from * (-1);
-                            JVector v = to - from;
+                            var diff = from * (-1);
+                            var v = to - from;
                             float t = JVector.Dot(v, diff);
 
                             if (t > 0)
@@ -614,9 +614,9 @@ namespace Jitter.Collision
                 float v, w;
 
                 // Check if P in vertex region outside A
-                JVector ab = b - a;
-                JVector ac = c - a;
-                JVector ap = p - a;
+                var ab = b - a;
+                var ac = c - a;
+                var ap = p - a;
                 float d1 = JVector.Dot(ab, ap);
                 float d2 = JVector.Dot(ac, ap);
                 if (d1 <= 0f && d2 <= 0f)
@@ -628,7 +628,7 @@ namespace Jitter.Collision
                 }
 
                 // Check if P in vertex region outside B
-                JVector bp = p - b;
+                var bp = p - b;
                 float d3 = JVector.Dot(ab, bp);
                 float d4 = JVector.Dot(ac, bp);
                 if (d3 >= 0f && d4 <= d3)
@@ -653,7 +653,7 @@ namespace Jitter.Collision
                 }
 
                 // Check if P in vertex region outside C
-                JVector cp = p - c;
+                var cp = p - c;
                 float d5 = JVector.Dot(ab, cp);
                 float d6 = JVector.Dot(ac, cp);
                 if (d6 >= 0f && d5 <= d6)
@@ -708,7 +708,7 @@ namespace Jitter.Collision
             /// Test if point p and d lie on opposite sides of plane through abc
             public int PointOutsideOfPlane(JVector p, JVector a, JVector b, JVector c, JVector d)
             {
-                JVector normal = JVector.Cross(b - a, c - a);
+                var normal = JVector.Cross(b - a, c - a);
 
                 float signp = JVector.Dot(p - a, normal); // [AP AB AC]
                 float signd = JVector.Dot(d - a, normal); // [AD AB AC]
@@ -752,7 +752,7 @@ namespace Jitter.Collision
                 if (pointOutsideABC != 0)
                 {
                     ClosestPtPointTriangle(p, a, b, c, ref tempResult);
-                    JVector q = tempResult.ClosestPointOnSimplex;
+                    var q = tempResult.ClosestPointOnSimplex;
 
                     float sqDist = ((JVector)(q - p)).LengthSquared();
                     // Update best closest point if (squared) distance is less than current best
@@ -777,7 +777,7 @@ namespace Jitter.Collision
                 if (pointOutsideACD != 0)
                 {
                     ClosestPtPointTriangle(p, a, c, d, ref tempResult);
-                    JVector q = tempResult.ClosestPointOnSimplex;
+                    var q = tempResult.ClosestPointOnSimplex;
                     //convert result bitmask!
 
                     float sqDist = ((JVector)(q - p)).LengthSquared();
@@ -801,7 +801,7 @@ namespace Jitter.Collision
                 if (pointOutsideADB != 0)
                 {
                     ClosestPtPointTriangle(p, a, d, b, ref tempResult);
-                    JVector q = tempResult.ClosestPointOnSimplex;
+                    var q = tempResult.ClosestPointOnSimplex;
                     //convert result bitmask!
 
                     float sqDist = ((JVector)(q - p)).LengthSquared();
@@ -826,7 +826,7 @@ namespace Jitter.Collision
                 if (pointOutsideBDC != 0)
                 {
                     ClosestPtPointTriangle(p, b, d, c, ref tempResult);
-                    JVector q = tempResult.ClosestPointOnSimplex;
+                    var q = tempResult.ClosestPointOnSimplex;
                     //convert result bitmask!
                     float sqDist = ((JVector)(q - p)).LengthSquared();
                     if (sqDist < bestSqDist)

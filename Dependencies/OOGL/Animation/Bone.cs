@@ -49,8 +49,8 @@ namespace OOGL.Animation
 		
 		public Matrix4 GetAnimationMatrix(float time)
 		{
-			Matrix4 matrix = this.localTransformationMatrix;
-			for (int i = 1; i < keyFrames.Length; i++)
+			var matrix = this.localTransformationMatrix;
+            for (int i = 1; i < keyFrames.Length; i++)
 			{
 				if (keyFrames[i - 1].time < time && keyFrames[i].time >= time)
 				{

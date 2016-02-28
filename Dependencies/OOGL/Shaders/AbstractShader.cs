@@ -40,8 +40,8 @@ namespace OOGL.Shaders
 			GL.ShaderSource(this.handle, sourceCode);
 			GL.CompileShader(this.handle);
 									
-			int[] results = new int[1];
-			GL.GetShader(this.handle, ShaderParameter.CompileStatus, results); 
+			var results = new int[1];
+            GL.GetShader(this.handle, ShaderParameter.CompileStatus, results); 
 			
 			if(results[0] == 0)
 			{

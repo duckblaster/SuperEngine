@@ -58,7 +58,7 @@ namespace OOGL.Animation
 
         public static Sample[] Load(string fileName)
         {
-            List<Sample> tracks = new List<Sample>();
+            var tracks = new List<Sample>();
             using (FileStream file = System.IO.File.OpenRead(fileName))
             {
                 using (StreamReader r = new StreamReader(file))
@@ -66,12 +66,12 @@ namespace OOGL.Animation
                     string line;
                     while ((line = r.ReadLine()) != null)
                     {
-                        string[] cols = line.Split(',');
+                        var cols = line.Split(',');
                         if (cols == null || cols.Length != 4) throw new FormatException();
-                        string name = cols[0];
+                        var name = cols[0];
                         int startFrame = int.Parse(cols[1]);
                         int endFrame = int.Parse(cols[2]);
-                        PlayMode playMode = (PlayMode)Enum.Parse(typeof(PlayMode), cols[3]);
+                        var playMode = (PlayMode)Enum.Parse(typeof(PlayMode), cols[3]);
 
                         tracks.Add(new Sample(name, startFrame, endFrame, playMode));
                     }

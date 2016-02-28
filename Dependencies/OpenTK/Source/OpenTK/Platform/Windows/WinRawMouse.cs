@@ -57,7 +57,7 @@ namespace OpenTK.Platform.Windows
         public int RegisterDevices()
         {
             int count = WinRawInput.DeviceCount;
-            RawInputDeviceList[] ridl = new RawInputDeviceList[count];
+            var ridl = new RawInputDeviceList[count];
             for (int i = 0; i < count; i++)
                 ridl[i] = new RawInputDeviceList();
             Functions.GetRawInputDeviceList(ridl, ref count, API.RawInputDeviceListSize);
@@ -69,7 +69,7 @@ namespace OpenTK.Platform.Windows
                 Functions.GetRawInputDeviceInfo(ridl[i].Device, RawInputDeviceInfoEnum.DEVICENAME, IntPtr.Zero, ref size);
                 IntPtr name_ptr = Marshal.AllocHGlobal((IntPtr)size);
                 Functions.GetRawInputDeviceInfo(ridl[i].Device, RawInputDeviceInfoEnum.DEVICENAME, name_ptr, ref size);
-                string name = Marshal.PtrToStringAnsi(name_ptr);
+                var name = Marshal.PtrToStringAnsi(name_ptr);
                 Marshal.FreeHGlobal(name_ptr);
 
                 if (name.ToLower().Contains("root"))
@@ -85,30 +85,30 @@ namespace OpenTK.Platform.Windows
                     // remove the \??\
                     name = name.Substring(4);
 
-                    string[] split = name.Split('#');
+                    var split = name.Split('#');
 
-                    string id_01 = split[0];    // ACPI (Class code)
-                    string id_02 = split[1];    // PNP0303 (SubClass code)
-                    string id_03 = split[2];    // 3&13c0b0c5&0 (Protocol code)
+                    var id_01 = split[0];    // ACPI (Class code)
+                    var id_02 = split[1];    // PNP0303 (SubClass code)
+                    var id_03 = split[2];    // 3&13c0b0c5&0 (Protocol code)
                     // The final part is the class GUID and is not needed here
 
-                    string findme = string.Format(
+                    var findme = string.Format(
                         @"System\CurrentControlSet\Enum\{0}\{1}\{2}",
                         id_01, id_02, id_03);
 
-                    RegistryKey regkey = Registry.LocalMachine.OpenSubKey(findme);
+                    var regkey = Registry.LocalMachine.OpenSubKey(findme);
 
-                    string deviceDesc = (string)regkey.GetValue("DeviceDesc");
+                    var deviceDesc = (string)regkey.GetValue("DeviceDesc");
                     deviceDesc = deviceDesc.Substring(deviceDesc.LastIndexOf(';') + 1);
-                    string deviceClass = (string)regkey.GetValue("Class");
+                    var deviceClass = (string)regkey.GetValue("Class");
 
                     if (!String.IsNullOrEmpty(deviceClass) && deviceClass.ToLower().Equals("mouse"))
                     {
-                        OpenTK.Input.MouseDevice mouse = new OpenTK.Input.MouseDevice();
+                        var mouse = new OpenTK.Input.MouseDevice();
                         mouse.Description = deviceDesc;
 
                         // Register the keyboard:
-                        RawInputDeviceInfo info = new RawInputDeviceInfo();
+                        var info = new RawInputDeviceInfo();
                         int devInfoSize = API.RawInputDeviceInfoSize;
                         Functions.GetRawInputDeviceInfo(ridl[i].Device, RawInputDeviceInfoEnum.DEVICEINFO,
                                 info, ref devInfoSize);
@@ -135,7 +135,7 @@ namespace OpenTK.Platform.Windows
 
         internal void RegisterRawDevice(OpenTK.Input.MouseDevice mouse)
         {
-            RawInputDevice[] rid = new RawInputDevice[1];
+            var rid = new RawInputDevice[1];
             // Mouse is 1/2 (page/id). See http://www.microsoft.com/whdc/device/input/HID_HWID.mspx
             rid[0] = new RawInputDevice();
             rid[0].UsagePage = 1;
@@ -155,7 +155,7 @@ namespace OpenTK.Platform.Windows
             else
             {
                 Debug.Print("Registered mouse {0}", mouse.ToString());
-                Point p = new Point();
+                var p = new Point();
                 if (Functions.GetCursorPos(ref p))
                     mouse.Position = p;
             }

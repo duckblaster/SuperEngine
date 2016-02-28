@@ -143,14 +143,16 @@ namespace Jitter.Collision.Shapes
 
         public override void MakeHull(ref List<JVector> triangleList, int generationThreshold)
         {
-            List<JVector> triangles = new List<JVector>();
+            var triangles = new List<JVector>();
 
             for (int i = 0; i < shapes.Length; i++)
             {
                 shapes[i].Shape.MakeHull(ref triangles, 4);
+#pragma warning disable CC0006 // Use foreach
                 for (int e = 0; e < triangles.Count; e++)
+#pragma warning restore CC0006 // Use foreach
                 {
-                    JVector pos = triangles[e];
+                    var pos = triangles[e];
                     JVector.Transform(ref pos,ref shapes[i].orientation,out pos);
                     JVector.Add(ref pos, ref shapes[i].position,out pos);
                     triangleList.Add(pos);
@@ -178,8 +180,8 @@ namespace Jitter.Collision.Shapes
 
             for (int i = 0; i < Shapes.Length; i++)
             {
-                JMatrix currentInertia = Shapes[i].InverseOrientation * Shapes[i].Shape.Inertia * Shapes[i].Orientation;
-                JVector p = Shapes[i].Position * -1.0f;
+                var currentInertia = Shapes[i].InverseOrientation * Shapes[i].Shape.Inertia * Shapes[i].Orientation;
+                var p = Shapes[i].Position * -1.0f;
                 float m = Shapes[i].Shape.Mass;
 
                 currentInertia.M11 += m * (p.Y * p.Y + p.Z * p.Z);
@@ -207,7 +209,7 @@ namespace Jitter.Collision.Shapes
 
         protected override Multishape CreateWorkingClone()
         {
-            CompoundShape clone = new CompoundShape();
+            var clone = new CompoundShape();
             clone.shapes = this.shapes;
             return clone;
         }
@@ -250,8 +252,8 @@ namespace Jitter.Collision.Shapes
             box.Min = mInternalBBox.Min;
             box.Max = mInternalBBox.Max;
 
-            JVector localHalfExtents = 0.5f * (box.Max - box.Min);
-            JVector localCenter = 0.5f * (box.Max + box.Min);
+            var localHalfExtents = 0.5f * (box.Max - box.Min);
+            var localCenter = 0.5f * (box.Max + box.Min);
 
             JVector center;
             JVector.Transform(ref localCenter, ref orientation, out center);
@@ -305,7 +307,7 @@ namespace Jitter.Collision.Shapes
             JBBox addBox;
             for (int i = 0; i < shapes.Length; i++)
             {
-                JMatrix shapeOrientation = shapes[i].Orientation;
+                var shapeOrientation = shapes[i].Orientation;
                 shapes[i].Shape.GetBoundingBox(ref shapeOrientation, out addBox);
 
                 addBox.Min += shapes[i].Position;

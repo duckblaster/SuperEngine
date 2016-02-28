@@ -521,10 +521,10 @@ namespace OpenTK.Platform.X11
             int height = image.Height;
             int size = width * height; 
 
-            System.Drawing.Imaging.BitmapData data = image.LockBits(new System.Drawing.Rectangle(0, 0, width, height),
+            var data = image.LockBits(new System.Drawing.Rectangle(0, 0, width, height),
                 System.Drawing.Imaging.ImageLockMode.ReadOnly,
                 System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            
+
             IntPtr ximage = XCreateImage(display, CopyFromParent, 24, ImageFormat.ZPixmap, 
                 0, data.Scan0, (uint)width, (uint)height, 32, 0); 
             IntPtr pixmap = XCreatePixmap(display, XDefaultRootWindow(display), 
@@ -544,7 +544,7 @@ namespace OpenTK.Platform.X11
             int width = image.Width; 
             int height = image.Height; 
             int stride = (width + 7) >> 3; 
-            byte[] mask = new byte[stride * height];
+            var mask = new byte[stride * height];
             bool msbfirst = (XBitmapBitOrder(display) == 1); // 1 = MSBFirst
         
             for (int y = 0; y < height; ++y) 

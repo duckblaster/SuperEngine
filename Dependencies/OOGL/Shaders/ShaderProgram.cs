@@ -40,15 +40,15 @@ namespace OOGL.Shaders
 			GL.AttachShader(this.handle, this.fragmentShader.handle);
 			GL.LinkProgram(this.handle);
 						
-			int[] results = new int[1];
-			GL.GetProgram(this.handle, ProgramParameter.LinkStatus, results);
+			var results = new int[1];
+            GL.GetProgram(this.handle, ProgramParameter.LinkStatus, results);
 			
 			if (results[0] == 0 )
 			{
 				GL.GetProgram(this.handle, ProgramParameter.InfoLogLength, results);
 				
-				System.Text.StringBuilder infoLog = new System.Text.StringBuilder(results[0]);
-				int length;
+				var infoLog = new System.Text.StringBuilder(results[0]);
+                int length;
 				GL.GetProgramInfoLog(this.handle, results[0], out length, infoLog);
 				
 				throw new Exception(string.Format("Shader program link failed: {0}", infoLog));
@@ -60,8 +60,8 @@ namespace OOGL.Shaders
 			{
 				GL.GetProgram(this.handle, ProgramParameter.InfoLogLength, results);
 				
-				System.Text.StringBuilder infoLog = new System.Text.StringBuilder(results[0]);
-				int length;
+				var infoLog = new System.Text.StringBuilder(results[0]);
+                int length;
 				GL.GetProgramInfoLog(this.handle, results[0], out length, infoLog);
 
 				throw new Exception(string.Format("Shader program validate failed: {0}", infoLog));
@@ -133,7 +133,7 @@ namespace OOGL.Shaders
 		[Obsolete]
 		public void SetMatrix(string name, Matrix4 value)
 		{
-			float[] matrix = new float[]
+			var matrix = new float[]
             {
             	value.Column0.X, value.Column1.X, value.Column2.X, value.Column3.X,
             	value.Column0.Y, value.Column1.Y, value.Column2.Y, value.Column3.Y,

@@ -96,8 +96,10 @@ namespace OpenTK.Graphics
                     Debug.Print("GraphicsContextFlags: {0}", flags);
                     Debug.Print("Requested version: {0}.{1}", major, minor);
 
+#pragma warning disable CC0001 // You should use 'var' whenever possible.
                     IGraphicsContext shareContext = shareContext = FindSharedContext();
-                    
+#pragma warning restore CC0001 // You should use 'var' whenever possible.
+
                     // Todo: Add a DummyFactory implementing IPlatformFactory.
                     if (designMode)
                     {
@@ -121,7 +123,7 @@ namespace OpenTK.Graphics
                         // declaration).
                         if (GetCurrentContext == null)
                         {
-                            GetCurrentContextDelegate temp = factory.CreateGetCurrentGraphicsContext();
+                            var temp = factory.CreateGetCurrentGraphicsContext();
                             if (temp != null)
                             {
                                 GetCurrentContext = temp;
@@ -203,7 +205,7 @@ namespace OpenTK.Graphics
                     // (but not disposed), it won't be removed from available_contexts
                     // making this return null even if another valid context exists.
                     // The workaround is to simply ignore null targets.
-                    IGraphicsContext target = r.Target as IGraphicsContext;
+                    var target = r.Target as IGraphicsContext;
                     if (target != null)
                         return target;
                 }
@@ -227,7 +229,7 @@ namespace OpenTK.Graphics
         /// </remarks>
         public static GraphicsContext CreateDummyContext()
         {
-            ContextHandle handle = GetCurrentContext();
+            var handle = GetCurrentContext();
             if (handle == ContextHandle.Zero)
                 throw new InvalidOperationException("No GraphicsContext is current on the calling thread.");
 
@@ -278,7 +280,7 @@ namespace OpenTK.Graphics
             // one, if it exists.
             foreach (WeakReference weak_ref in available_contexts.Values)
             {
-                IGraphicsContext context = (IGraphicsContext)weak_ref.Target;
+                var context = (IGraphicsContext)weak_ref.Target;
                 if (context.IsCurrent)
                 {
                     return (context as IGraphicsContextInternal).Context;
@@ -303,7 +305,7 @@ namespace OpenTK.Graphics
                 {
                     if (available_contexts.Count > 0)
                     {
-                        ContextHandle handle = GetCurrentContext();
+                        var handle = GetCurrentContext();
                         if (handle.Handle != IntPtr.Zero)
                             return (GraphicsContext)available_contexts[handle].Target;
                     }

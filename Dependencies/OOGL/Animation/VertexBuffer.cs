@@ -43,8 +43,8 @@ namespace OOGL.Animation
 			this.numVerts = vertices.Length;
 			this.numIndices = indices.Length;
 			
-			int[] handles = new int[2];
-			GL.GenBuffers(2, handles);
+			var handles = new int[2];
+            GL.GenBuffers(2, handles);
 			this.vertexHandle = handles[0];
 			this.indexHandle = handles[1];
 
@@ -99,8 +99,8 @@ namespace OOGL.Animation
 				
 		public void Dispose()
 		{
-			int[] bufferHandles = new int[] { vertexHandle, indexHandle };
-			GL.DeleteBuffers(2, bufferHandles);
+			var bufferHandles = new int[] { vertexHandle, indexHandle };
+            GL.DeleteBuffers(2, bufferHandles);
 		}
 	}
 }

@@ -444,7 +444,7 @@ namespace OpenTK.Platform.MacOS.Carbon
         internal static IntPtr CreateNewWindow(WindowClass @class, WindowAttributes attributes, Rect r)
         {
             IntPtr retval;
-            OSStatus stat = _CreateNewWindow(@class, attributes, ref r, out retval);
+            var stat = _CreateNewWindow(@class, attributes, ref r, out retval);
 
             Debug.Print("Created Window: {0}", retval);
 
@@ -486,7 +486,7 @@ namespace OpenTK.Platform.MacOS.Carbon
         internal static Rect GetWindowBounds(IntPtr window, WindowRegionCode regionCode)
         {
             Rect retval;
-            OSStatus result = GetWindowBounds(window, regionCode, out retval);
+            var result = GetWindowBounds(window, regionCode, out retval);
 
             if (result != OSStatus.NoError)
                 throw new MacOSException(result);
@@ -530,7 +530,7 @@ namespace OpenTK.Platform.MacOS.Carbon
             
             for (;;)
             {
-                OSStatus status = ReceiveNextEvent(0, IntPtr.Zero, 0.0, true, out theEvent);
+                var status = ReceiveNextEvent(0, IntPtr.Zero, 0.0, true, out theEvent);
 
                 if (status == OSStatus.EventLoopTimedOut)
                     break;
@@ -601,10 +601,10 @@ namespace OpenTK.Platform.MacOS.Carbon
 		{
 			IntPtr retval;
 
-			OSStatus stat = _CreateEvent(IntPtr.Zero, EventClass.Window, (uint)kind, 
+			var stat = _CreateEvent(IntPtr.Zero, EventClass.Window, (uint)kind, 
 				0, EventAttributes.kEventAttributeNone, out retval);
 
-			if (stat != OSStatus.NoError)
+            if (stat != OSStatus.NoError)
 			{
 				throw new MacOSException(stat);
 			}
@@ -623,9 +623,9 @@ namespace OpenTK.Platform.MacOS.Carbon
 
             unsafe
             {
-                int* codeAddr = &code;
+                var codeAddr = &code;
 
-                OSStatus result = API.GetEventParameter(inEvent,
+                var result = API.GetEventParameter(inEvent,
                      EventParamName.KeyCode, EventParamType.typeUInt32, IntPtr.Zero,
                      (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(UInt32)), IntPtr.Zero,
                      (IntPtr) codeAddr);
@@ -645,9 +645,9 @@ namespace OpenTK.Platform.MacOS.Carbon
 
             unsafe
             {
-                char* codeAddr = &code;
+                var codeAddr = &code;
 
-                OSStatus result = API.GetEventParameter(inEvent,
+                var result = API.GetEventParameter(inEvent,
                      EventParamName.KeyMacCharCode, EventParamType.typeChar, IntPtr.Zero,
                      (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(char)), IntPtr.Zero,
                      (IntPtr)codeAddr);
@@ -667,9 +667,9 @@ namespace OpenTK.Platform.MacOS.Carbon
 
             unsafe
             {
-                int* btn = &button;
+                var btn = &button;
 
-                OSStatus result = API.GetEventParameter(inEvent,
+                var result = API.GetEventParameter(inEvent,
                         EventParamName.MouseButton, EventParamType.typeMouseButton, IntPtr.Zero,
                         (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(short)), IntPtr.Zero,
                         (IntPtr)btn);
@@ -686,13 +686,13 @@ namespace OpenTK.Platform.MacOS.Carbon
 
 			unsafe
 			{
-				int* d = &delta;
+				var d = &delta;
 
-				OSStatus result = API.GetEventParameter(inEvent,
+                var result = API.GetEventParameter(inEvent,
 					 EventParamName.MouseWheelDelta, EventParamType.typeSInt32,
 					 IntPtr.Zero, (uint)sizeof(int), IntPtr.Zero, (IntPtr)d);
 
-				if (result != OSStatus.NoError)
+                if (result != OSStatus.NoError)
 					throw new MacOSException(result);
 			}
 
@@ -705,9 +705,9 @@ namespace OpenTK.Platform.MacOS.Carbon
 
             unsafe
             {
-                HIPoint* parm = &point;
+                var parm = &point;
 
-                OSStatus result = API.GetEventParameter(inEvent,
+                var result = API.GetEventParameter(inEvent,
                         EventParamName.WindowMouseLocation, EventParamType.typeHIPoint, IntPtr.Zero,
                         (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(HIPoint)), IntPtr.Zero,
                         (IntPtr)parm);
@@ -725,12 +725,12 @@ namespace OpenTK.Platform.MacOS.Carbon
 
 			unsafe
 			{
-				IntPtr* parm = &retval;
-				OSStatus result = API.GetEventParameter(inEvent,
+				var parm = &retval;
+                var result = API.GetEventParameter(inEvent,
 					EventParamName.WindowRef, EventParamType.typeWindowRef, IntPtr.Zero,
 					(uint)sizeof(IntPtr), IntPtr.Zero, (IntPtr)parm);
 
-				windowRef = retval;
+                windowRef = retval;
 
 				return result;
 			}
@@ -742,9 +742,9 @@ namespace OpenTK.Platform.MacOS.Carbon
 
             unsafe
             {
-                HIPoint* parm = &point;
+                var parm = &point;
 
-                OSStatus result = API.GetEventParameter(inEvent,
+                var result = API.GetEventParameter(inEvent,
                         EventParamName.MouseLocation, EventParamType.typeHIPoint, IntPtr.Zero,
                         (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(HIPoint)), IntPtr.Zero,
                         (IntPtr)parm);
@@ -761,9 +761,9 @@ namespace OpenTK.Platform.MacOS.Carbon
 
             unsafe
             {
-                uint* codeAddr = &code;
+                var codeAddr = &code;
 
-                OSStatus result = API.GetEventParameter(inEvent,
+                var result = API.GetEventParameter(inEvent,
                      EventParamName.KeyModifiers, EventParamType.typeUInt32, IntPtr.Zero,
                      (uint)System.Runtime.InteropServices.Marshal.SizeOf(typeof(uint)), IntPtr.Zero,
                      (IntPtr)codeAddr);
@@ -798,11 +798,11 @@ namespace OpenTK.Platform.MacOS.Carbon
 			//Debug.Print("User Data: {0}", userData);
 			//Debug.Print("Handler Ref: {0}", handlerRef);
 
-            OSStatus error = _InstallEventHandler(windowTarget, uppHandlerProc, 
+            var error = _InstallEventHandler(windowTarget, uppHandlerProc, 
                                     eventTypes.Length, eventTypes,
                                     userData, handlerRef);
 
-			//Debug.Print("Status: {0}", error);
+            //Debug.Print("Status: {0}", error);
 
             if (error != OSStatus.NoError)
             {
@@ -814,7 +814,7 @@ namespace OpenTK.Platform.MacOS.Carbon
                 EventTypeSpec[] eventTypes, IntPtr userData, IntPtr handlerRef)
         {
 
-            OSStatus error = _InstallEventHandler(GetApplicationEventTarget(), uppHandlerProc, 
+            var error = _InstallEventHandler(GetApplicationEventTarget(), uppHandlerProc, 
                                     eventTypes.Length, eventTypes,
                                     userData, handlerRef);
 
@@ -903,7 +903,7 @@ namespace OpenTK.Platform.MacOS.Carbon
         internal static HIRect HIViewGetFrame(IntPtr inView)
         {
             HIRect retval;
-            OSStatus result = HIViewGetFrame(inView, out retval);
+            var result = HIViewGetFrame(inView, out retval);
 
             if (result != OSStatus.NoError)
                 throw new MacOSException(result);
@@ -936,8 +936,8 @@ namespace OpenTK.Platform.MacOS.Carbon
         static extern OSStatus _ChangeWindowAttributes(IntPtr windowRef, WindowAttributes setTheseAttributes, WindowAttributes clearTheseAttributes); 
           internal static void ChangeWindowAttributes(IntPtr windowRef, WindowAttributes setTheseAttributes, WindowAttributes clearTheseAttributes)
           {
-              OSStatus error = _ChangeWindowAttributes(windowRef, setTheseAttributes, clearTheseAttributes);
-              
+              var error = _ChangeWindowAttributes(windowRef, setTheseAttributes, clearTheseAttributes);
+
             if (error != OSStatus.NoError)
             {
                 throw new MacOSException(error);
@@ -972,7 +972,7 @@ namespace OpenTK.Platform.MacOS.Carbon
 
         internal static void CollapseWindow(IntPtr windowRef, bool collapse)
         {
-            OSStatus error = _CollapseWindow(windowRef, collapse);
+            var error = _CollapseWindow(windowRef, collapse);
 
             if (error != OSStatus.NoError)
             {
@@ -993,7 +993,7 @@ namespace OpenTK.Platform.MacOS.Carbon
 
         internal static void ZoomWindowIdeal(IntPtr windowRef, WindowPartCode inPartCode, ref CarbonPoint toIdealSize)
         {
-            CarbonPoint pt = toIdealSize;
+            var pt = toIdealSize;
             OSStatus error ;
             IntPtr handle = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(CarbonPoint)));
             Marshal.StructureToPtr(toIdealSize, handle, false);

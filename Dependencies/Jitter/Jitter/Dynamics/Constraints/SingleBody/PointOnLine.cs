@@ -102,9 +102,9 @@ namespace Jitter.Dynamics.Constraints.SingleBody
 
             JVector.Subtract(ref p1, ref anchor, out dp);
 
-            JVector l = lineNormal;
+            var l = lineNormal;
 
-            JVector t = (p1 - anchor) % l;
+            var t = (p1 - anchor) % l;
             if (t.LengthSquared() != 0.0f) t.Normalize();
             t = t % l;
 
