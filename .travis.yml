@@ -1,5 +1,5 @@
 language: csharp
-solution: SuperEngine.sln
+solution: SuperEngine-Travis.sln
 script:
-#  - xbuild /p:NoWarn=0612,1591 /p:Configuration=Release SuperEngine-Travis-Dependencies.sln
-  - xbuild /p:Configuration=Release SuperEngine.sln
+  - xbuild /p:NoWarn=0612,1591 /p:Configuration=Release SuperEngine-Travis-Dependencies.sln
+  - xbuild /p:Configuration=Release SuperEngine-Travis.sln
